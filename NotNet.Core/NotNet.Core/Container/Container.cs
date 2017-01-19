@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using NotNet.Core.Attributes;
+using NotNet.Core;
 using System.Linq;
 
 namespace NotNet.Core
@@ -94,19 +94,35 @@ namespace NotNet.Core
 		}
 		public void AutoRegister(Assembly assembly)
 		{
+			// Register "SomeClass/ISomeClass" couple 
 			var attr = typeof(AutoRegisterAttribute);
-			var somestuff = assembly.DefinedTypes.Where (t => t.IsClass && !t.IsAbstract && t.GetCustomAttribute(attr) != null).ToList();
-			foreach (var item in somestuff) 
+			var typeInfos = assembly.DefinedTypes.Where (t => t.IsClass && !t.IsAbstract && t.GetCustomAttribute(attr) != null).ToList();
+			foreach (var typeInfo in typeInfos) 
 			{
 				try
 				{
-					var autoattr = item.GetCustomAttribute(attr) as AutoRegisterAttribute;	
-					var iface = item.AsType().GetTypeInfo().ImplementedInterfaces.FirstOrDefault();
-					Register(iface,item.AsType(),autoattr.AsSingleton ? ObjectLifecycle.Singleton : ObjectLifecycle.NewInstance);
+					var autoattr = typeInfo.GetCustomAttribute(attr) as AutoRegisterAttribute;	
+					var iface = typeInfo.AsType().GetTypeInfo().ImplementedInterfaces.FirstOrDefault();
+					Register(iface,typeInfo.AsType(),autoattr.AsSingleton ? ObjectLifecycle.Singleton : ObjectLifecycle.NewInstance);
 				}
 				catch(Exception ex)
 				{
 					System.Diagnostics.Debug.WriteLine (ex.Message);
+				}
+			}
+			//Register "SomeClass" without a "ISomeClass"
+			attr = typeof(AutoRegisterModelAttribute);
+			typeInfos = assembly.DefinedTypes.Where(t => t.IsClass && !t.IsAbstract && t.GetCustomAttribute(attr) != null).ToList();
+			foreach (var typeInfo in typeInfos)
+			{
+				try
+				{
+					var autoattr = typeInfo.GetCustomAttribute(attr) as AutoRegisterModelAttribute;
+					Register(typeInfo.AsType(), typeInfo.AsType(), autoattr.AsSingleton ? ObjectLifecycle.Singleton : ObjectLifecycle.NewInstance);
+				}
+				catch (Exception ex)
+				{
+					System.Diagnostics.Debug.WriteLine(ex.Message);
 				}
 			}
 

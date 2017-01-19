@@ -18,6 +18,7 @@ namespace NotNet.Core.Test
 			var t5 = Container.Default.ResolveOrDefault<TestModel5>();
 			var t5_2 = Container.Default.ResolveOrDefault<TestModel5>();
 			var t5_3 = (TestModel5)Container.Default.GetService(typeof(TestModel5));
+			var t6 = Container.Default.ResolveOrDefault<TestModel6>();
 			Console.WriteLine("T1   " + (t1?.Test1 ?? "null"));
 			Console.WriteLine("T2   " + (t2?.Test1 ?? "null"));
 			Console.WriteLine("T3_1 " + (t3?.Test1 ?? "null"));
@@ -27,10 +28,14 @@ namespace NotNet.Core.Test
 			Console.WriteLine("T5_1 " + (t5?.Test1 ?? "null"));
 			Console.WriteLine("T5_2 " + (t5_2?.Test1 ?? "null"));
 			Console.WriteLine("T5_3 " + (t5_3?.Test1 ?? "null"));
+			Console.WriteLine("T6   " + (t6?.Test ?? "null"));
+
 		}
 		private static void RegisterStuff() 
 		{
+			
 			Container.Default.Register<TestModel5>();
+			Container.Default.Register<TestModel6>();
 			Container.Default.Register<ITestModel2,TestModel2>();
 			Container.Default.AutoRegister(typeof(MainClass).Assembly);
 		}

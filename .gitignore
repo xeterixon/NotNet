@@ -1,4 +1,4 @@
-
-NotNet.Core/*/obj/
-NotNet.Core/*/bin/
-NotNet.Core.userprefs
+**/obj/
+**/bin/
+NotNet.Core.Xamarin/packages/*/
+*.userprefs

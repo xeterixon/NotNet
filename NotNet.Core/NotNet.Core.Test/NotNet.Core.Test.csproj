@@ -8,6 +8,7 @@
     <RootNamespace>NotNet.Core.Test</RootNamespace>
     <AssemblyName>NotNet.Core.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>1.0.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +38,7 @@
     <Compile Include="Model\TestModel3.cs" />
     <Compile Include="Model\TestModel4.cs" />
     <Compile Include="Model\TestModel5.cs" />
+    <Compile Include="Model\TestModel6.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NotNet.Core\NotNet.Core.csproj">
