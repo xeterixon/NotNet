@@ -1,0 +1,3 @@
+#NotNet.Core
+
+Simple crappy dependecy injector, that's it...
