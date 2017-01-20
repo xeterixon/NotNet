@@ -13,7 +13,7 @@ namespace NotNet.Core
 		NewInstance,
 		Singleton,
 	}
-	public class Container : IServiceProvider
+	public class Container : IContainer,IServiceProvider
 	{
 		public static Container Default { get; private set;}
 		private readonly Registry _registry;
@@ -41,7 +41,8 @@ namespace NotNet.Core
 			var imt = typeof(TImpl);
 			_registry.Add (ift, imt,olc);
 		}
-		public  void Register<TImpl>(ObjectLifecycle olc = ObjectLifecycle.NewInstance) 
+		public void Register<TImpl>(ObjectLifecycle olc = ObjectLifecycle.NewInstance) 
+			where TImpl:class
 		{
 			_registry.Add(typeof(TImpl), typeof(TImpl), olc);
 		}

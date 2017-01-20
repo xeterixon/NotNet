@@ -119,11 +119,16 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Platform.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NNCTest\NNCTest.csproj">
       <Project>{F2386DA8-126D-4351-92EF-8766894E859B}</Project>
       <Name>NNCTest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\NotNet.Core\NotNet.Core\NotNet.Core.csproj">
+      <Project>{856E53CA-A304-4DC4-8D7F-51F70FC87084}</Project>
+      <Name>NotNet.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

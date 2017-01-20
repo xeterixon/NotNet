@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using NotNet.Core;
 using Xamarin.Forms;
 
 namespace NNCTest
@@ -13,10 +14,11 @@ namespace NNCTest
 		}
 		private void Register() 
 		{
-			NotNet.Core.Container.Default.AutoRegister(typeof(App).GetTypeInfo().Assembly);
-			NotNet.Core.Container.Default.Register<TestView1ViewModel>();
-			NotNet.Core.Container.Default.Register<ITestPage1ViewModel, TestPage1ViewModel>();
-			NotNet.Core.Container.Default.Register<TestPage1>();
+			Container.Default.RegisterSingleton<IContainer>(Container.Default);
+			Container.Default.AutoRegister(typeof(App).GetTypeInfo().Assembly);
+			Container.Default.Register<TestView1ViewModel>();
+			Container.Default.Register<ITestPage1ViewModel, TestPage1ViewModel>();
+			Container.Default.Register<TestPage1>();
 		}
 		protected override void OnStart()
 		{

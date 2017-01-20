@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using NNCTest.Interface;
 using UIKit;
 
 namespace NNCTest.iOS
@@ -13,9 +14,8 @@ namespace NNCTest.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init();
-
 			LoadApplication(new App());
-
+			NotNet.Core.Container.Default.Register<IPlatform, Platform>(NotNet.Core.ObjectLifecycle.Singleton);
 			return base.FinishedLaunching(app, options);
 		}
 	}

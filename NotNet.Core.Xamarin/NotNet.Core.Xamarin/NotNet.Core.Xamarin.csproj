@@ -34,6 +34,8 @@
     <Compile Include="Attributes\ViewModelAttribute.cs" />
     <Compile Include="Interface\ICleanable.cs" />
     <Compile Include="Extensions\CleanableExtension.cs" />
+    <Compile Include="MVVM\ViewModelBase.cs" />
+    <Compile Include="MVVM\ContentViewBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
