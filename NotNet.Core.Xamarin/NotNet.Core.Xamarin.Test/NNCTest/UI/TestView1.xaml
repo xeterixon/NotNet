@@ -5,6 +5,9 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		x:Class="NNCTest.TestView1">
 	<ContentView.Content>
-		<Label Text="{Binding Test}"/>
+		<StackLayout>
+			<Label Text="{Binding Test}"/>
+			<Button Text="Push me" Command="{Binding PushMeCommand}"/>
+		</StackLayout>
 	</ContentView.Content>
 </ContentView>

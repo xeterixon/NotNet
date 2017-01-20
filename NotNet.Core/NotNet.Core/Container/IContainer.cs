@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace NotNet.Core
 {
-	public interface IContainer
+	public interface IContainer: IServiceProvider
 	{
 		void Register<TIface, TImpl>(ObjectLifecycle olc = ObjectLifecycle.NewInstance)
 			where TIface : class

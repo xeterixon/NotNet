@@ -2,6 +2,7 @@
 
 namespace NotNet.Core.Test.Model
 {
+	[AutoRegisterBase]
 	public class TestModel6
 	{
 		public TestModel5 Model { get; private set;}

@@ -55,6 +55,7 @@
     <Compile Include="UI\TestView1ViewModel.cs" />
     <Compile Include="Model\TestModel1.cs" />
     <Compile Include="Interface\IPlatform.cs" />
+    <Compile Include="UI\ModalPage1.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

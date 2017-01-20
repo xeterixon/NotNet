@@ -13,19 +13,23 @@ namespace NotNet.Core
 		NewInstance,
 		Singleton,
 	}
-	public class Container : IContainer,IServiceProvider
+	public class Container : IContainer
 	{
-		public static Container Default { get; private set;}
+		public static IContainer Default { get; private set;}
 		private readonly Registry _registry;
 		private readonly Creator _createor;
 		private Container() 
 		{
 			_registry = new Registry();
 			_createor = new Creator(_registry);
+
 		}
 		static Container() 
 		{
 			Default = new Container();
+			// Register it self
+			Default.RegisterSingleton<IContainer>(Default);
+
 		}
 		/// <summary>
 		/// Register an interface and a implementing class
@@ -95,7 +99,7 @@ namespace NotNet.Core
 		}
 		public void AutoRegister(Assembly assembly)
 		{
-			// Register "SomeClass/ISomeClass" couple 
+			// Register "SomeClass" that implements "ISomeClass"
 			var attr = typeof(AutoRegisterAttribute);
 			var typeInfos = assembly.DefinedTypes.Where (t => t.IsClass && !t.IsAbstract && t.GetCustomAttribute(attr) != null).ToList();
 			foreach (var typeInfo in typeInfos) 
@@ -111,14 +115,14 @@ namespace NotNet.Core
 					System.Diagnostics.Debug.WriteLine (ex.Message);
 				}
 			}
-			//Register "SomeClass" without a "ISomeClass"
-			attr = typeof(AutoRegisterModelAttribute);
+			//Register "SomeClass" that does not implement "ISomeClass"
+			attr = typeof(AutoRegisterBaseAttribute);
 			typeInfos = assembly.DefinedTypes.Where(t => t.IsClass && !t.IsAbstract && t.GetCustomAttribute(attr) != null).ToList();
 			foreach (var typeInfo in typeInfos)
 			{
 				try
 				{
-					var autoattr = typeInfo.GetCustomAttribute(attr) as AutoRegisterModelAttribute;
+					var autoattr = typeInfo.GetCustomAttribute(attr) as AutoRegisterBaseAttribute;
 					Register(typeInfo.AsType(), typeInfo.AsType(), autoattr.AsSingleton ? ObjectLifecycle.Singleton : ObjectLifecycle.NewInstance);
 				}
 				catch (Exception ex)

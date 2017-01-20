@@ -113,6 +113,10 @@
       <Project>{856E53CA-A304-4DC4-8D7F-51F70FC87084}</Project>
       <Name>NotNet.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\NotNet.Core.Xamarin\NotNet.Core.Xamarin.csproj">
+      <Project>{657D9F61-CE44-4A7A-A0F2-5388D7E50756}</Project>
+      <Name>NotNet.Core.Xamarin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

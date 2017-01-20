@@ -16,6 +16,7 @@ namespace NNCTest
 		{
 			InitializeComponent();
 			BindingContext = model;
+
 		}
 	}
 }

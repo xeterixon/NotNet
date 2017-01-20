@@ -3,7 +3,7 @@ using NotNet.Core;
 
 namespace NNCTest
 {
-	[AutoRegisterModel(true)]
+	[AutoRegisterBase(true)]
 	public class TestModel1
 	{
 		public string Test { get; set; }

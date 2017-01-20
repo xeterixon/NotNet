@@ -34,10 +34,9 @@ namespace NotNet.Core.Test
 		private static void RegisterStuff() 
 		{
 			
-			Container.Default.Register<TestModel5>();
-			Container.Default.Register<TestModel6>();
-			Container.Default.Register<ITestModel2,TestModel2>();
 			Container.Default.AutoRegister(typeof(MainClass).Assembly);
+			Container.Default.Register<TestModel5>();
+			Container.Default.Register<ITestModel2,TestModel2>();
 		}
 	}
 }

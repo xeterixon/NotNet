@@ -12,11 +12,10 @@ namespace NotNet.Core.Xamarin
 		public static void Cleanup(this View self) 
 		{
 			CleanBindableObject(self);
-			
 		}
 		private static void CleanBindableObject(BindableObject bindable) 
 		{
-			(bindable.BindingContext as ICleanable)?.Cleanup();
+			(bindable?.BindingContext as ICleanable)?.Cleanup();
 			(bindable as ICleanable)?.Cleanup();
 		}
 	}

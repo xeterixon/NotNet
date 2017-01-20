@@ -5,12 +5,12 @@ using NotNet.Core.Xamarin;
 
 namespace NNCTest
 {
-	public interface ITestPage1ViewModel 
+	public interface ITestPage1ViewModel : IViewModelBase
 	{
 		string Test { get; set; }
 		string Platform { get; set; }
 	}
-	public class TestPage1ViewModel : Observable, ITestPage1ViewModel
+	public class TestPage1ViewModel : ViewModelBase, ITestPage1ViewModel
 	{
 		~TestPage1ViewModel() 
 		{
@@ -18,7 +18,7 @@ namespace NNCTest
 			
 		}
 		public string Platform { get; set; }
-		public TestPage1ViewModel(TestModel1 data, IContainer container)
+		public TestPage1ViewModel(TestModel1 data, IContainer container,INavigationLocator nav)
 		{
 			Platform = container.Resolve<IPlatform>().Name;
  			Test = data.Test;

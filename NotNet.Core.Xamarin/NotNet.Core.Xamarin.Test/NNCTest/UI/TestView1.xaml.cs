@@ -11,7 +11,6 @@ namespace NNCTest
 	{
 		~TestView1() 
 		{
-			this.Cleanup();
 			System.Diagnostics.Debug.WriteLine("~TestView1()");
 		}
 		public TestView1()

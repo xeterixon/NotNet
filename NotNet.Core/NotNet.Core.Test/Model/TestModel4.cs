@@ -1,5 +1,5 @@
 ﻿using System;
-using NotNet.Core.Attributes;
+using NotNet.Core;
 
 namespace NotNet.Core.Test.Model
 {

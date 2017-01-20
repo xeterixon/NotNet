@@ -4,12 +4,10 @@ using System.Runtime.CompilerServices;
 
 namespace NotNet.Core.Xamarin
 {
-	public class Observable : INotifyPropertyChanged, ICleanable
+	public class Observable : INotifyPropertyChanged
 	{
 		#region INotifyPropertyChanged implementation
 		public event PropertyChangedEventHandler PropertyChanged;
-
-		public virtual void Cleanup(){}
 
 		virtual protected void OnPropertyChanged([CallerMemberName] string name = null)
 		{

@@ -30,12 +30,17 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MVVM\Observable.cs" />
-    <Compile Include="Container\ContainerExtensions.cs" />
     <Compile Include="Attributes\ViewModelAttribute.cs" />
     <Compile Include="Interface\ICleanable.cs" />
     <Compile Include="Extensions\CleanableExtension.cs" />
     <Compile Include="MVVM\ViewModelBase.cs" />
-    <Compile Include="MVVM\ContentViewBase.cs" />
+    <Compile Include="MVVM\IViewModelBase.cs" />
+    <Compile Include="Infrastructure\ApplicationWrapper.cs" />
+    <Compile Include="Interface\INavigationLocator.cs" />
+    <Compile Include="Infrastructure\NavigationLocator.cs" />
+    <Compile Include="Extensions\NavigationLocatorExtensions.cs" />
+    <Compile Include="Extensions\ContainerExtensions.cs" />
+    <Compile Include="Infrastructure\ContentPageBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -59,10 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MVVM\" />
-    <Folder Include="Container\" />
     <Folder Include="Attributes\" />
     <Folder Include="Interface\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Infrastructure\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
