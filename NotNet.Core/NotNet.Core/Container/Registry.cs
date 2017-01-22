@@ -19,7 +19,15 @@ namespace NotNet.Core
 		{
 			RegisteredTypes = new List<RegistryEntry> ();
 		}
+		public bool IsRegistered<T>()
+		{
+			return RegisteredTypes.Any(r => r.Interface.Equals(typeof(T)));
+		}
+
+		//TODO Use something faster than a list
 		public IList<RegistryEntry> RegisteredTypes{ get; private set;}
+
+		//TODO There should be a lock in the Add methods
 		public void Add(Type iface, object instance)
 		{
 			RegisteredTypes.Add(new RegistryEntry{ Instance = instance, Implementation = instance.GetType(), Interface = iface, LifeCycle = ObjectLifecycle.Singleton});

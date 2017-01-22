@@ -7,8 +7,14 @@ namespace NNCTest
 {
 	public partial class NNCTestPage : ContentPage
 	{
+		void PushTabPage(object sender, System.EventArgs e)
+		{
+			_navigation.PushAsync(container.Resolve<TabPage>());
+		}
+
 		async void PushModal(object sender, System.EventArgs e)
 		{
+			
 			await Navigation.PushModalAsync(container.Resolve<ModalPage1>());
 		}
 
@@ -30,10 +36,12 @@ namespace NNCTest
 			await Navigation.PushAsync(page);
 		}
 		IContainer container;
-		public NNCTestPage( IContainer cont)
+		INavigationLocator _navigation;
+		public NNCTestPage( IContainer cont, INavigationLocator navLocator)
 		{
 			InitializeComponent();
 			container = cont;
+			_navigation = navLocator;
 		}
 	}
 }

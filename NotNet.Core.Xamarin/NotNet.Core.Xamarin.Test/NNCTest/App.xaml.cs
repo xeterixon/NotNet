@@ -11,13 +11,16 @@ namespace NNCTest
 		{
 			InitializeComponent();
 			Register();
+			var registry =  Container.Default.Resolve<IObjectRegistry>();
+			registry.SetInstance(Container.Default.Resolve<TestModel1>());
+			RegisterNavigationLocator();
 			MainPage = new NavigationPage(Container.Default.Resolve<NNCTestPage>());
 		}
 		private void Register() 
 		{
-			Container.Default.RegisterSingleton<INavigationLocator>(new NavigationLocator(this));
-			Container.Default.Register<NNCTestPage>();
 			Container.Default.AutoRegister(typeof(App).GetTypeInfo().Assembly);
+
+			Container.Default.Register<NNCTestPage>();
 			Container.Default.Register<TestView1ViewModel>();
 			Container.Default.Register<ITestPage1ViewModel, TestPage1ViewModel>();
 			Container.Default.Register<TestPage1>();

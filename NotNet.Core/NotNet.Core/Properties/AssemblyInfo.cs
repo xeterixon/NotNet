@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 // Change them to the values specific to your project.
 
 [assembly: AssemblyTitle ("NotNet.Core")]
-[assembly: AssemblyDescription ("Stuff I need")]
+[assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("NotNet Solutions")]
 [assembly: AssemblyProduct ("")]

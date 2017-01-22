@@ -1,13 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace NotNet.Core.Xamarin
 {
-	public class ApplicationWrapper : Application
+	public abstract class ApplicationWrapper : Application
 	{
 		protected INavigation RootNavigation {
 			set { Navigations.Push(value); }
+		}
+		public void  RegisterNavigationLocator(IContainer container = null) 
+		{
+			container = container ?? Container.Default;
+			if (!container.IsRegistered<INavigationLocator>())
+			{
+				container.RegisterSingleton<INavigationLocator>(new NavigationLocator(this));
+			}
 		}
 		public INavigation Navigation => Navigations.Peek();
 		private Stack<INavigation> Navigations { get; set; } = new Stack<INavigation>();
@@ -30,7 +37,6 @@ namespace NotNet.Core.Xamarin
 				}
 			}
 		}
-
 		void NonModelPagePopped(object sender, NavigationEventArgs e)
 		{
 			var p = e.Page;

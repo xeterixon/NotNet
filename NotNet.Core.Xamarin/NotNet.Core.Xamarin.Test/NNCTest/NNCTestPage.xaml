@@ -5,6 +5,7 @@
 		<Button Text="Push Page 1" Clicked="PushPage1"/>
 		<Button Text="Push Page 2" Clicked="PushPage2"/>
 		<Button Text="Push Modal" Clicked="PushModal"/>
+		<Button Text="Push TabPage" Clicked="PushTabPage"/>
 		
 	</StackLayout>
 

@@ -9,7 +9,7 @@ namespace NotNet.Core.Test.Model
 		string Test2 { get; set; }
 	}
 	// Singleton
-	[AutoRegister(true)]
+	[AutoRegister(ObjectLifecycle.Singleton)]
 	public class TestModel1: ITestModel1
 	{
 		public TestModel1()

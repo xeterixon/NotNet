@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NotNet.Core
+﻿namespace NotNet.Core
 {
 	public static class Component
 	{

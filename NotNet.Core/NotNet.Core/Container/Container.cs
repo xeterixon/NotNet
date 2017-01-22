@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using NotNet.Core;
 using System.Linq;
 
 namespace NotNet.Core
@@ -28,7 +27,7 @@ namespace NotNet.Core
 		{
 			Default = new Container();
 			// Register it self
-			Default.RegisterSingleton<IContainer>(Default);
+			Default.RegisterSingleton(Default);
 
 		}
 		/// <summary>
@@ -106,31 +105,17 @@ namespace NotNet.Core
 			{
 				try
 				{
-					var autoattr = typeInfo.GetCustomAttribute(attr) as AutoRegisterAttribute;	
-					var iface = typeInfo.AsType().GetTypeInfo().ImplementedInterfaces.FirstOrDefault();
-					Register(iface,typeInfo.AsType(),autoattr.AsSingleton ? ObjectLifecycle.Singleton : ObjectLifecycle.NewInstance);
+					var autoattr = typeInfo.GetCustomAttribute(attr) as AutoRegisterAttribute;
+					var iface = autoattr.Description == ObjectDescription.HasInterface ?
+										typeInfo.AsType().GetTypeInfo().ImplementedInterfaces.FirstOrDefault() :
+										typeInfo.AsType();
+					Register(iface,typeInfo.AsType(),autoattr.Lifecycle);
 				}
 				catch(Exception ex)
 				{
 					System.Diagnostics.Debug.WriteLine (ex.Message);
 				}
 			}
-			//Register "SomeClass" that does not implement "ISomeClass"
-			attr = typeof(AutoRegisterBaseAttribute);
-			typeInfos = assembly.DefinedTypes.Where(t => t.IsClass && !t.IsAbstract && t.GetCustomAttribute(attr) != null).ToList();
-			foreach (var typeInfo in typeInfos)
-			{
-				try
-				{
-					var autoattr = typeInfo.GetCustomAttribute(attr) as AutoRegisterBaseAttribute;
-					Register(typeInfo.AsType(), typeInfo.AsType(), autoattr.AsSingleton ? ObjectLifecycle.Singleton : ObjectLifecycle.NewInstance);
-				}
-				catch (Exception ex)
-				{
-					System.Diagnostics.Debug.WriteLine(ex.Message);
-				}
-			}
-
 		}
 		private void Register(Type iface, Type impl, ObjectLifecycle olc)
 		{
@@ -140,6 +125,10 @@ namespace NotNet.Core
 		public object GetService(Type serviceType)
 		{
 			return _createor.Create(serviceType);
+		}
+		public bool IsRegistered<T>() 
+		{
+			return _registry.IsRegistered<T>();
 		}
 	}
 }

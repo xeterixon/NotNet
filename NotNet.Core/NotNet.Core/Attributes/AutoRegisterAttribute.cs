@@ -1,28 +1,37 @@
 ﻿using System;
 namespace NotNet.Core
 {
+	public enum ObjectDescription 
+	{
+		NoInterface = 0,
+		HasInterface = 1
+
+	}
 	/// <summary>
 	/// Should be used when register a Class that implements an specified interface.
 	/// </summary>
 	[System.AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 	public class AutoRegisterAttribute : Attribute
 	{
-		public bool AsSingleton{ get; set;}
-		public AutoRegisterAttribute (bool asSingleton = false)
+		public ObjectLifecycle Lifecycle{get; private set;}
+		public ObjectDescription Description { get; private set;}
+		public AutoRegisterAttribute() 
 		{
-			AsSingleton = asSingleton;
+			Lifecycle = ObjectLifecycle.NewInstance;
+			Description = ObjectDescription.HasInterface;
 		}
-	}
-	/// <summary>
-	/// Should be used when register a Class without a specified interface
-	/// </summary>
-	[System.AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-	public class AutoRegisterBaseAttribute : Attribute
-	{
-		public bool AsSingleton { get; set; }
-		public AutoRegisterBaseAttribute(bool asSingleton = false)
+		public AutoRegisterAttribute(ObjectLifecycle life) : this()
 		{
-			AsSingleton = asSingleton;
+			Lifecycle = life;
+		}
+		public AutoRegisterAttribute(ObjectDescription desc) : this()
+		{
+			Description = desc;
+		}
+		public AutoRegisterAttribute(ObjectLifecycle life, ObjectDescription desc)
+		{
+			Lifecycle = life;
+			Description = desc;
 		}
 	}
 }

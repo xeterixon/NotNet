@@ -1,12 +1,9 @@
-﻿using System;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace NotNet.Core.Xamarin
 {
 	public class ContentPageBase : ContentPage
 	{
-		public ContentPageBase() { }
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();

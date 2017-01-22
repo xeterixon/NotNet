@@ -1,5 +1,4 @@
-﻿using System;
-using NotNet.Core.Xamarin;
+﻿using NotNet.Core.Xamarin;
 using Xamarin.Forms;
 
 namespace NotNet.Core.Xamarin

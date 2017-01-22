@@ -7,7 +7,9 @@
 	<ContentPage.Content>
 		<StackLayout>
 			<Label Text="{Binding Test}"/>
+			<Label Text="{Binding Test1}"/>
 			<Label Text="{Binding Platform}"/>
+			
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

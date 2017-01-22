@@ -1,7 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-
-namespace NotNet.Core.Xamarin
+﻿namespace NotNet.Core.Xamarin
 {
 	public interface IViewModelBase 
 	{
