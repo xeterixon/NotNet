@@ -11,7 +11,7 @@ namespace NotNet.Core
 		/// <param name="olc">Object life cycle.</param>
 		/// <typeparam name="TIface">The interface type.</typeparam>
 		/// <typeparam name="TImpl">The implementaion type.</typeparam>
-		void Register<TIface, TImpl>(ObjectLifecycle olc = ObjectLifecycle.NewInstance)
+		void Register<TIface, TImpl>(ObjectLifecycle olc = ObjectLifecycle.Transient)
 			where TIface : class
 			where TImpl : TIface;
 		/// <summary>
@@ -19,7 +19,7 @@ namespace NotNet.Core
 		/// </summary>
 		/// <param name="olc">Object life cycle.</param>
 		/// <typeparam name="TImpl">The 1st type parameter.</typeparam>
-		void Register<TImpl>(ObjectLifecycle olc = ObjectLifecycle.NewInstance)
+		void Register<TImpl>(ObjectLifecycle olc = ObjectLifecycle.Transient)
 			where TImpl : class;
 
 		/// <summary>

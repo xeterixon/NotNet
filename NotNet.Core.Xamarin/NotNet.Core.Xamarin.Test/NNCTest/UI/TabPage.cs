@@ -5,7 +5,7 @@ using NotNet.Core;
 using NotNet.Core.Xamarin;
 namespace NNCTest
 {
-	[AutoRegister(ObjectDescription.NoInterface)]
+	[AutoRegister(ObjectDescription.Base)]
 	public class TabPage : TabbedPage
 	{
 		~TabPage() 

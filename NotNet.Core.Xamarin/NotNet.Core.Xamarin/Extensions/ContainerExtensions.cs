@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Xamarin.Forms;
 
 namespace NotNet.Core.Xamarin
@@ -7,36 +8,33 @@ namespace NotNet.Core.Xamarin
 	{
 		// Creates a ContentPage with TView as content trying to get the BindingContext from an attribute on the TView
 		public static ContentPage ResolveWrappedView<TView>(this IContainer container)
-			where TView:ContentView, new()
+			where TView:ContentView
 		{
 			var attr = typeof(TView).GetTypeInfo().GetCustomAttribute<ViewModelAttribute>();
-			object bindingContext = null;
-			var page = new ContentPageBase();
-			page.BatchBegin();
-			page.Content = new TView();
-			if (attr != null) 
+			var view = container.ResolveView<TView>();
+			var page = new ContentPageBase
 			{
-				bindingContext = container.GetService(attr.ViewModelType);
-				page.BindingContext = bindingContext;
-				if (typeof(IViewModelBase).GetTypeInfo().IsAssignableFrom(bindingContext.GetType().GetTypeInfo())) 
-				{
-					var vm = (IViewModelBase)bindingContext;
-					page.SetBinding(Page.TitleProperty, nameof(vm.Title));
-				}
-			}
-			page.BatchCommit();
+				BindingContext = view.BindingContext,
+				Content = view
+			};
+			page.SetBinding(Page.TitleProperty, "Title");
 			return page;
 		}
-
-		// Creates a TView trying to get the BindingContext from an attribute on the TView
-		public static TView ResolveView<TView>(this IContainer container)
-			where TView : ContentView, new()
+		private static object GetViewModelFromAttribute(IContainer container, Type t) 
 		{
-			var attr = typeof(TView).GetTypeInfo().GetCustomAttribute<ViewModelAttribute>();
-			object vm = null;
-			if (attr != null) {
-				vm = container.GetService(attr.ViewModelType);			}
-			return new TView{ BindingContext = vm };
+			var attr = t.GetTypeInfo().GetCustomAttribute<ViewModelAttribute>();
+			if (attr != null) 
+			{
+				return container.GetService(attr.ViewModelType);
+			}
+			return null;
+		}
+		public static TElement ResolveView<TElement>(this IContainer container)
+			where TElement : View
+		{
+			var bindable = (TElement)container.GetService(typeof(TElement));
+			bindable.BindingContext = GetViewModelFromAttribute(container, typeof(TElement));
+			return bindable;
 		}
 
 	}

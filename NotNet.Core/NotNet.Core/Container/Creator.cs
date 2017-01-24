@@ -64,6 +64,8 @@ namespace NotNet.Core
 		/// <param name="type">Type.</param>
 		private object FindBestConstructorAndCreateInstance(Type type) 
 		{
+			var bt = type.GetTypeInfo().BaseType;
+
 			var ctors = type.GetTypeInfo().DeclaredConstructors.OrderBy((arg) => arg.GetParameters().Count());
 			var ctor = ctors.FirstOrDefault((arg) => arg.GetCustomAttribute(typeof(PreferredConstructorAttribute)) != null) ?? ctors.FirstOrDefault();
 			List<object> types = new List<object>();

@@ -4,17 +4,29 @@ namespace NotNet.Core.Xamarin
 {
 	public class ContentPageBase : ContentPage
 	{
+		public IViewModelBase ViewModel{
+			get
+			{
+				return BindingContext as IViewModelBase;
+			}
+		}
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-			var vm = BindingContext as IViewModelBase;
-			vm?.OnPageAppearing();
+			ViewModel?.OnPageAppearing();
 		}
 		protected override void OnDisappearing()
 		{
 			base.OnDisappearing();
-			var vm = BindingContext as IViewModelBase;
-			vm?.OnPageDisappearing();
+			ViewModel?.OnPageDisappearing();
+		}
+		protected override bool OnBackButtonPressed()
+		{
+			if (ViewModel != null) 
+			{
+				return ViewModel.OnBackButtonPressed();
+			}
+			return base.OnBackButtonPressed();
 		}
 	}
 }

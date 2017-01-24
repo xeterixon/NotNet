@@ -2,7 +2,7 @@
 
 namespace NotNet.Core.Test.Model
 {
-	[AutoRegister(ObjectDescription.NoInterface)]
+	[AutoRegister(ObjectDescription.Base)]
 	public class TestModel6
 	{
 		public TestModel5 Model { get; private set;}

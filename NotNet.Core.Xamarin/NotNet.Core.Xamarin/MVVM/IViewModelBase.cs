@@ -5,5 +5,6 @@
 		string Title { get; set; }
 		void OnPageAppearing();
 		void OnPageDisappearing();
+		bool OnBackButtonPressed();
 	}
 }

@@ -9,7 +9,7 @@ namespace NotNet.Core
 	/// </summary>
 	public enum ObjectLifecycle
 	{
-		NewInstance,
+		Transient,
 		Singleton,
 	}
 	public class Container : IContainer
@@ -36,7 +36,7 @@ namespace NotNet.Core
 		/// <param name="olc">The lifecycle for the object.</param>
 		/// <typeparam name="TIface">The interface.</typeparam>
 		/// <typeparam name="TImpl">The implementation.</typeparam>
-		public void Register<TIface,TImpl>( ObjectLifecycle olc = ObjectLifecycle.NewInstance)
+		public void Register<TIface,TImpl>( ObjectLifecycle olc = ObjectLifecycle.Transient)
 			where TIface:class
 			where TImpl:TIface
 		{
@@ -44,7 +44,7 @@ namespace NotNet.Core
 			var imt = typeof(TImpl);
 			_registry.Add (ift, imt,olc);
 		}
-		public void Register<TImpl>(ObjectLifecycle olc = ObjectLifecycle.NewInstance) 
+		public void Register<TImpl>(ObjectLifecycle olc = ObjectLifecycle.Transient) 
 			where TImpl:class
 		{
 			_registry.Add(typeof(TImpl), typeof(TImpl), olc);
@@ -106,7 +106,7 @@ namespace NotNet.Core
 				try
 				{
 					var autoattr = typeInfo.GetCustomAttribute(attr) as AutoRegisterAttribute;
-					var iface = autoattr.Description == ObjectDescription.HasInterface ?
+					var iface = autoattr.Description == ObjectDescription.ImplementsInterface ?
 										typeInfo.AsType().GetTypeInfo().ImplementedInterfaces.FirstOrDefault() :
 										typeInfo.AsType();
 					Register(iface,typeInfo.AsType(),autoattr.Lifecycle);

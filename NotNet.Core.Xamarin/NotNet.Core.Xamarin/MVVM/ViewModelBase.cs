@@ -26,5 +26,10 @@
 		public virtual void Cleanup() { }
 		public virtual void OnPageAppearing(){}
 		public virtual void OnPageDisappearing(){}
+		public virtual bool OnBackButtonPressed()
+		{
+			return false;
+		}
+
 	}
 }

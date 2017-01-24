@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace NNCTest.UI
 {
-	[AutoRegister(ObjectDescription.NoInterface)]
+	[AutoRegister(ObjectDescription.Base)]
 	public class ModalPage1 : ContentPage
 	{
 		~ModalPage1()

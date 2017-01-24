@@ -3,8 +3,8 @@ namespace NotNet.Core
 {
 	public enum ObjectDescription 
 	{
-		NoInterface = 0,
-		HasInterface = 1
+		Base = 0,
+		ImplementsInterface = 1
 
 	}
 	/// <summary>
@@ -17,8 +17,8 @@ namespace NotNet.Core
 		public ObjectDescription Description { get; private set;}
 		public AutoRegisterAttribute() 
 		{
-			Lifecycle = ObjectLifecycle.NewInstance;
-			Description = ObjectDescription.HasInterface;
+			Lifecycle = ObjectLifecycle.Transient;
+			Description = ObjectDescription.ImplementsInterface;
 		}
 		public AutoRegisterAttribute(ObjectLifecycle life) : this()
 		{
