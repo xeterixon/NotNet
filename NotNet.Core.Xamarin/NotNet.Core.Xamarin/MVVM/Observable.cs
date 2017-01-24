@@ -12,12 +12,14 @@ namespace NotNet.Core.Xamarin
 		{
 			if (name == null)
 				return;
-			var handler = PropertyChanged;
-			if (handler == null)
-				return;
-			handler(this, new PropertyChangedEventArgs(name));
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 		#endregion
+		protected void SetProperty<T>(ref T self, T value, [CallerMemberName] string propertyName = null) 
+		{
+			if (object.Equals(self, value)) return;
+			OnPropertyChanged(propertyName);
+		}
 	}
 
 	public class Observable<T> : Observable
@@ -28,8 +30,7 @@ namespace NotNet.Core.Xamarin
 			get { return _Value; }
 			set
 			{
-				_Value = value;
-				OnPropertyChanged();
+				SetProperty(ref _Value, value);
 			}
 		}
 		public Observable()
