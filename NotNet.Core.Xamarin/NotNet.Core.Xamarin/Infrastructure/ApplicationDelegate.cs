@@ -9,13 +9,13 @@ namespace NotNet.Core.Xamarin
 		public INavigation Navigation => Navigations.Peek();
 		private Stack<INavigation> Navigations { get; set; } = new Stack<INavigation>();
 
-		public ApplicationDelegate(Application app)
+		public ApplicationDelegate(Application app, IContainer container)
 		{
 			this.App = app;
 			app.PropertyChanged += Application_PropertyChanged;
 			app.ModalPopped += ModalPopped;
 			app.ModalPushing += ModalPushing;
-			Container.Default.RegisterSingleton<INavigationLocator>(new NavigationLocator(this));
+			container.RegisterSingleton<INavigationLocator>(new NavigationLocator(this,container));
 		}
 		void Application_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{

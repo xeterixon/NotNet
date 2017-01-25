@@ -67,7 +67,7 @@ namespace NotNet.Core
 		{
 			var it = TryCreate<TIface>();
 			if (it == null) {
-				throw new ArgumentException(string.Format("Type {0} is not registered", typeof(TIface).GetTypeInfo().Name));
+				throw new ArgumentException(string.Format("Unable to resolve {0}", typeof(TIface).GetTypeInfo().Name));
 			}
 			return it;
 		}

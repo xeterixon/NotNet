@@ -21,7 +21,7 @@ namespace NNCTest
 			// Auto register stuff...
 			Container.Default.AutoRegister(typeof(App).GetTypeInfo().Assembly);
 
-			Container.Default.RegisterSingleton<IApplicationDelegate>(new ApplicationDelegate(this));
+			Container.Default.RegisterSingleton<IApplicationDelegate>(new ApplicationDelegate(this, Container.Default));
 			Container.Default.RegisterSingleton<Application>(this);
 
 			Container.Default.Register<NNCTestPage>();
