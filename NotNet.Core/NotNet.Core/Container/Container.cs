@@ -70,6 +70,10 @@ namespace NotNet.Core
 		{
 			_registry.Add(typeof(TImpl), instance);	
 		}
+		public T Resolve<T>(params object[] args) 
+		{
+			return _createor.CreateWithArgs<T>(args);
+		}
 		/// <summary>
 		/// Get the implementation for an interface.
 		/// </summary>
@@ -90,6 +94,10 @@ namespace NotNet.Core
 			var obj = _createor.Create<TIface> ();
 			action (obj);
 			return obj;
+		}
+		public T ResolveOrDefault<T>(params object[] args) 
+		{
+			return _createor.TryCreateWithArgs<T>(args);
 		}
 		public TIFace ResolveOrDefault<TIFace>()
 			where TIFace:class
@@ -120,6 +128,13 @@ namespace NotNet.Core
 		private void Register(Type iface, Type impl, ObjectLifecycle olc)
 		{
 			_registry.Add (iface, impl, olc);
+		}
+		public object Resolve(Type t, params object[] args) 
+		{
+			return _createor.CreateWithArgs(t, args);
+		}
+		public object Resolve(Type t)		{
+			return _createor.Create(t);
 		}
 
 		public object GetService(Type serviceType)

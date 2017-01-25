@@ -20,30 +20,29 @@ namespace NNCTest
 		}
 		public ICommand PushMeCommand { get; private set; }
 		bool _runTimer = true;
-		bool HandleFunc()
+		bool TimerCallback()
 		{
 			Test = Guid.NewGuid().ToString();
 			OnPropertyChanged(nameof(Test));
 			return _runTimer;
 		}
-		public override void OnPageAppearing()
-		{
-			Title = "Hello";
-		}
 
 		public string Test { get; set; } = Guid.NewGuid().ToString();
 		INavigationLocator navigation;
 		IContainer container;
-		public TestView1ViewModel(IContainer c, INavigationLocator nav)
+		TestModel2 _model2;
+		public TestView1ViewModel(IContainer c, INavigationLocator nav, TestModel2 model2)
 		{
+			_model2 = model2;
 			container = c;
 			navigation = nav;
-			Device.StartTimer(TimeSpan.FromSeconds(2),HandleFunc);
+			Device.StartTimer(TimeSpan.FromSeconds(2),TimerCallback);
 			PushMeCommand = new Command(async (obj) => { await PushStuff(); });
+			Title = _model2.Test;
 		}
 		private async Task PushStuff() 
 		{
-			await navigation.PushAsync(container.ResolveWrappedView<TestView1>());
+			await navigation.PushAsync(container.ResolveWrappedView<TestView1>(_model2));
 		}
 	}
 }

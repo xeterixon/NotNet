@@ -11,12 +11,10 @@ namespace NNCTest
 		{
 			System.Diagnostics.Debug.WriteLine("~TestPage1()");
 		}
-		
-		public TestPage1(ITestPage1ViewModel model)
+		public TestPage1(ITestPage1ViewModel model, TestModel2 m2)
 		{
 			InitializeComponent();
 			BindingContext = model;
-
 		}
 	}
 }

@@ -17,14 +17,20 @@ namespace NNCTest
 			System.Diagnostics.Debug.WriteLine("~TestPage1ViewModel()");
 			
 		}
-		public string Test1 { get { return _registry.GetInstance<TestModel1>().Test; }}
+		public string Test1 {
+			get {
+				return "CRAP";
+			}
+		}
 		public string Platform { get; set; }
-		IObjectRegistry _registry;
-		public TestPage1ViewModel(TestModel1 data, IContainer container,INavigationLocator nav, IObjectRegistry reg)
+		TestModel2 _model2;
+		public TestPage1ViewModel(TestModel1 data, IContainer container,INavigationLocator nav)
 		{
-			_registry = reg;
+
+//			_model2 = model2;
 			Platform = container.Resolve<IPlatform>().Name;
  			Test = data.Test;
+			Title = "Title from TestPage1ViewModel";
 		}
 		public string Test { get; set; }
 	}

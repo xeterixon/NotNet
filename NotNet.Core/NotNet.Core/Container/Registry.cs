@@ -10,7 +10,7 @@ namespace NotNet.Core
 	{
 		public Type Interface{get;set;}
 		public Type Implementation{get;set;}
-		public object Instance{get;set;}
+		public object Instance{get;set;} // Holds the instance for singleton objects
 		public ObjectLifecycle LifeCycle{ get; set; }
 	}
 	internal class Registry

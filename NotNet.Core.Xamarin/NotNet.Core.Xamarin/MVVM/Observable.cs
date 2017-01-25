@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
+using System.Linq.Expressions;
+using System;
+using System.Reflection;
 namespace NotNet.Core.Xamarin
 {
 	public class Observable : INotifyPropertyChanged
@@ -15,9 +17,18 @@ namespace NotNet.Core.Xamarin
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 		#endregion
+		protected void SetProperty<TVal, TTarget>(TVal input, TTarget target, Expression<Func<TTarget, TVal>> outExpr) 
+		{
+	        var expr = (MemberExpression)outExpr.Body;
+			var prop = (PropertyInfo)expr.Member;
+			var apa = (TVal)prop.GetValue(target);
+			if (object.Equals(apa, input)) return;
+			prop.SetValue(target, input, null);			OnPropertyChanged(prop.Name);
+		}
 		protected void SetProperty<T>(ref T self, T value, [CallerMemberName] string propertyName = null) 
 		{
 			if (object.Equals(self, value)) return;
+			self = value;
 			OnPropertyChanged(propertyName);
 		}
 	}

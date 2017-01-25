@@ -12,8 +12,7 @@
 				return _title;
 			}
 			set {
-				_title = value;
-				OnPropertyChanged();
+				SetProperty(ref _title, value);
 			}
 		}
 		protected ViewModelBase() { }

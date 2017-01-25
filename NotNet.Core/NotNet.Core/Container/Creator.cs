@@ -17,6 +17,17 @@ namespace NotNet.Core
 			return  _registry.RegisteredTypes.FirstOrDefault(r => r.Interface.Equals(t));
 			
 		}
+		public T TryCreateWithArgs<T>(params object[] args) 
+		{
+			try 
+			{
+				return CreateWithArgs<T>(args);
+			} 
+			catch 
+			{
+				return default(T);
+			}
+		}
 		public TIface TryCreate<TIface>()
 			where TIface : class
 		{
@@ -42,6 +53,11 @@ namespace NotNet.Core
 				return FindBestConstructorAndCreateInstance(entry.Implementation);
 			}
 		}
+		public object CreateWithArgs(Type t, params object[] args) 
+		{
+			var ctor = GetPreferredConstructor(t);
+			return ConstructInstanceWithArgs(ctor, args);
+		}
 		public object Create(Type t) 
 		{
 			return CreateObject(t);
@@ -55,6 +71,41 @@ namespace NotNet.Core
 			}
 			return it;
 		}
+		public T CreateWithArgs<T>(params object[] args) 
+		{
+			return (T)CreateWithArgs(typeof(T), args);
+		}
+		private ConstructorInfo GetPreferredConstructor(Type type) 
+		{
+			var ctors = type.GetTypeInfo().DeclaredConstructors.OrderBy((arg) => arg.GetParameters().Count());
+			var ctor = ctors.FirstOrDefault((arg) => arg.GetCustomAttribute(typeof(PreferredConstructorAttribute)) != null) ?? ctors.FirstOrDefault();
+			return ctor;
+		}
+		private object ConstructInstanceWithArgs(ConstructorInfo cinof, params object[] args) 
+		{
+			var cargs = GetInjectedParameterArgs(cinof);
+			cargs.AddRange(args);
+			return Activator.CreateInstance(cinof.DeclaringType, cargs.ToArray());
+		}
+		private List<object> GetInjectedParameterArgs(ConstructorInfo cinfo) 
+		{
+			List<object> types = new List<object>();
+			foreach (var param in cinfo.GetParameters()) {
+				var t = param.ParameterType;
+				var o = CreateObject(t);
+				if (o != null)
+				{
+					types.Add(o);
+				}
+			}
+			return types;
+		}
+		private object ConstructInstance(ConstructorInfo cinfo) 
+		{
+			var args = GetInjectedParameterArgs(cinfo);
+			return Activator.CreateInstance(cinfo.DeclaringType, args.ToArray());
+			
+		}
 		/// <summary>
 		/// Finds the best constructor and create instance.
 		/// It tries to use the constructor with the least amount of parameters 
@@ -64,18 +115,9 @@ namespace NotNet.Core
 		/// <param name="type">Type.</param>
 		private object FindBestConstructorAndCreateInstance(Type type) 
 		{
-			var bt = type.GetTypeInfo().BaseType;
 
-			var ctors = type.GetTypeInfo().DeclaredConstructors.OrderBy((arg) => arg.GetParameters().Count());
-			var ctor = ctors.FirstOrDefault((arg) => arg.GetCustomAttribute(typeof(PreferredConstructorAttribute)) != null) ?? ctors.FirstOrDefault();
-			List<object> types = new List<object>();
-			foreach (var param in ctor.GetParameters()) 
-			{
-				var t = param.ParameterType;
-				var o = CreateObject(t);
-				types.Add(o);
-			}
-			return Activator.CreateInstance(type, types.ToArray());
+			var ctor = GetPreferredConstructor(type);
+			return ConstructInstance(ctor);
 		}
 	}
 }

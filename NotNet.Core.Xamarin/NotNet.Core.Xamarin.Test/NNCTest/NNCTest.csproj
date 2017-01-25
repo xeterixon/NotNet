@@ -59,6 +59,7 @@
     <Compile Include="Interface\IObjectRegistry.cs" />
     <Compile Include="Service\ObjectRegistry.cs" />
     <Compile Include="UI\TabPage.cs" />
+    <Compile Include="Model\TestModel2.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

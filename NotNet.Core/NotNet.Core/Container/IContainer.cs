@@ -49,6 +49,20 @@ namespace NotNet.Core
 			where TIface : class;
 
 		/// <summary>
+		/// Resolves with arguments.
+		/// Note that args are injected as the last arguments to the constructor.
+		/// Any Resolved arguments are injected first.
+		/// This might lead to some unexpected behavior for types in args that can be resolved
+		/// </summary>
+		/// <returns>An object of type T</returns>
+		/// <param name="args">An array of instances</param>
+		/// <typeparam name="T">The type to create</typeparam>
+		T Resolve<T>(params object[] args);
+
+		object Resolve(Type t, params object[] args);
+		object Resolve(Type t);
+
+		/// <summary>
 		/// Fetch an object of type TIface and executes the action
 		/// Throws if no suitable class or interface is found
 		/// <returns>An object implementing TIFace</returns>
@@ -60,11 +74,13 @@ namespace NotNet.Core
 
 		/// <summary>
 		/// Fetch an object of type TIface
-		/// <returns>An object implementing TIFace</returns>
+		/// <returns>An object implementing TIFace or null if no implementation is found</returns>
 		/// </summary>
 		/// <typeparam name="TIface">The type.</typeparam>
 		TIFace ResolveOrDefault<TIFace>()
 			where TIFace : class;
+
+		T ResolveOrDefault<T>(params object[] args);
 		/// <summary>
 		/// Auto register classes with the AutoRegister attribute
 		/// </summary>
@@ -77,6 +93,6 @@ namespace NotNet.Core
 		/// <returns><c>true</c>, if type registered, <c>false</c> otherwise.</returns>
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		bool IsRegistered<T>();
-	}
 
+	}
 }

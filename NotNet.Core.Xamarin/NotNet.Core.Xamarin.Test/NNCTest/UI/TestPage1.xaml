@@ -3,7 +3,9 @@
 		BackgroundColor="Olive" 
 		xmlns="http://xamarin.com/schemas/2014/forms" 
 		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-		x:Class="NNCTest.TestPage1">
+		x:Class="NNCTest.TestPage1"
+		Title="{Binding Title}"
+		>
 	<ContentPage.Content>
 		<StackLayout>
 			<Label Text="{Binding Test}"/>

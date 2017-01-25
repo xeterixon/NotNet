@@ -19,6 +19,9 @@ namespace NotNet.Core.Test
 			var t5_2 = Container.Default.ResolveOrDefault<TestModel5>();
 			var t5_3 = (TestModel5)Container.Default.GetService(typeof(TestModel5));
 			var t6 = Container.Default.ResolveOrDefault<TestModel6>();
+			var t7 = Container.Default.Resolve<TestModel7>(new TestArg1(), new TestArg3());
+			//t8 should be null-ish, but not throw...
+			var t8 = Container.Default.ResolveOrDefault<object>(null, null);
 			Console.WriteLine("T1   " + (t1?.Test1 ?? "null"));
 			Console.WriteLine("T2   " + (t2?.Test1 ?? "null"));
 			Console.WriteLine("T3_1 " + (t3?.Test1 ?? "null"));
@@ -29,13 +32,15 @@ namespace NotNet.Core.Test
 			Console.WriteLine("T5_2 " + (t5_2?.Test1 ?? "null"));
 			Console.WriteLine("T5_3 " + (t5_3?.Test1 ?? "null"));
 			Console.WriteLine("T6   " + (t6?.Test ?? "null"));
-
+			Console.WriteLine("T7   " + (t7?.Test ?? "null"));
+			Console.WriteLine("T8   " + (t8 == null ?  "null, as it should" : "Not null, WTF"));
 		}
 		private static void RegisterStuff() 
 		{
 			
 			Container.Default.AutoRegister(typeof(MainClass).Assembly);
 			Container.Default.Register<TestModel5>();
+			Container.Default.Register<TestModel7>();
 			Container.Default.Register<ITestModel2,TestModel2>();
 		}
 	}
