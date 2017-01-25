@@ -21,7 +21,7 @@ namespace NotNet.Core
 		{
 			try 
 			{
-				return CreateWithArgs<T>(args);
+				return CreateWithArguments<T>(args);
 			} 
 			catch 
 			{
@@ -33,14 +33,14 @@ namespace NotNet.Core
 		{
 			try
 			{
-				return CreateObject(typeof(TIface)) as TIface;
+				return Build(typeof(TIface)) as TIface;
 			}
             catch 
 			{
 				return null;
 			}
 		}
-		internal object CreateObject(Type ifaceType) 
+		internal object Build(Type ifaceType) 
 		{
 			var entry = GetEntryFor(ifaceType);
 			if (entry == null) return null;
@@ -56,11 +56,11 @@ namespace NotNet.Core
 		public object CreateWithArgs(Type t, params object[] args) 
 		{
 			var ctor = GetPreferredConstructor(t);
-			return ConstructInstanceWithArgs(ctor, args);
+			return CreateInstanceWithArguments(ctor, args);
 		}
 		public object Create(Type t) 
 		{
-			return CreateObject(t);
+			return Build(t);
 		}
 		public TIface Create<TIface>()
 			where TIface : class
@@ -71,7 +71,7 @@ namespace NotNet.Core
 			}
 			return it;
 		}
-		public T CreateWithArgs<T>(params object[] args) 
+		public T CreateWithArguments<T>(params object[] args) 
 		{
 			return (T)CreateWithArgs(typeof(T), args);
 		}
@@ -81,18 +81,18 @@ namespace NotNet.Core
 			var ctor = ctors.FirstOrDefault((arg) => arg.GetCustomAttribute(typeof(PreferredConstructorAttribute)) != null) ?? ctors.FirstOrDefault();
 			return ctor;
 		}
-		private object ConstructInstanceWithArgs(ConstructorInfo cinof, params object[] args) 
+		private object CreateInstanceWithArguments(ConstructorInfo cinof, params object[] args) 
 		{
-			var cargs = GetInjectedParameterArgs(cinof);
+			var cargs = GetInjectedArguments(cinof);
 			cargs.AddRange(args);
 			return Activator.CreateInstance(cinof.DeclaringType, cargs.ToArray());
 		}
-		private List<object> GetInjectedParameterArgs(ConstructorInfo cinfo) 
+		private List<object> GetInjectedArguments(ConstructorInfo cinfo) 
 		{
 			List<object> types = new List<object>();
 			foreach (var param in cinfo.GetParameters()) {
 				var t = param.ParameterType;
-				var o = CreateObject(t);
+				var o = Build(t);
 				if (o != null)
 				{
 					types.Add(o);
@@ -100,9 +100,9 @@ namespace NotNet.Core
 			}
 			return types;
 		}
-		private object ConstructInstance(ConstructorInfo cinfo) 
+		private object CreateInstance(ConstructorInfo cinfo) 
 		{
-			var args = GetInjectedParameterArgs(cinfo);
+			var args = GetInjectedArguments(cinfo);
 			return Activator.CreateInstance(cinfo.DeclaringType, args.ToArray());
 			
 		}
@@ -117,7 +117,7 @@ namespace NotNet.Core
 		{
 
 			var ctor = GetPreferredConstructor(type);
-			return ConstructInstance(ctor);
+			return CreateInstance(ctor);
 		}
 	}
 }

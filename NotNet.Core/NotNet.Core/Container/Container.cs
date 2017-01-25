@@ -72,7 +72,7 @@ namespace NotNet.Core
 		}
 		public T Resolve<T>(params object[] args) 
 		{
-			return _createor.CreateWithArgs<T>(args);
+			return _createor.CreateWithArguments<T>(args);
 		}
 		/// <summary>
 		/// Get the implementation for an interface.
