@@ -35,12 +35,13 @@
     <Compile Include="Extensions\CleanableExtension.cs" />
     <Compile Include="MVVM\ViewModelBase.cs" />
     <Compile Include="MVVM\IViewModelBase.cs" />
-    <Compile Include="Infrastructure\ApplicationWrapper.cs" />
     <Compile Include="Interface\INavigationLocator.cs" />
     <Compile Include="Infrastructure\NavigationLocator.cs" />
     <Compile Include="Extensions\NavigationLocatorExtensions.cs" />
     <Compile Include="Extensions\ContainerExtensions.cs" />
     <Compile Include="Infrastructure\ContentPageBase.cs" />
+    <Compile Include="Infrastructure\ApplicationDelegate.cs" />
+    <Compile Include="Interface\IApplicationDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

@@ -5,8 +5,8 @@ namespace NotNet.Core.Xamarin
 {
 	public class NavigationLocator : INavigationLocator
 	{
-		ApplicationWrapper _app;
-		public NavigationLocator(ApplicationWrapper app)
+		ApplicationDelegate _app;
+		public NavigationLocator(ApplicationDelegate app)
 		{
 			_app = app;
 		}

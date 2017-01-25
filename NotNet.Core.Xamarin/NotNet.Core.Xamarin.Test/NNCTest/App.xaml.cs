@@ -5,20 +5,24 @@ using Xamarin.Forms;
 
 namespace NNCTest
 {
-	public partial class App : ApplicationWrapper
+	public partial class App : Application
 	{
 		public App()
 		{
 			InitializeComponent();
 			Register();
+
 			var registry =  Container.Default.Resolve<IObjectRegistry>();
 			registry.SetInstance(Container.Default.Resolve<TestModel1>());
-			RegisterNavigationLocator();
 			MainPage = new NavigationPage(Container.Default.Resolve<NNCTestPage>());
 		}
 		private void Register() 
 		{
+			// Auto register stuff...
 			Container.Default.AutoRegister(typeof(App).GetTypeInfo().Assembly);
+
+			Container.Default.RegisterSingleton<IApplicationDelegate>(new ApplicationDelegate(this));
+			Container.Default.RegisterSingleton<Application>(this);
 
 			Container.Default.Register<NNCTestPage>();
 			Container.Default.Register<TestView1ViewModel>();

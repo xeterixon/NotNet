@@ -6,6 +6,7 @@ using Xamarin.Forms;
 
 namespace NNCTest
 {
+	[AutoRegister(ObjectDescription.Base)]
 	[ViewModel(typeof(TestView1ViewModel))]
 	public partial class TestView1 : ContentView
 	{

@@ -36,6 +36,5 @@ namespace NotNet.Core.Xamarin
 			bindable.BindingContext = GetViewModelFromAttribute(container, typeof(TElement));
 			return bindable;
 		}
-
 	}
 }
