@@ -22,8 +22,8 @@ namespace NNCTest
 		bool _runTimer = true;
 		bool TimerCallback()
 		{
-			Test = Guid.NewGuid().ToString();
-			OnPropertyChanged(nameof(Test));
+			SetProperty(Guid.NewGuid().ToString(), this, (t) => t.Test);
+			SetProperty(Test, this, (m) => m.Title);
 			return _runTimer;
 		}
 
@@ -42,7 +42,7 @@ namespace NNCTest
 		}
 		private async Task PushStuff() 
 		{
-			await navigation.PushAsync(container.ResolveWrappedView<TestView1>(_model2));
+			await navigation.PushAsync(container.ResolveWrappedView("TestView1",_model2));
 		}
 	}
 }

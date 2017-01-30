@@ -23,11 +23,9 @@ namespace NNCTest
 			}
 		}
 		public string Platform { get; set; }
-		TestModel2 _model2;
 		public TestPage1ViewModel(TestModel1 data, IContainer container,INavigationLocator nav)
 		{
 
-//			_model2 = model2;
 			Platform = container.Resolve<IPlatform>().Name;
  			Test = data.Test;
 			Title = "Title from TestPage1ViewModel";

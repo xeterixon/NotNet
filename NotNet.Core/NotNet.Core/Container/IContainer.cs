@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace NotNet.Core
@@ -59,8 +60,28 @@ namespace NotNet.Core
 		/// <typeparam name="T">The type to create</typeparam>
 		T Resolve<T>(params object[] args);
 
+		/// <summary>
+		/// Resolve by type
+		/// </summary>
+		/// <param name="t">The type</param>
+		/// <param name="args">Arguments pass to the consturcotr.</param>
 		object Resolve(Type t, params object[] args);
+		/// <summary>
+		/// Resolve by type
+		/// </summary>
+		/// <param name="t">The type</param>
 		object Resolve(Type t);
+		/// <summary>
+		/// Resolve by class name
+		/// </summary>
+		/// <param name="name">The name of the class to resolve</param>
+		/// <param name="args">Arguments passed to the constructor.</param>
+		object Resolve(string name, params object[] args);
+		/// <summary>
+		/// Resolve by class name
+		/// </summary>
+		/// <param name="name">The name of the class to resolve.</param>
+		object Resolve(string name);
 
 		/// <summary>
 		/// Fetch an object of type TIface and executes the action
@@ -94,5 +115,10 @@ namespace NotNet.Core
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		bool IsRegistered<T>();
 
+		// Helpers
+		IRegistryEntry GetEntry(string name);
+		IEnumerable<IRegistryEntry> RegisteredEntries { get; }
+		IEnumerable<Type> RegistedTypes { get; }
+		IEnumerable<string> RegisteredNames { get; }
 	}
 }

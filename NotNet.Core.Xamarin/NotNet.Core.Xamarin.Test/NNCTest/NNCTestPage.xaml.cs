@@ -9,18 +9,18 @@ namespace NNCTest
 	{
 		void PushTabPage(object sender, System.EventArgs e)
 		{
-			_navigation.NavigateTo<TabPage>();
+			_navigation.NavigateTo("TabPage");
 		}
 
 		async void PushModal(object sender, System.EventArgs e)
 		{
 
-			await _navigation.NavigateModalTo<ModalPage1>();
+			await _navigation.NavigateModalTo("ModalPage1");
 		}
 
 		async void PushPage1(object sender, System.EventArgs e)
 		{
-			await _navigation.NavigateTo<TestPage1>(new TestModel2());
+			await _navigation.NavigateTo("TestPage1",new TestModel2());
 		}
 		async void PushPage2(object sender, System.EventArgs e)
 		{
@@ -32,7 +32,7 @@ namespace NNCTest
 
 		async void PushView(object sender, System.EventArgs e)
 		{
-			await _navigation.NavigateToView<TestView1>(new TestModel2());
+			await _navigation.NavigateTo("TestView1",new TestModel2());
 		}
 		IContainer container;
 		INavigationLocator _navigation;

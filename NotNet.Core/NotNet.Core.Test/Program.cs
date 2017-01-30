@@ -9,6 +9,13 @@ namespace NotNet.Core.Test
 		public static void Main(string[] args)
 		{
 			RegisterStuff();
+
+			Console.WriteLine($"*** Registered types ***");
+			foreach (var name in Container.Default.RegisteredNames) {
+				Console.WriteLine($"* {name}");
+			}
+			Console.WriteLine($"************************");
+
 			var t1 = Container.Default.ResolveOrDefault<ITestModel1>();
 			var t2 = Container.Default.ResolveOrDefault<ITestModel2>();
 			var t3 = Container.Default.ResolveOrDefault<ITestModel3>();
@@ -22,6 +29,7 @@ namespace NotNet.Core.Test
 			var t7 = Container.Default.Resolve<TestModel7>(new TestArg1(), new TestArg3());
 			//t8 should be null-ish, but not throw...
 			var t8 = Container.Default.ResolveOrDefault<object>(null, null);
+			var t9 = (TestModel6)Container.Default.Resolve("TestModel6");
 			Console.WriteLine("T1   " + (t1?.Test1 ?? "null"));
 			Console.WriteLine("T2   " + (t2?.Test1 ?? "null"));
 			Console.WriteLine("T3_1 " + (t3?.Test1 ?? "null"));
@@ -34,6 +42,7 @@ namespace NotNet.Core.Test
 			Console.WriteLine("T6   " + (t6?.Test ?? "null"));
 			Console.WriteLine("T7   " + (t7?.Test ?? "null"));
 			Console.WriteLine("T8   " + (t8 == null ?  "null, as it should" : "Not null, WTF"));
+			Console.WriteLine("T9   " + (t9?.Test) ?? "null");
 		}
 		private static void RegisterStuff() 
 		{

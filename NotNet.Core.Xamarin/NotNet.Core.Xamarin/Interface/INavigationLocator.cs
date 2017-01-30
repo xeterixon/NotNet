@@ -7,6 +7,11 @@ namespace NotNet.Core.Xamarin
 		INavigation Navigation { get; }
 		Task NavigateToView<T>() where T : View;
 		Task NavigateModalToView<T>() where T : View;
+		Task NavigateTo(string name);
+		Task NavigateTo(string name, params object[] args);
+		Task NavigateModalTo(string name);
+		Task NavigateModalTo(string name, params object[] args);
+
 		Task NavigateTo<T>() where T : Page;
 		Task NavigateModalTo<T>() where T : Page;
 

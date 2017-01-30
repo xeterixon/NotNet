@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
+//FIXME *CreateWithArguments does not take ObjectLifecycle into considerations. 
 namespace NotNet.Core
 {
-	internal class Creator
+	internal class Resolver
 	{
 		private Registry _registry;
-		public Creator(Registry registry) 
+		public Resolver(Registry registry) 
 		{
 			_registry = registry;
 		}
 		private RegistryEntry GetEntryFor(Type t) 
 		{
 			return  _registry.RegisteredTypes.FirstOrDefault(r => r.Interface.Equals(t));
-			
 		}
-		public T TryCreateWithArgs<T>(params object[] args) 
+		private RegistryEntry GetEntryFor(string name) 
+		{
+			return _registry.RegisteredTypes.FirstOrDefault((arg) => arg.Interface.Name == name);
+		}
+		public T TryCreateWithArguments<T>(params object[] args) 
 		{
 			try 
 			{
@@ -53,16 +57,26 @@ namespace NotNet.Core
 				return FindBestConstructorAndCreateInstance(entry.Implementation);
 			}
 		}
-		public object CreateWithArgs(Type t, params object[] args) 
+		public object CreateWithArguments(Type t, params object[] args) 
 		{
 			var ctor = GetPreferredConstructor(t);
 			return CreateInstanceWithArguments(ctor, args);
 		}
-		public object Create(Type t) 
+		internal object CreateWithArguments(string name, params object[] args) 
+		{
+			var ctor = GetPreferredConstructor(GetEntryFor(name).Interface);
+			return CreateInstanceWithArguments(ctor, args);
+		}
+		internal object Create(string name) 
+		{
+			var entry = GetEntryFor(name);
+			return Build(entry.Interface);
+		}
+		internal object Create(Type t) 
 		{
 			return Build(t);
 		}
-		public TIface Create<TIface>()
+		internal TIface Create<TIface>()
 			where TIface : class
 		{
 			var it = TryCreate<TIface>();
@@ -71,9 +85,9 @@ namespace NotNet.Core
 			}
 			return it;
 		}
-		public T CreateWithArguments<T>(params object[] args) 
+		internal T CreateWithArguments<T>(params object[] args) 
 		{
-			return (T)CreateWithArgs(typeof(T), args);
+			return (T)CreateWithArguments(typeof(T), args);
 		}
 		private ConstructorInfo GetPreferredConstructor(Type type) 
 		{
@@ -83,11 +97,11 @@ namespace NotNet.Core
 		}
 		private object CreateInstanceWithArguments(ConstructorInfo cinof, params object[] args) 
 		{
-			var cargs = GetInjectedArguments(cinof);
+			var cargs = GetResolvableArguments(cinof);
 			cargs.AddRange(args);
 			return Activator.CreateInstance(cinof.DeclaringType, cargs.ToArray());
 		}
-		private List<object> GetInjectedArguments(ConstructorInfo cinfo) 
+		private List<object> GetResolvableArguments(ConstructorInfo cinfo) 
 		{
 			List<object> types = new List<object>();
 			foreach (var param in cinfo.GetParameters()) {
@@ -102,7 +116,7 @@ namespace NotNet.Core
 		}
 		private object CreateInstance(ConstructorInfo cinfo) 
 		{
-			var args = GetInjectedArguments(cinfo);
+			var args = GetResolvableArguments(cinfo);
 			return Activator.CreateInstance(cinfo.DeclaringType, args.ToArray());
 			
 		}
