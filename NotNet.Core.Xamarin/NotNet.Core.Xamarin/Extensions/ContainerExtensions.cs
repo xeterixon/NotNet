@@ -57,7 +57,7 @@ namespace NotNet.Core.Xamarin
 		{
 			
 			var bindable = container.Resolve<TElement>();
-			bindable.BindingContext = CreateViewModelFromAttribute(container, typeof(TElement));
+			SetBindingContextFromAttributeIfExist(bindable, container, typeof(TElement));
 			return bindable;
 		}
 		public static ContentPage ResolveWrappedView(this IContainer container, string viewName) 
@@ -70,23 +70,33 @@ namespace NotNet.Core.Xamarin
 
 		public static ContentPage ResolveWrappedView(this IContainer container, Type viewType)		{
 			var view = (View)container.Resolve(viewType);
-			var attr = GetViewModelAttribute(viewType);
-			view.BindingContext = CreateViewModelFromAttribute(container,viewType);
+			SetBindingContextFromAttributeIfExist(view, container, viewType);
 			var page = new ContentPageBase 
 			{
-
 				BindingContext = view.BindingContext,
 				Content = view
 			};
 			page.SetBinding(Page.TitleProperty, "Title");
 			return page;
-
+		}
+		private static void SetBindingContextFromAttributeIfExist(View view, IContainer container, Type viewType, params object[] args)		{
+			var vm = CreateViewModelFromAttribute(container, viewType, args);
+			if (vm != null) {
+				view.BindingContext = vm;
+			}
+		}
+		private static void SetBindingContextFromAttributeIfExist(View view, IContainer container, Type viewType) 
+		{
+			var vm = CreateViewModelFromAttribute(container, viewType);
+			if (vm != null) 
+			{
+				view.BindingContext = vm;
+			}
 		}
 		public static ContentPage ResolveWrappedView(this IContainer container, Type viewType, params object[] args)
 		{
 			var view = (View)container.Resolve(viewType);
-			var attr = GetViewModelAttribute(viewType);
-			view.BindingContext = CreateViewModelFromAttribute(container, viewType,args);
+			SetBindingContextFromAttributeIfExist(view, container, viewType, args);
 			var page = new ContentPageBase {
 
 				BindingContext = view.BindingContext,
