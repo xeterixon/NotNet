@@ -1,6 +1,6 @@
 **/obj/*
 **/bin/*
-NotNet.Core.Xamarin/packages/*/
+NotNet.Core.Forms/packages/*/
 *.userprefs
 */*/*/bin/
 */*/*/obj/*
