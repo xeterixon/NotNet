@@ -6,3 +6,7 @@ NotNet.Core.Forms/packages/*/
 */*/*/obj/*
 */*/bin/*
 */*/obj/*
+
+Nuget/*.nupkg
+
+Nuget/nugetpush.sh

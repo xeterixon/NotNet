@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-//FIXME *CreateWithArguments does not take ObjectLifecycle into considerations. 
 namespace NotNet.Core
 {
 	internal class Resolver

@@ -5,10 +5,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{657D9F61-CE44-4A7A-A0F2-5388D7E50756}</ProjectGuid>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <UseMSBuildEngine>true</UseMSBuildEngine>
     <OutputType>Library</OutputType>
     <RootNamespace>NotNet.Core.Forms</RootNamespace>
-    <AssemblyName>NotNet.Core.Xamarin</AssemblyName>
+    <AssemblyName>NotNet.Core.Forms</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
   </PropertyGroup>
@@ -56,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="NotNet.Core.Forms.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\NotNet.Core\NotNet.Core\NotNet.Core.csproj">
