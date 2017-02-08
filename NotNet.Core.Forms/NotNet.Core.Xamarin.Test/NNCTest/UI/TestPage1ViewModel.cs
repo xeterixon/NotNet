@@ -16,7 +16,6 @@ namespace NNCTest
 		~TestPage1ViewModel() 
 		{
 			System.Diagnostics.Debug.WriteLine("~TestPage1ViewModel()");
-			
 		}
 		public string Test1 {
 			get {

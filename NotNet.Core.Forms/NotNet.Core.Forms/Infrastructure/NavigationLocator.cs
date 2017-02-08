@@ -17,66 +17,55 @@ namespace NotNet.Core.Forms
 
 		public INavigation Navigation { get { return _app.Navigation; } }
 
-		public Task NavigateTo(string visualElementName,params object[] args)		{
-			return Navigation.PushAsync(BuildPage(visualElementName, args));
-		}
 		private Page BuildPage(string name) 
 		{
-			var entry = _container.GetEntry(name);
-			if (typeof(View).GetTypeInfo().IsAssignableFrom(entry.Interface.GetTypeInfo())) {
-				return _container.ResolveWrappedView(entry.Interface);
-			}
-			if (typeof(Page).GetTypeInfo().IsAssignableFrom(entry.Interface.GetTypeInfo())) {
-				return (Page)_container.Resolve(entry.Interface);
-			}
-			var message = $"Wrong type. {name} must be either a View or a Page";
-			System.Diagnostics.Debug.WriteLine(message);
-			throw new ArgumentException(message);
+			return BuildPage(name, null);
 		}
-		private Page BuildPage(string name, params object[] args)
+		private Page BuildPage(string name, params object[] args )
 		{
 			var entry = _container.GetEntry(name);
+			if (entry == null) 
+			{
+				throw new ArgumentException($"No view namned {name} was found");
+			}
 			if (typeof(View).GetTypeInfo().IsAssignableFrom(entry.Interface.GetTypeInfo())) {
-				return _container.ResolveWrappedView(entry.Interface,args);
+				return args == null ? 
+					_container.ResolveWrappedView(entry.Interface) :  
+					_container.ResolveWrappedView(entry.Interface,args);
 			}
 			if (typeof(Page).GetTypeInfo().IsAssignableFrom(entry.Interface.GetTypeInfo())) {
-				return (Page)_container.Resolve(entry.Interface,args);
+				return args == null ? 
+					(Page)_container.Resolve(entry.Interface) :
+					(Page)_container.Resolve(entry.Interface,args);
 			}
-			var message = $"Wrong type. {name} must be either a View or a Page";
-			System.Diagnostics.Debug.WriteLine(message);
-			throw new ArgumentException(message);
+			throw new ArgumentException($"Wrong type. {name} must be either a View or a Page");
 		}
 
 
 		public Task NavigateTo(string visualElementName) 
 		{
-			return Navigation.PushAsync(BuildPage(visualElementName));
+			return NavigateTo(visualElementName, null);
+		}
+		public Task NavigateTo(string visualElementName, params object[] args)
+		{
+			return Navigation.PushAsync(BuildPage(visualElementName, args));
 		}
 
-		public Task NavigateModalTo(string name) 
+		public Task NavigateModalTo(string visualElementName) 
 		{
-			return Navigation.PushModalAsync(BuildPage(name));
-
+			return NavigateModalTo(visualElementName, null);
+	
 		}
 		public Task NavigateModalTo(string name, params object[] args) 
 		{
 			return Navigation.PushModalAsync(BuildPage(name, args));
-
 		}
-
 
 		public Task NavigateTo<T>() where T : VisualElement
 		{
-			
-			var page = BuildPage(typeof(T).Name);
-			return Navigation.PushAsync(page);
+			return NavigateTo<T>(null);
 		}
 
-		public Task NavigateModalTo<T>() where T : VisualElement
-		{
-			var page = BuildPage(typeof(T).Name);
-			return Navigation.PushModalAsync(page);
-		}
 
 		public Task NavigateTo<T>(params object[] args) where T : VisualElement
 		{
@@ -84,6 +73,10 @@ namespace NotNet.Core.Forms
 			return Navigation.PushAsync(page);
 		}
 
+		public Task NavigateModalTo<T>() where T : VisualElement
+		{
+			return NavigateModalTo<T>(null);
+		}
 		public Task NavigateModalTo<T>(params object[] args) where T : VisualElement
 		{
 			var page = BuildPage(typeof(T).Name,args);

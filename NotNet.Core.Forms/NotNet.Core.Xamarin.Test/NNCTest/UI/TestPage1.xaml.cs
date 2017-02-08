@@ -6,6 +6,8 @@ using Xamarin.Forms;
 
 namespace NNCTest
 {
+	// Does not work yet
+	[ViewModel(typeof(ITestPage1ViewModel))] 
 	public partial class TestPage1 : ContentPage
 	{
 		~TestPage1()
