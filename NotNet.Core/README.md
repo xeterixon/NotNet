@@ -57,7 +57,7 @@ It's possible to pass "non-resolvable" objects to the constructor as well.
 
 ##Notes
 
-* The container itself is resolvable as IContainer (it's not possible to rool your own container yet)
+* The container itself is resolvable as IContainer (it's not possible to roll your own container yet)
 
 ##More
 
