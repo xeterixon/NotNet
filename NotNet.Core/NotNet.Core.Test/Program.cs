@@ -1,5 +1,4 @@
 ﻿using System;
-using NotNet.Core;
 using NotNet.Core.Test.Model;
 
 namespace NotNet.Core.Test
@@ -30,6 +29,8 @@ namespace NotNet.Core.Test
 			//t8 should be null-ish, but not throw...
 			var t8 = Container.Default.ResolveOrDefault<object>(null, null);
 			var t9 = (TestModel6)Container.Default.Resolve("TestModel6");
+			var t10 = Container.Default.ResolveAll<ITestModel89>();
+
 			Console.WriteLine("T1   " + (t1?.Test1 ?? "null"));
 			Console.WriteLine("T2   " + (t2?.Test1 ?? "null"));
 			Console.WriteLine("T3_1 " + (t3?.Test1 ?? "null"));
@@ -43,6 +44,10 @@ namespace NotNet.Core.Test
 			Console.WriteLine("T7   " + (t7?.Test ?? "null"));
 			Console.WriteLine("T8   " + (t8 == null ?  "null, as it should" : "Not null, WTF"));
 			Console.WriteLine("T9   " + (t9?.Test) ?? "null");
+			foreach (var item in t10) 
+			{
+				Console.WriteLine(item.Name);
+			}
 		}
 		private static void RegisterStuff() 
 		{
@@ -51,6 +56,8 @@ namespace NotNet.Core.Test
 			Container.Default.Register<TestModel5>();
 			Container.Default.Register<TestModel7>();
 			Container.Default.Register<ITestModel2,TestModel2>();
+			Container.Default.Register<ITestModel89, TestModel8>();
+			Container.Default.Register<ITestModel89, TestModel9>();
 		}
 	}
 }

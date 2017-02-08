@@ -72,9 +72,16 @@ namespace NotNet.Core
 			_registry.Add(typeof(TImpl), instance);
 		}
 		public T Resolve<T>(params object[] args)
+			where T : class
 		{
 			return _resolver.CreateWithArguments<T>(args);
 		}
+		public IEnumerable<T> ResolveAll<T>()
+			where T : class
+		{
+			return _resolver.CreateAll<T>();
+		}
+
 		/// <summary>
 		/// Get the implementation for an interface.
 		/// </summary>
@@ -84,19 +91,10 @@ namespace NotNet.Core
 		{
 			return _resolver.Create<TIface>();
 		}
-		/// <summary>
-		/// Get the implementation for an interface
-		/// </summary>
-		/// <param name="action">A action to call after the creation of the object</param>
-		/// <typeparam name="TIface">The interface.</typeparam>
-		public TIface Resolve<TIface>(Action<TIface> action)
-			where TIface : class
-		{
-			var obj = _resolver.Create<TIface>();
-			action(obj);
-			return obj;
-		}
+
 		public T ResolveOrDefault<T>(params object[] args)
+			where T : class
+
 		{
 			return _resolver.TryCreateWithArguments<T>(args);
 		}
@@ -153,24 +151,25 @@ namespace NotNet.Core
 		public IEnumerable<Type> RegistedTypes
 		{
 			get { 
-				return _registry.RegisteredTypes.Select((arg) => arg.Interface);
+				return _registry.Register.Select((arg) => arg.Key);
 			}
 		}
 		public IRegistryEntry GetEntry(string name) 
 		{
-			return _registry.RegisteredTypes.FirstOrDefault((arg) => arg.Interface.Name == name);
+			var tmp =  _registry.Register.FirstOrDefault((arg) => arg.Key.Name == name);
+			return tmp.Value.FirstOrDefault();
 		}
 
 		public IEnumerable<string> RegisteredNames
 		{
 			get {
-				return _registry.RegisteredTypes.Select((arg) => arg.Interface.Name);
+				return _registry.Register.Select((arg) => arg.Key.Name);
 			}
 		}
 		public IEnumerable<IRegistryEntry> RegisteredEntries 
 		{
 			get {
-				return _registry.RegisteredTypes;
+				return _registry.Register.SelectMany((arg) => arg.Value);
 			}
 		}
 

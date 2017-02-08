@@ -21,7 +21,7 @@ namespace NotNet.Core.Test.Model
 			_m3 = m3;
 		}
 		public string Test1 {
-			get { return _m3.Test1; }
+			get { return _m1.Test1 + " " +  _m3.Test1; }
 			set { _m3.Test1 = value;}
 		}
 		public string Test2 {

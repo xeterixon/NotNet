@@ -4,6 +4,7 @@ namespace NotNet.Core.Forms
 {
 	public class ContentPageBase : ContentPage
 	{
+		
 		public IViewModelBase ViewModel{
 			get
 			{

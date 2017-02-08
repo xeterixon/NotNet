@@ -12,13 +12,14 @@ namespace NotNet.Core
 		{
 			_registry = registry;
 		}
-		private RegistryEntry GetEntryFor(Type t) 
+		private RegistryEntry GetEntryFor(Type t, Type implementationHint) 
 		{
-			return  _registry.RegisteredTypes.FirstOrDefault(r => r.Interface.Equals(t));
+			var tmp =  _registry.Register.FirstOrDefault(r => r.Key.Equals(t));
+			return tmp.Value?.FirstOrDefault((arg) => arg.Implementation.Equals(implementationHint) || implementationHint == null);
 		}
 		private RegistryEntry GetEntryFor(string name) 
 		{
-			return _registry.RegisteredTypes.FirstOrDefault((arg) => arg.Interface.Name == name);
+			return _registry.Register.FirstOrDefault((arg) => arg.Key.Name == name).Value.FirstOrDefault();
 		}
 		public T TryCreateWithArguments<T>(params object[] args) 
 		{
@@ -43,9 +44,9 @@ namespace NotNet.Core
 				return null;
 			}
 		}
-		internal object Build(Type ifaceType) 
+		internal object Build(Type ifaceType, Type implementationHint = null) 
 		{
-			var entry = GetEntryFor(ifaceType);
+			var entry = GetEntryFor(ifaceType,implementationHint);
 			if (entry == null) return null;
 			if (entry.LifeCycle == ObjectLifecycle.Singleton) {
 				if (entry.Instance == null)
@@ -70,6 +71,16 @@ namespace NotNet.Core
 		{
 			var entry = GetEntryFor(name);
 			return Build(entry.Interface);
+		}
+		internal IEnumerable<T> CreateAll<T>() 
+		{
+			var list = new List<T>();
+			var entries = _registry.Register[typeof(T)];
+			foreach (var entry in entries) 
+			{
+				list.Add((T)Build(entry.Interface, entry.Implementation));
+			}
+			return list;
 		}
 		internal object Create(Type t) 
 		{

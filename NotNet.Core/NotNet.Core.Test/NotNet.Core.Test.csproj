@@ -40,6 +40,7 @@
     <Compile Include="Model\TestModel5.cs" />
     <Compile Include="Model\TestModel6.cs" />
     <Compile Include="Model\TestModel7.cs" />
+    <Compile Include="Model\TestModel89.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NotNet.Core\NotNet.Core.csproj">

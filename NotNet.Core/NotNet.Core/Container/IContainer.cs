@@ -19,9 +19,9 @@ namespace NotNet.Core
 		/// Register an class,
 		/// </summary>
 		/// <param name="olc">Object life cycle.</param>
-		/// <typeparam name="TImpl">The 1st type parameter.</typeparam>
-		void Register<TImpl>(ObjectLifecycle olc = ObjectLifecycle.Transient)
-			where TImpl : class;
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
+		void Register<T>(ObjectLifecycle olc = ObjectLifecycle.Transient)
+			where T : class;
 
 		/// <summary>
 		/// Register an interface and an implementing class as a singleton.
@@ -45,9 +45,9 @@ namespace NotNet.Core
 		/// Throws if no suitable class or interface is found
 		/// <returns>An object implementing TIFace</returns>
 		/// </summary>
-		/// <typeparam name="TIface">The type.</typeparam>
-		TIface Resolve<TIface>()
-			where TIface : class;
+		/// <typeparam name="T">The type.</typeparam>
+		T Resolve<T>()
+			where T : class;
 
 		/// <summary>
 		/// Resolves with arguments.
@@ -58,7 +58,13 @@ namespace NotNet.Core
 		/// <returns>An object of type T</returns>
 		/// <param name="args">An array of instances</param>
 		/// <typeparam name="T">The type to create</typeparam>
-		T Resolve<T>(params object[] args);
+		T Resolve<T>(params object[] args)
+			where T : class;
+
+
+		IEnumerable<T> ResolveAll<T>()
+			where T : class;
+
 
 		/// <summary>
 		/// Resolve by type
@@ -84,24 +90,16 @@ namespace NotNet.Core
 		object Resolve(string name);
 
 		/// <summary>
-		/// Fetch an object of type TIface and executes the action
-		/// Throws if no suitable class or interface is found
-		/// <returns>An object implementing TIFace</returns>
-		/// </summary>
-		/// <param name="action">Action called after the instance has been created</param>
-		/// <typeparam name="TIface">The 1st type parameter.</typeparam>
-		TIface Resolve<TIface>(Action<TIface> action)
-			where TIface : class;
-
-		/// <summary>
 		/// Fetch an object of type TIface
 		/// <returns>An object implementing TIFace or null if no implementation is found</returns>
 		/// </summary>
 		/// <typeparam name="TIface">The type.</typeparam>
-		TIFace ResolveOrDefault<TIFace>()
-			where TIFace : class;
+		T ResolveOrDefault<T>()
+			where T : class;
 
-		T ResolveOrDefault<T>(params object[] args);
+		T ResolveOrDefault<T>(params object[] args)
+			where T : class;
+
 		/// <summary>
 		/// Auto register classes with the AutoRegister attribute
 		/// </summary>
