@@ -4,6 +4,8 @@ namespace NotNet.Core.Forms
 {
 	public interface INavigationLocator
 	{
+		bool ShowNavigationBar { get; set; }
+		bool ShowBackButton { get; set; }
 		INavigation Navigation { get; }
 		Task NavigateTo(string name);
 		Task NavigateTo(string name, params object[] args);

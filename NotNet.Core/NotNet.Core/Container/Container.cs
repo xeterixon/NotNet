@@ -157,7 +157,7 @@ namespace NotNet.Core
 		public IRegistryEntry GetEntry(string name) 
 		{
 			var tmp =  _registry.Register.FirstOrDefault((arg) => arg.Key.Name == name);
-			return tmp.Value.FirstOrDefault();
+			return tmp.Value?.FirstOrDefault();
 		}
 
 		public IEnumerable<string> RegisteredNames

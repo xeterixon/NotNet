@@ -19,6 +19,14 @@ namespace NNCTest
 			await _navigation.NavigateModalTo("ModalPage1");
 		}
 
+		async void PushPageNoBar(object sender, System.EventArgs e)
+		{
+			_navigation.ShowNavigationBar = false;
+			await _navigation.NavigateTo("TestPage2");
+			_navigation.ShowNavigationBar = true;
+
+		}
+
 		async void PushPage1(object sender, System.EventArgs e)
 		{
 			await _navigation.NavigateTo("TestPage1",new TestModel2());

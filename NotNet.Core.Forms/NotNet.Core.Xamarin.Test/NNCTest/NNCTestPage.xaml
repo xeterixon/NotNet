@@ -6,6 +6,7 @@
 		<Button Text="Push Page 2" Clicked="PushPage2"/>
 		<Button Text="Push Modal" Clicked="PushModal"/>
 		<Button Text="Push TabPage" Clicked="PushTabPage"/>
+		<Button Text="Push Page no nav bar" Clicked="PushPageNoBar"/>
 		
 	</StackLayout>
 

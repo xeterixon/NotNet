@@ -9,11 +9,15 @@ namespace NotNet.Core.Forms
 	{
 		ApplicationDelegate _app;
 		IContainer _container;
+
 		public NavigationLocator(ApplicationDelegate app, IContainer container)
 		{
 			_app = app;
 			_container = container;
 		}
+
+		public bool ShowNavigationBar { get; set; } = true;
+		public bool ShowBackButton { get; set; } = true;
 
 		public INavigation Navigation { get { return _app.Navigation; } }
 
@@ -29,14 +33,22 @@ namespace NotNet.Core.Forms
 				throw new ArgumentException($"No view namned {name} was found");
 			}
 			if (typeof(View).GetTypeInfo().IsAssignableFrom(entry.Interface.GetTypeInfo())) {
-				return args == null ? 
+				var page = 
+					args == null ? 
 					_container.ResolveWrappedView(entry.Interface) :  
 					_container.ResolveWrappedView(entry.Interface,args);
+				NavigationPage.SetHasNavigationBar(page, ShowNavigationBar);
+				NavigationPage.SetHasBackButton(page, ShowBackButton);
+				return page;
 			}
 			if (typeof(Page).GetTypeInfo().IsAssignableFrom(entry.Interface.GetTypeInfo())) {
-				return args == null ? 
+				var page =  
+					args == null ? 
 					_container.ResolvePage(entry.Interface) :
 					_container.ResolvePage(entry.Interface,args);
+				NavigationPage.SetHasNavigationBar(page, ShowNavigationBar);
+				NavigationPage.SetHasBackButton(page, ShowBackButton);
+				return page;
 			}
 			throw new ArgumentException($"Wrong type. {name} must be either a View or a Page");
 		}
