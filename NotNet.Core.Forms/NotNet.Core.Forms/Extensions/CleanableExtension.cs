@@ -6,13 +6,20 @@ namespace NotNet.Core.Forms
 	{
 		public static void Cleanup(this Page self) 
 		{
+			CleanPage(self);
 			//Do we need to handle other special pages?
 			if (self is TabbedPage)
 			{
 				CleanTabPage(self as TabbedPage);
 			}
-			else {
-				CleanPage(self);
+			if (self is NavigationPage) 
+			{
+				CleanPage(((NavigationPage)self).CurrentPage);
+			}
+			if (self is MasterDetailPage) 
+			{
+				CleanPage(((MasterDetailPage)self).Master);
+				CleanPage(((MasterDetailPage)self).Detail);
 			}
 		}
 		private static void CleanPage(Page p) 

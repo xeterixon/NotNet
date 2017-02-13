@@ -35,8 +35,8 @@ namespace NotNet.Core.Forms
 			}
 			if (typeof(Page).GetTypeInfo().IsAssignableFrom(entry.Interface.GetTypeInfo())) {
 				return args == null ? 
-					(Page)_container.Resolve(entry.Interface) :
-					(Page)_container.Resolve(entry.Interface,args);
+					_container.ResolvePage(entry.Interface) :
+					_container.ResolvePage(entry.Interface,args);
 			}
 			throw new ArgumentException($"Wrong type. {name} must be either a View or a Page");
 		}

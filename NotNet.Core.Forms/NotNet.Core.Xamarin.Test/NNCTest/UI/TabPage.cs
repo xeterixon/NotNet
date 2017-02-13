@@ -21,7 +21,7 @@ namespace NNCTest
 		[PreferredConstructor]
 		public TabPage(IContainer container)
 		{
-			Children.Add(container.Resolve<TestPage1>(new TestModel2()));	
+			Children.Add(container.ResolvePage<TestPage1>(new TestModel2()));	
 			Children.Add(container.ResolveWrappedView<TestView1>(new TestModel2()));
 
 		}

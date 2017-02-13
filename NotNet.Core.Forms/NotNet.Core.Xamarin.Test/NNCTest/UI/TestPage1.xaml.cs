@@ -6,7 +6,6 @@ using Xamarin.Forms;
 
 namespace NNCTest
 {
-	// Does not work yet
 	[ViewModel(typeof(ITestPage1ViewModel))] 
 	public partial class TestPage1 : ContentPage
 	{
@@ -14,10 +13,10 @@ namespace NNCTest
 		{
 			System.Diagnostics.Debug.WriteLine("~TestPage1()");
 		}
-		public TestPage1(ITestPage1ViewModel model, TestModel2 m2)
+		public TestPage1()
 		{
 			InitializeComponent();
-			BindingContext = model;
+//			BindingContext = model;
 		}
 	}
 }
