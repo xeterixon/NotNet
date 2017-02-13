@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>NotNet.Core.Forms</id>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <title>NotNet.Core</title>
     <authors>Xet Erixon</authors>
     <owners>NotNet Solutions</owners>
@@ -13,7 +13,7 @@
     <copyright>NotNet Solutions. Copyright 2016</copyright>
     <tags>notnet, di, service locator, ioc, mvvm, xamarin.forms</tags>
 	<dependencies>
-		<dependency id="NotNet.Core" version="1.1.0" />
+		<dependency id="NotNet.Core" version="1.2.0" />
 	</dependencies>
   </metadata>
    <files>
