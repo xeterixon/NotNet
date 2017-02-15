@@ -48,5 +48,24 @@ namespace NotNet.Core.UnitTest
 			Assert.NotNull(o, "Should not be null");
 			Assert.IsNotEmpty(o.Name, "Name should not be empty");
 		}
+		[Test]
+		public void RemoveRegisterdItem() 
+		{
+			Container.Default.Register<TemporaryModel>();
+			var obj = Container.Default.Resolve<TemporaryModel>();
+			Assert.NotNull(obj, "Should not be null");
+			Container.Default.Unregister<TemporaryModel>();
+
+			obj = Container.Default.ResolveOrDefault<TemporaryModel>();
+			Assert.Null(obj, "Generic - Should be null");
+			Container.Default.Register<TemporaryModel>();
+
+			obj = Container.Default.Resolve<TemporaryModel>();
+			Assert.NotNull(obj, "Should not be null");
+			Container.Default.Unregister(typeof(TemporaryModel));
+			obj = Container.Default.ResolveOrDefault<TemporaryModel>();
+			Assert.Null(obj, "Type - Should be null");
+
+		}
 	}
 }

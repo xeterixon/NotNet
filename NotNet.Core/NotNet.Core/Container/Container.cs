@@ -81,6 +81,15 @@ namespace NotNet.Core
 		{
 			return _resolver.CreateAll<T>();
 		}
+		public void Unregister<T>() 
+		{
+			Unregister(typeof(T));
+		}
+
+		public void Unregister(Type t) 
+		{
+			_registry.Remove(t);
+		}
 
 		/// <summary>
 		/// Get the implementation for an interface.

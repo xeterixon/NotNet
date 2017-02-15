@@ -35,6 +35,14 @@ namespace NotNet.Core
 				}
 			);
 		}
+		public void Remove(Type t) 
+		{
+			var items = Register.Where((arg) => arg.Key.Equals(t)).ToList();
+			foreach (var item in items) 
+			{
+				Register.Remove(item.Key);
+			}
+		}
 		public void Add(Type iface, Type impl, ObjectLifecycle olc)
 		{
 			if (!iface.Equals(impl) && !iface.GetTypeInfo ().IsInterface) 

@@ -65,7 +65,8 @@ namespace NotNet.Core
 		IEnumerable<T> ResolveAll<T>()
 			where T : class;
 
-
+		void Unregister<T>();
+		void Unregister(Type t);
 		/// <summary>
 		/// Resolve by type
 		/// </summary>

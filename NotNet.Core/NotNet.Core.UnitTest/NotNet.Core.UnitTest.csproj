@@ -48,6 +48,7 @@
     <Compile Include="Models\NonRegisteredModel.cs" />
     <Compile Include="Models\TestModel6.cs" />
     <Compile Include="Models\TestModel7.cs" />
+    <Compile Include="Models\TemporaryModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
