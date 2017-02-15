@@ -1,6 +1,7 @@
 **/obj/*
 **/bin/*
 NotNet.Core.Forms/packages/*/
+packages/*/
 *.userprefs
 */*/*/bin/
 */*/*/obj/*
@@ -10,3 +11,4 @@ NotNet.Core.Forms/packages/*/
 Nuget/*.nupkg
 
 Nuget/nugetpush.sh
+

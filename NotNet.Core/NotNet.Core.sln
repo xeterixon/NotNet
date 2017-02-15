@@ -3,12 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotNet.Core", "NotNet.Core\NotNet.Core.csproj", "{856E53CA-A304-4DC4-8D7F-51F70FC87084}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotNet.Core.Test", "NotNet.Core.Test\NotNet.Core.Test.csproj", "{EB26B404-3D29-4AEC-BE57-DC82B7CCE181}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{61995B64-9586-4211-B82F-656DF5A2369B}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotNet.Core.UnitTest", "NotNet.Core.UnitTest\NotNet.Core.UnitTest.csproj", "{8092DCC9-3DE9-4F30-ABE3-9F30B7101CD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +20,10 @@ Global
 		{856E53CA-A304-4DC4-8D7F-51F70FC87084}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{856E53CA-A304-4DC4-8D7F-51F70FC87084}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{856E53CA-A304-4DC4-8D7F-51F70FC87084}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB26B404-3D29-4AEC-BE57-DC82B7CCE181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB26B404-3D29-4AEC-BE57-DC82B7CCE181}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB26B404-3D29-4AEC-BE57-DC82B7CCE181}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB26B404-3D29-4AEC-BE57-DC82B7CCE181}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8092DCC9-3DE9-4F30-ABE3-9F30B7101CD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8092DCC9-3DE9-4F30-ABE3-9F30B7101CD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8092DCC9-3DE9-4F30-ABE3-9F30B7101CD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8092DCC9-3DE9-4F30-ABE3-9F30B7101CD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		version = 1.0.0
