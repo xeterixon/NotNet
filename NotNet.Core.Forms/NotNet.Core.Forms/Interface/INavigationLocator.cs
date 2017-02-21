@@ -4,8 +4,25 @@ namespace NotNet.Core.Forms
 {
 	public interface INavigationLocator
 	{
+		/// <summary>
+		/// Flag that indicates if the navigation bar should be visible when pushing the next page
+		/// Note that this is not per page, but rather for any subsequent pages.
+		/// Use the HideNavigationBar class to scoop it.
+		/// </summary>
+		/// <value><c>true</c> if show navigation bar; otherwise, <c>false</c>.</value>
 		bool ShowNavigationBar { get; set; }
+		/// <summary>
+		/// Flag that indicates if the back button should be visible when pushing the next page
+		/// Note that this is not per page, but rather for any subsequent pages.
+		/// Use the HideBackbuttonClase class to scoop it.
+		/// </summary>
+		/// <value><c>true</c> if show navigation bar; otherwise, <c>false</c>.</value>
+
 		bool ShowBackButton { get; set; }
+		/// <summary>
+		/// The current navigation instance.
+		/// </summary>
+		/// <value>The navigation.</value>
 		INavigation Navigation { get; }
 		Task NavigateTo(string name);
 		Task NavigateTo(string name, params object[] args);

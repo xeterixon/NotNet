@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package >
-  <metadata>
-    <id>NotNet.Core</id>
-    <version>1.2.1</version>
-    <title>NotNet.Core</title>
-    <authors>Xet Erixon</authors>
-    <projectUrl>https://github.com/xeterixon/NotNet</projectUrl>
-    <owners>NotNet Solutions</owners>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Basic IoT-thingy</description>
-    <iconUrl>https://github.com/xeterixon/NotNet/blob/master/Nuget/nn-nuget.png</iconUrl>
-    <releaseNotes>
-    </releaseNotes>
-    <copyright>NotNet Solutions. Copyright 2015</copyright>
-    <tags>notnet, di, servicelocator, ioc</tags>
-  </metadata>
-   <files>
-     <file src="bin/Release/NotNet.Core.dll" target="lib" />
-</files>
+	<metadata>
+		<id>$id$</id>
+		<version>$version$</version>
+		<copyright>$copyright$</copyright>
+		<title>$id$</title>
+		<authors>$author$</authors>
+		<owners>$author$</owners>
+		<description>$description$</description>
+		<projectUrl>https://github.com/xeterixon/NotNet</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<iconUrl>https://github.com/xeterixon/NotNet/blob/master/Nuget/nn-nuget.png</iconUrl>
+		<releaseNotes>
+		</releaseNotes>
+		<tags>notnet, di, servicelocator, ioc</tags>
+	</metadata>
+	<files>
+		<file src="bin/Release/NotNet.Core.dll" target="lib" />
+	</files>
 </package>
