@@ -9,12 +9,14 @@
     <owners>NotNet Solutions</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>MVVM Helper for Xamarin Forms</description>
+    <iconUrl>https://github.com/xeterixon/NotNet/blob/master/Nuget/nn-nuget.png</iconUrl>
     <releaseNotes>
     </releaseNotes>
     <copyright>NotNet Solutions. Copyright 2016</copyright>
     <tags>di, servicelocator, ioc, mvvm, xamarin.forms</tags>
 	<dependencies>
 		<dependency id="NotNet.Core" version="1.2.0" />
+		<dependency id="Xamarin.Forms" version="2.3.3.180" />
 	</dependencies>
   </metadata>
    <files>
