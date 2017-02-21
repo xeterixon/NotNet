@@ -11,7 +11,7 @@
 
 		<projectUrl>https://github.com/xeterixon/NotNet</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<iconUrl>https://github.com/xeterixon/NotNet/blob/master/Nuget/nn-nuget.png</iconUrl>
+		<iconUrl>https://raw.githubusercontent.com/xeterixon/NotNet/master/Nuget/nn-nuget.png</iconUrl>
 		<releaseNotes>
 		</releaseNotes>
 		<tags>di, servicelocator, ioc, mvvm, xamarin.forms</tags>
