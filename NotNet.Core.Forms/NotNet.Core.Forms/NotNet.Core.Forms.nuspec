@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package >
-  <metadata>
-    <id>NotNet.Core.Forms</id>
-    <version>1.2.1</version>
-    <title>NotNet.Core.Form</title>
-    <authors>Xet Erixon</authors>
-    <projectUrl>https://github.com/xeterixon/NotNet</projectUrl>
-    <owners>NotNet Solutions</owners>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>MVVM Helper for Xamarin Forms</description>
-    <iconUrl>https://github.com/xeterixon/NotNet/blob/master/Nuget/nn-nuget.png</iconUrl>
-    <releaseNotes>
-    </releaseNotes>
-    <copyright>NotNet Solutions. Copyright 2016</copyright>
-    <tags>di, servicelocator, ioc, mvvm, xamarin.forms</tags>
-	<dependencies>
-		<dependency id="NotNet.Core" version="1.2.0" />
-		<dependency id="Xamarin.Forms" version="2.3.3.180" />
-	</dependencies>
-  </metadata>
-   <files>
-     <file src="bin/Release/NotNet.Core.Forms.dll" target="lib" />
-   </files>
+	<metadata>
+		<id>$id$</id>
+		<title>$id$</title>
+		<version>$version$</version>
+		<authors>$author$</authors>
+		<description>$description$</description>
+		<owners>$author$</owners>
+		<copyright>$copyright$</copyright>
+
+		<projectUrl>https://github.com/xeterixon/NotNet</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<iconUrl>https://github.com/xeterixon/NotNet/blob/master/Nuget/nn-nuget.png</iconUrl>
+		<releaseNotes>
+		</releaseNotes>
+		<tags>di, servicelocator, ioc, mvvm, xamarin.forms</tags>
+		<dependencies>
+			<dependency id="NotNet.Core" version="1.2.0" />
+			<dependency id="Xamarin.Forms" version="2.3.3.180" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="bin/Release/NotNet.Core.Forms.dll" target="lib" />
+	</files>
 </package>

@@ -36,7 +36,6 @@
     <Compile Include="Container\Container.cs" />
     <Compile Include="Container\Registry.cs" />
     <Compile Include="Attributes\AutoRegisterAttribute.cs" />
-    <Compile Include="Component.cs" />
     <Compile Include="Container\Resolver.cs" />
     <Compile Include="Container\IContainer.cs" />
     <Compile Include="Attributes\PreferredConstructorAttribute.cs" />

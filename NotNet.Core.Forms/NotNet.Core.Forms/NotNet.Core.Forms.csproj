@@ -41,6 +41,8 @@
     <Compile Include="Infrastructure\ContentPageBase.cs" />
     <Compile Include="Infrastructure\ApplicationDelegate.cs" />
     <Compile Include="Interface\IApplicationDelegate.cs" />
+    <Compile Include="Infrastructure\HideNavigationBar.cs" />
+    <Compile Include="Infrastructure\HideBackButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
