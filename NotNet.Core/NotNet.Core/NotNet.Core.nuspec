@@ -9,6 +9,7 @@
     <owners>NotNet Solutions</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Basic IoT-thingy</description>
+    <iconUrl>https://github.com/xeterixon/NotNet/blob/master/Nuget/nn-nuget.png</iconUrl>
     <releaseNotes>
     </releaseNotes>
     <copyright>NotNet Solutions. Copyright 2015</copyright>
