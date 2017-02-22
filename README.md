@@ -1,3 +1,2 @@
 # NotNet
-Misc stuff.
-Mostly Xamarin.Forms related, probably
+[Documentation](https://github.com/xeterixon/NotNet/wiki/NotNet.Core)
