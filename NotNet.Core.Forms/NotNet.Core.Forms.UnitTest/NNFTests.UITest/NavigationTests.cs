@@ -27,6 +27,7 @@ namespace NNFTests.UITest
 		public void BeforeEachTest()
 		{
 			app = AppInitializer.StartApp(platform);
+			app.Repl();
 		}
 		private void PushView(string buttonId, string waitForAfterTap) 
 		{
@@ -38,6 +39,8 @@ namespace NNFTests.UITest
 		[Test]
 		public void NavigateToWrappedViewAndBack()
 		{
+			Console.WriteLine("Basic navigation");
+			
 			PushView(ButtonId1,LabelId);
 			var label = app.Query(c => c.Marked(LabelId)).First();
 			Assert.IsTrue(label.Text == ExpectedLabelText, $"Text should be {ExpectedLabelText}. Was {label.Text}");
@@ -59,11 +62,19 @@ namespace NNFTests.UITest
 			var anyBack = app.Query((arg) => arg.Marked("Back")).Any();
 			Assert.IsFalse(anyBack, "There should be no back button");
 			app.Tap(c => c.Marked("PopPageButton"));
+			Console.WriteLine("Test modal");
+
 			PushView(ButtonId4,"PopModal");
 			app.Tap(c => c.Marked("PopModal"));
 
 			PushView("Button5", "PopModal");
+			Console.WriteLine("Test action sheet");
 			app.Tap(c => c.Marked("PopModal"));
+			app.Tap(i => i.Marked("Button3")); ;
+			app.Tap(i => i.Text("Show sheet"));
+			app.Tap(i => i.Marked("Cancel"));
+			app.Tap(i => i.Marked("OK"));
+
 		}
 	}		
 }

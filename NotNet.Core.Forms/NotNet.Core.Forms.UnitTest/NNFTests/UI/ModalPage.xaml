@@ -3,6 +3,7 @@
 	<ContentPage.Content>
 		<StackLayout>
 			<Button AutomationId="PopModal" Text="PopMe" Clicked="Handle_Clicked"/>
+			<ContentView x:Name="SubView"/>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

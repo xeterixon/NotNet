@@ -155,9 +155,10 @@ namespace NotNet.Core.Forms
 				}
 				return;
 			}
-#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
-			catch { }
-#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("SetBindingContextFromAttributeIfExist - " + ex.Message);
+			}
 			try
 			{
 				vm = CreateViewModelFromAttribute(container, viewType);
@@ -167,9 +168,10 @@ namespace NotNet.Core.Forms
 				}
 				return;
 			}
-#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
-			catch { }
-#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("SetBindingContextFromAttributeIfExist - " + ex.Message);
+			}
 
 		}
 

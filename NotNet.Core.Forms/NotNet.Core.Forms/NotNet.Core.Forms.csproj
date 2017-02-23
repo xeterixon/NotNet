@@ -30,19 +30,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MVVM\Observable.cs" />
     <Compile Include="Attributes\ViewModelAttribute.cs" />
-    <Compile Include="Interface\ICleanup.cs" />
     <Compile Include="Extensions\CleanableExtension.cs" />
     <Compile Include="MVVM\ViewModelBase.cs" />
     <Compile Include="MVVM\IViewModelBase.cs" />
-    <Compile Include="Interface\INavigationLocator.cs" />
-    <Compile Include="Infrastructure\NavigationLocator.cs" />
     <Compile Include="Extensions\NavigationLocatorExtensions.cs" />
     <Compile Include="Extensions\ContainerExtensions.cs" />
-    <Compile Include="Infrastructure\ContentPageBase.cs" />
-    <Compile Include="Infrastructure\ApplicationDelegate.cs" />
-    <Compile Include="Interface\IApplicationDelegate.cs" />
-    <Compile Include="Infrastructure\HideNavigationBar.cs" />
-    <Compile Include="Infrastructure\HideBackButton.cs" />
+    <Compile Include="Infrastructure\Popup\PopupService.cs" />
+    <Compile Include="Infrastructure\Popup\IPopupService.cs" />
+    <Compile Include="Infrastructure\Navigation\INavigationLocator.cs" />
+    <Compile Include="Infrastructure\Navigation\HideBackButton.cs" />
+    <Compile Include="Infrastructure\Navigation\HideNavigationBar.cs" />
+    <Compile Include="Infrastructure\Navigation\NavigationLocator.cs" />
+    <Compile Include="Infrastructure\Application\ApplicationDelegate.cs" />
+    <Compile Include="Infrastructure\Application\IApplicationDelegate.cs" />
+    <Compile Include="MVVM\ICleanup.cs" />
+    <Compile Include="MVVM\ContentPageBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -68,9 +70,11 @@
   <ItemGroup>
     <Folder Include="MVVM\" />
     <Folder Include="Attributes\" />
-    <Folder Include="Interface\" />
     <Folder Include="Extensions\" />
     <Folder Include="Infrastructure\" />
+    <Folder Include="Infrastructure\Navigation\" />
+    <Folder Include="Infrastructure\Popup\" />
+    <Folder Include="Infrastructure\Application\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

@@ -14,10 +14,11 @@ namespace NNFTests
 			await _navigation.PopModalAsync();
 		}
 		INavigationLocator _navigation;
-		public ModalPage( INavigationLocator nav)
+		public ModalPage( INavigationLocator nav, IContainer container)
 		{
 			_navigation = nav;
 			InitializeComponent();
+			SubView.Content = container.ResolveView<TestView2>();
 		}
 	}
 }

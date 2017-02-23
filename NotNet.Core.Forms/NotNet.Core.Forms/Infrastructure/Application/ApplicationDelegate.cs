@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace NotNet.Core.Forms
@@ -8,14 +10,35 @@ namespace NotNet.Core.Forms
 		public Application App { get;private set; }
 		public INavigation Navigation => Navigations.Peek();
 		private Stack<INavigation> Navigations { get; set; } = new Stack<INavigation>();
-
+		public Page CurrentPage { 
+			get 
+			{
+				return GetCurrentPage();
+			} 
+		}
+		private Page GetCurrentPage() 
+		{
+			Page p = null;
+			// Get the topmost (i.e Last) in the model stack, if there is on
+			if (Navigation.ModalStack.Any())
+			{
+				p = Navigation.ModalStack.Last();
+			}
+			else 
+			{
+				p = Navigation.NavigationStack.LastOrDefault();
+			}
+			return p ?? App.MainPage;
+		}
 		public ApplicationDelegate(Application app, IContainer container)
 		{
 			App = app;
 			app.PropertyChanged += Application_PropertyChanged;
 			app.ModalPopped += ModalPopped;
 			app.ModalPushing += ModalPushing;
-			container.RegisterSingleton<INavigationLocator>(new NavigationLocator(this,container));
+			container.RegisterSingleton<INavigationLocator>(new NavigationLocator(this, container));
+			container.RegisterSingleton<IApplicationDelegate>(this);
+			
 		}
 
 		void Application_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
