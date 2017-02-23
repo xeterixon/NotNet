@@ -59,6 +59,7 @@
     <Compile Include="UI\ModalPage.xaml.cs">
       <DependentUpon>ModalPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\MasterDetail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

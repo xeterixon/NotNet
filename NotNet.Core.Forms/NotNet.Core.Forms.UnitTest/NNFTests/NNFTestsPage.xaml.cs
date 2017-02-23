@@ -24,6 +24,11 @@ namespace NNFTests
 		{
 			await _navigation.NavigateModalTo("ModalPage");
 		}
+		async void PushPage5(object sender, System.EventArgs e)
+		{
+			await _navigation.NavigateModalTo("MasterDetail");
+		}
+
 		INavigationLocator _navigation;
 		public NNFTestsPage()
 		{

@@ -6,7 +6,7 @@ using Xamarin.UITest;
 namespace NNFTests.UITest
 {
 	[TestFixture(Platform.iOS)]
-	[TestFixture(Platform.Android)]
+	//[TestFixture(Platform.Android)]
 	public class NavigationTests
 	{
 		IApp app;
@@ -39,11 +39,6 @@ namespace NNFTests.UITest
 		public void NavigateToWrappedViewAndBack()
 		{
 			PushView(ButtonId1,LabelId);
-			/*
-			app.WaitForElement((arg) => arg.Marked(ButtonId1));
-			app.Tap(c => c.Marked(ButtonId1));
-			app.WaitForElement((arg) => arg.Marked(LabelId));
-			*/
 			var label = app.Query(c => c.Marked(LabelId)).First();
 			Assert.IsTrue(label.Text == ExpectedLabelText, $"Text should be {ExpectedLabelText}. Was {label.Text}");
 			if (platform == Platform.iOS)
@@ -65,6 +60,9 @@ namespace NNFTests.UITest
 			Assert.IsFalse(anyBack, "There should be no back button");
 			app.Tap(c => c.Marked("PopPageButton"));
 			PushView(ButtonId4,"PopModal");
+			app.Tap(c => c.Marked("PopModal"));
+
+			PushView("Button5", "PopModal");
 			app.Tap(c => c.Marked("PopModal"));
 		}
 	}		
