@@ -3,8 +3,8 @@ namespace NotNet.Core.Forms
 {
 	public class HideNavigationBar : IDisposable
 	{
-		INavigationLocator _navigation;
-		bool _oldValue;
+		readonly INavigationLocator _navigation;
+		readonly bool _oldValue;
 		public HideNavigationBar(INavigationLocator navigation)
 		{
 			_navigation = navigation;

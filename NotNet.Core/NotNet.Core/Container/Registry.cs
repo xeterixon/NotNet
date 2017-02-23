@@ -8,10 +8,7 @@ namespace NotNet.Core
 	internal class Registry
 	{
 		public Dictionary<Type, List<RegistryEntry>> Register = new Dictionary<Type, List<RegistryEntry>>();
-		object gate = new object();
-		public Registry()
-		{
-		}
+		readonly object gate = new object();
 		public bool IsRegistered<T>()
 		{
 			return Register.Any((arg) => arg.Key.Equals(typeof(T)));

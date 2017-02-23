@@ -52,10 +52,9 @@ namespace NotNet.Core
 				if (entry.Instance == null)
 					entry.Instance = FindBestConstructorAndCreateInstance(entry.Implementation);
 				return entry.Instance;
-			} else 
-			{
-				return FindBestConstructorAndCreateInstance(entry.Implementation);
-			}
+			} 
+			return FindBestConstructorAndCreateInstance(entry.Implementation);
+
 		}
 		public object CreateWithArguments(Type t, params object[] args) 
 		{
@@ -114,7 +113,7 @@ namespace NotNet.Core
 		}
 		private List<object> GetResolvableArguments(ConstructorInfo cinfo) 
 		{
-			List<object> types = new List<object>();
+			var types = new List<object>();
 			foreach (var param in cinfo.GetParameters()) {
 				var t = param.ParameterType;
 				var o = Build(t);

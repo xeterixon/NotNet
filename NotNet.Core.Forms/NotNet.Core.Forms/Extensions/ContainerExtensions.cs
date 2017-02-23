@@ -59,7 +59,9 @@ namespace NotNet.Core.Forms
 				page.SetBinding(Page.TitleProperty, "Title");
 				return page;
 			}
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
 			catch { }
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
 			try
 			{
 				var page = (Page)container.Resolve(type);
@@ -67,7 +69,9 @@ namespace NotNet.Core.Forms
 				page.SetBinding(Page.TitleProperty, "Title");
 				return page;
 			}
-			catch { };
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+			catch { }
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
 
 			return null;
 		}
@@ -151,7 +155,9 @@ namespace NotNet.Core.Forms
 				}
 				return;
 			}
-			catch { };
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+			catch { }
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
 			try
 			{
 				vm = CreateViewModelFromAttribute(container, viewType);
@@ -161,8 +167,9 @@ namespace NotNet.Core.Forms
 				}
 				return;
 			}
-			catch { };
-
+#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
+			catch { }
+#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
 
 		}
 

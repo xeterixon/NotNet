@@ -19,20 +19,30 @@ namespace NotNet.Core.UnitTest
 			var m1 = Container.Default.Resolve<SingletonModel1>();
 			var m2 = Container.Default.Resolve<SingletonModel1>();
 
+			Assert.AreEqual(m1, m2, "Instances should be the same");
 			Assert.AreEqual(m1.Id, m2.Id, "Id should be the same");
+
 		}
 		[Test]
-		public void TryResolveShouldNotThrow()
+		public void TryResolveShouldNotThrowForUnregisteredType()
 		{
 			var o = Container.Default.ResolveOrDefault<object>();
 			Assert.IsNull(o, "Should be null");
 		}
 		[Test]
+		public void ResolveAutoRegisteredInterface()
+		{
+			var o = Container.Default.Resolve<IAutoRegisteredModel2>();
+			Assert.IsNotNull(o, "Should not be null");
+			Assert.IsTrue(string.Compare(o.Name, nameof(AutoRegisteredModel2)) == 0, "Name should be same as class name");
+		}
+
+		[Test]
 		public void ResolveAutoRegisteredClass()
 		{
-			var o = Container.Default.Resolve<TestModel3>();
+			var o = Container.Default.Resolve<AutoRegisteredModel1>();
 			Assert.IsNotNull(o, "Should not be null");
-			Assert.IsTrue(string.Compare(o.Name, nameof(TestModel3)) == 0, "Name should be same as class name");
+			Assert.IsTrue(string.Compare(o.Name, nameof(AutoRegisteredModel1)) == 0, "Name should be same as class name");
 		}
 		[Test]
 		public void ResolveMultiple() 
@@ -40,13 +50,15 @@ namespace NotNet.Core.UnitTest
 			var o = Container.Default.ResolveAll<IMulti>();
 			Assert.IsTrue(o.Any(), "Should have some implementation");
 			Assert.IsTrue(o.Count() > 1, "Should be more than 1");
+			Assert.AreNotSame(o.First(), o.Last(), "Should be different instances");
 		}
 		[Test]
-		public void ResolveAutoRegisterInterfaceWithImplementation() 
+		public void ResolvePreveredConsturctor() 
 		{
 			var o = Container.Default.Resolve<ITestModel7>();
 			Assert.NotNull(o, "Should not be null");
 			Assert.IsNotEmpty(o.Name, "Name should not be empty");
+			Assert.NotNull(o.Model, "Model should no be null");
 		}
 		[Test]
 		public void RemoveRegisterdItem() 

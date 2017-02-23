@@ -11,7 +11,7 @@ namespace NotNet.Core.Forms
 
 		public ApplicationDelegate(Application app, IContainer container)
 		{
-			this.App = app;
+			App = app;
 			app.PropertyChanged += Application_PropertyChanged;
 			app.ModalPopped += ModalPopped;
 			app.ModalPushing += ModalPushing;

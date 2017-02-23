@@ -3,8 +3,8 @@ namespace NotNet.Core.Forms
 {
 	public class HideBackButton : IDisposable
 	{
-		INavigationLocator _navigation;
-		bool _oldValue;
+		readonly INavigationLocator _navigation;
+		readonly bool _oldValue;
 		public HideBackButton(INavigationLocator navigation)
 		{
 			_navigation = navigation;

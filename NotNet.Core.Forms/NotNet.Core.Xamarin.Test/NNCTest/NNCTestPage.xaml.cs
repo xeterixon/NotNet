@@ -21,7 +21,7 @@ namespace NNCTest
 
 		async void PushPageNoBar(object sender, System.EventArgs e)
 		{
-			using (new HideBackButton(_navigation))
+			using (new HideNavigationBar(_navigation))
 			{
 				await _navigation.NavigateTo("TestPage2");
 			}
