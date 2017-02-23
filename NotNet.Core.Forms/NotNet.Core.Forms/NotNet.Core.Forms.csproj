@@ -45,6 +45,7 @@
     <Compile Include="Infrastructure\Application\IApplicationDelegate.cs" />
     <Compile Include="MVVM\ICleanup.cs" />
     <Compile Include="MVVM\ContentPageBase.cs" />
+    <Compile Include="Extensions\ContainerConfigurationExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

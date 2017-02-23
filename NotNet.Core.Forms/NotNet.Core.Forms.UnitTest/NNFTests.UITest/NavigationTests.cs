@@ -27,7 +27,7 @@ namespace NNFTests.UITest
 		public void BeforeEachTest()
 		{
 			app = AppInitializer.StartApp(platform);
-			app.Repl();
+//			app.Repl();
 		}
 		private void PushView(string buttonId, string waitForAfterTap) 
 		{

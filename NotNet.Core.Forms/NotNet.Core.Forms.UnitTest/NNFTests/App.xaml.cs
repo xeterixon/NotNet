@@ -17,9 +17,10 @@ namespace NNFTests
 
 		private void RegisterDependencies() 
 		{
-			Container.Default.AutoRegister(typeof(App).GetTypeInfo().Assembly);
-			Container.Default.RegisterSingleton<IApplicationDelegate>(new ApplicationDelegate(this,Container.Default));
-			Container.Default.Register<IPopupService, PopupService>();
+			var config = new ContainerConfiguration(Container.Default)
+				.AutoRegister<App>()
+				.Register<IPopupService, PopupService>()
+				.AddApplicationDelegate(this);
 		}
 		protected override void OnStart()
 		{
