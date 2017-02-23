@@ -12,3 +12,4 @@ Nuget/*.nupkg
 
 Nuget/nugetpush.sh
 
+NotNet.Core.Forms/NotNet.Core.Forms.UnitTest/packages/*
