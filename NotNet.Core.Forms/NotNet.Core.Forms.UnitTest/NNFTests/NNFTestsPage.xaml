@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:NNFTests" 
+	x:Class="NNFTests.NNFTestsPage"
+	AutomationId="MainPage"
+	Title="Test page"
+	>
+	<StackLayout>
+		<Button AutomationId="Button1" Text="Push page" Clicked="PushPage1"/>
+		<Button AutomationId="Button2" Text="Push wrapped view" Clicked="PushPage2"/>
+		<Button AutomationId="Button3" Text="Push wrapped view no bar" Clicked="PushPage3"/>
+		<Button AutomationId="Button4" Text="Push modal page" Clicked="PushPage4"/>
+		<Button AutomationId="Button5" Text="Push master detail page" Clicked="PushPage5"/>
+		
+	</StackLayout>
+</ContentPage>
