@@ -6,6 +6,9 @@
 		<StackLayout>
 			<Label AutomationId="LabelId" Text="{Binding Name}"/>
 			<Button AutomationId="PopPageButton" Text="PopMe" Command="{Binding PopPageCommand}"/>
+			<Button AutomationId="ShowAlert" Text="Show alert" CommandParameter="ALERT" Command="{Binding ShowPopupCommand}"/>
+			<Button AutomationId="ShowAlert" Text="Show question" CommandParameter="QUESTION" Command="{Binding ShowPopupCommand}"/>
+			<Button AutomationId="ShowAlert" Text="Show sheet" CommandParameter="SHEET" Command="{Binding ShowPopupCommand}"/>
 		</StackLayout>
 	</ContentView.Content>
 </ContentView>
