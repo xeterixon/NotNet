@@ -17,15 +17,18 @@ namespace NNFTests
 
 		private void RegisterDependencies() 
 		{
-			
+
 			ContainerConfiguration
 				.Use(Container.Default)
 				.AutoRegister<App>()
-				.Register<IPopupService, PopupService>()
+				// Add standard forms related stuff
 				.AddApplicationDelegate(this)
-				.AddNavigationLocator()
-				.AddNavigationLocator()
-				;
+				.AddPopupService()
+				.AddNavigationLocator() // Intentionally added twice, just to make sure it doesn't break
+				.AddNavigationLocator();
+			// One could use AddDefaultServices
+
+			
 		}
 		protected override void OnStart()
 		{

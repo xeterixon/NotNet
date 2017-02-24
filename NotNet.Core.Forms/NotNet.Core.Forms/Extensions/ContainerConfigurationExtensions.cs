@@ -22,5 +22,17 @@ namespace NotNet.Core.Forms
 			}
 			return self;
 		}
+		public static IContainerConfiguration AddPopupService(this IContainerConfiguration self) 
+		{
+			if (!self.Container.IsRegistered<IPopupService>()) 
+			{
+				self.Container.Register<IPopupService, PopupService>();
+			}
+			return self;
+		}
+		public static IContainerConfiguration AddDefaultServices(this IContainerConfiguration self, Application app) 
+		{
+			return self.AddApplicationDelegate(app).AddNavigationLocator().AddPopupService();
+		}
 	}
 }
