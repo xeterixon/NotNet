@@ -17,10 +17,15 @@ namespace NNFTests
 
 		private void RegisterDependencies() 
 		{
-			var config = new ContainerConfiguration(Container.Default)
+			
+			ContainerConfiguration
+				.Use(Container.Default)
 				.AutoRegister<App>()
 				.Register<IPopupService, PopupService>()
-				.AddApplicationDelegate(this);
+				.AddApplicationDelegate(this)
+				.AddNavigationLocator()
+				.AddNavigationLocator()
+				;
 		}
 		protected override void OnStart()
 		{

@@ -16,7 +16,7 @@ namespace NotNet.Core.Forms
 				BindingContext = view.BindingContext,
 				Content = view
 			};
-			page.SetBinding(Page.TitleProperty, "Title");
+			BindTitle(page);
 			return page;
 		}
 
@@ -41,12 +41,17 @@ namespace NotNet.Core.Forms
 		{
 			return (T)container.ResolvePage(typeof(T));
 		}
+		private static void BindTitle(Page p) 
+		{
+			if (p?.BindingContext == null) return;
+			p.SetBinding(Page.TitleProperty, "Title");
 
+		} 
 		public static Page ResolvePage(this IContainer container, Type type) 
 		{
 			var page = (Page)container.Resolve(type);
 			SetBindingContextFromAttributeIfExist(page, container, type, null);
-			page.SetBinding(Page.TitleProperty, "Title");
+			BindTitle(page);
 			return page;
 		}
 
@@ -56,22 +61,24 @@ namespace NotNet.Core.Forms
 			{
 				var page = (Page)container.Resolve(type, args);
 				SetBindingContextFromAttributeIfExist(page, container, type, args);
-				page.SetBinding(Page.TitleProperty, "Title");
+				BindTitle(page);
 				return page;
 			}
-#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
-			catch { }
-#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("ResolvePage with args - " + ex.Message);				
+			}
 			try
 			{
 				var page = (Page)container.Resolve(type);
 				SetBindingContextFromAttributeIfExist(page, container, type);
-				page.SetBinding(Page.TitleProperty, "Title");
+				BindTitle(page);
 				return page;
 			}
-#pragma warning disable RECS0022 // A catch clause that catches System.Exception and has an empty body
-			catch { }
-#pragma warning restore RECS0022 // A catch clause that catches System.Exception and has an empty body
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine("ResolvePage without args - " + ex.Message);
+			}
 
 			return null;
 		}
@@ -85,7 +92,7 @@ namespace NotNet.Core.Forms
 				BindingContext = view.BindingContext,
 				Content = view
 			};
-			page.SetBinding(Page.TitleProperty, "Title");
+			BindTitle(page);
 			return page;
 		}
 
@@ -98,7 +105,7 @@ namespace NotNet.Core.Forms
 				BindingContext = view.BindingContext,
 				Content = view
 			};
-			page.SetBinding(Page.TitleProperty, "Title");
+			BindTitle(page);
 			return page;
 		}
 
@@ -127,7 +134,7 @@ namespace NotNet.Core.Forms
 				BindingContext = view.BindingContext,
 				Content = view
 			};
-			page.SetBinding(Page.TitleProperty, "Title");
+			BindTitle(page);
 			return page;
 		}
 

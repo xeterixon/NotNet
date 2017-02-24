@@ -6,5 +6,6 @@ namespace NotNet.Core.Forms
 	{
 		Application App { get; }
 		Page CurrentPage { get; }
+		INavigation Navigation { get;}
 	}
 }

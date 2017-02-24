@@ -6,8 +6,11 @@ namespace NotNet.Core
 	public class ContainerConfiguration : IContainerConfiguration
 	{
 		public IContainer Container { get; private set; }
-
-		public ContainerConfiguration(IContainer c)
+		public static IContainerConfiguration Use(IContainer c) 
+		{
+			return new ContainerConfiguration(c);
+		}
+		private ContainerConfiguration(IContainer c)
 		{
 			Container = c;
 		}
