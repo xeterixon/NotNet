@@ -39,6 +39,12 @@
     <EmbeddedResource Include="UI\ModalPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\NewNavStack\ModalRootPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\NewNavStack\PushPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -60,6 +66,12 @@
       <DependentUpon>ModalPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\MasterDetail.cs" />
+    <Compile Include="UI\NewNavStack\ModalRootPage.xaml.cs">
+      <DependentUpon>ModalRootPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\NewNavStack\PushPage.xaml.cs">
+      <DependentUpon>PushPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -78,6 +90,7 @@
   <ItemGroup>
     <Folder Include="UI\" />
     <Folder Include="Model\" />
+    <Folder Include="UI\NewNavStack\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\NotNet.Core\NotNet.Core\NotNet.Core.csproj">

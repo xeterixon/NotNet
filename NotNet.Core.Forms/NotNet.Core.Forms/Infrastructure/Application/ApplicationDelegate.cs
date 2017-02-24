@@ -19,7 +19,7 @@ namespace NotNet.Core.Forms
 		private Page GetCurrentPage() 
 		{
 			Page p = null;
-			// Get the topmost (i.e Last) in the model stack, if there is on
+			// Get the topmost (i.e Last) in the model stack, if there is one
 			if (Navigation.ModalStack.Any())
 			{
 				p = Navigation.ModalStack.Last();
@@ -30,15 +30,18 @@ namespace NotNet.Core.Forms
 			}
 			return p ?? App.MainPage;
 		}
-		public ApplicationDelegate(Application app, IContainer container)
+		[Obsolete("Will be removed soon, use the ContainerConfigurator to set up the ApplicationDelegate")]
+		public ApplicationDelegate(Application app, IContainer container) : this(container,app)
+		{
+			container.RegisterSingleton<INavigationLocator>(new NavigationLocator(container));
+		}
+		public ApplicationDelegate(IContainer container, Application app)
 		{
 			App = app;
 			app.PropertyChanged += Application_PropertyChanged;
 			app.ModalPopped += ModalPopped;
 			app.ModalPushing += ModalPushing;
-			container.RegisterSingleton<INavigationLocator>(new NavigationLocator(this, container));
 			container.RegisterSingleton<IApplicationDelegate>(this);
-			
 		}
 
 		void Application_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

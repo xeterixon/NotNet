@@ -27,7 +27,7 @@ namespace NNFTests.UITest
 		public void BeforeEachTest()
 		{
 			app = AppInitializer.StartApp(platform);
-			app.Repl();
+//			app.Repl();
 		}
 		private void PushView(string buttonId, string waitForAfterTap) 
 		{
@@ -51,7 +51,6 @@ namespace NNFTests.UITest
 			else
 			{
 				app.Back();
-
 			}
 			
 			PushView(ButtonId2, LabelId);
@@ -74,7 +73,23 @@ namespace NNFTests.UITest
 			app.Tap(i => i.Text("Show sheet"));
 			app.Tap(i => i.Marked("Cancel"));
 			app.Tap(i => i.Marked("OK"));
+			app.Tap((arg) => arg.Marked("PopPageButton"));
 
+			Console.WriteLine("Testing new nav stack");
+			PushView("Button6", "PushPage");
+			app.Tap(c => c.Marked("PushPage"));
+			app.WaitForElement((arg) => arg.Marked("PushPage"));
+			app.Tap(c => c.Marked("PushPage"));
+			app.WaitForElement((arg) => arg.Marked("PushPage"));
+			app.Tap(c => c.Marked("PushPage"));
+			app.WaitForElement((arg) => arg.Marked("PushPage"));
+			app.Tap((arg) => arg.Marked("ShowSheet"));
+			app.Tap(i => i.Marked("Cancel"));
+			app.Tap(i => i.Marked("OK"));
+
+			app.Tap(c => c.Marked("PopToRoot"));
+			app.WaitForElement((arg) => arg.Marked("PopMe"));
+			app.Tap(c => c.Marked("PopMe"));
 		}
 	}		
 }

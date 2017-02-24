@@ -7,19 +7,22 @@ namespace NotNet.Core.Forms
 {
 	public class NavigationLocator : INavigationLocator
 	{
-		ApplicationDelegate _app;
 		IContainer _container;
 
-		public NavigationLocator(ApplicationDelegate app, IContainer container)
+		public NavigationLocator(IContainer container)
 		{
-			_app = app;
 			_container = container;
 		}
 
 		public bool ShowNavigationBar { get; set; } = true;
 		public bool ShowBackButton { get; set; } = true;
 
-		public INavigation Navigation { get { return _app.Navigation; } }
+		public INavigation Navigation { 
+			get 
+			{
+				return _container.ResolveOrDefault<IApplicationDelegate>()?.Navigation;
+			} 
+		}
 
 		private Page BuildPage(string name) 
 		{

@@ -29,6 +29,12 @@ namespace NNFTests
 			await _navigation.NavigateModalTo("MasterDetail");
 		}
 
+		async void PushPage6(object sender, System.EventArgs e)
+		{
+			var page = Container.Default.Resolve<ModalRootPage>();
+			await _navigation.PushModalAsync(new NavigationPage(page) { Title = "New nav stack" });
+		}
+
 		INavigationLocator _navigation;
 		public NNFTestsPage()
 		{
