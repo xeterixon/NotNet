@@ -45,6 +45,15 @@
     <EmbeddedResource Include="UI\NewNavStack\PushPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Args\ArgsTestRootPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Args\ArgsToPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Args\ArgsToVm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -72,6 +81,16 @@
     <Compile Include="UI\NewNavStack\PushPage.xaml.cs">
       <DependentUpon>PushPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Args\ArgsTestRootPage.xaml.cs">
+      <DependentUpon>ArgsTestRootPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Args\ArgsToPage.xaml.cs">
+      <DependentUpon>ArgsToPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Args\ArgsToVm.xaml.cs">
+      <DependentUpon>ArgsToVm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Args\Models.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -91,6 +110,7 @@
     <Folder Include="UI\" />
     <Folder Include="Model\" />
     <Folder Include="UI\NewNavStack\" />
+    <Folder Include="UI\Args\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\NotNet.Core\NotNet.Core\NotNet.Core.csproj">

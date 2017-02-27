@@ -57,6 +57,7 @@ namespace NotNet.Core.Forms
 
 		public static Page ResolvePage(this IContainer container, Type type, params object[] args)
 		{
+			//HACK The args might go to the Page constructor or the ViewModel constructor. Try both...	
 			try
 			{
 				var page = (Page)container.Resolve(type, args);
@@ -66,18 +67,18 @@ namespace NotNet.Core.Forms
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine("ResolvePage with args - " + ex.Message);				
+				System.Diagnostics.Debug.WriteLine("ResolvePage - Args to Page - " + ex.Message);				
 			}
 			try
 			{
 				var page = (Page)container.Resolve(type);
-				SetBindingContextFromAttributeIfExist(page, container, type);
+				SetBindingContextFromAttributeIfExist(page, container, type, args);
 				BindTitle(page);
 				return page;
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine("ResolvePage without args - " + ex.Message);
+				System.Diagnostics.Debug.WriteLine("ResolvePage - Args to BindingContext - " + ex.Message);
 			}
 
 			return null;
@@ -164,7 +165,7 @@ namespace NotNet.Core.Forms
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine("SetBindingContextFromAttributeIfExist - " + ex.Message);
+				System.Diagnostics.Debug.WriteLine("SetBindingContextFromAttributeIfExist - Args to BindingContext - " + ex.Message);
 			}
 			try
 			{
@@ -177,7 +178,7 @@ namespace NotNet.Core.Forms
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine("SetBindingContextFromAttributeIfExist - " + ex.Message);
+				System.Diagnostics.Debug.WriteLine("SetBindingContextFromAttributeIfExist - No args to BindingContext- " + ex.Message);
 			}
 
 		}

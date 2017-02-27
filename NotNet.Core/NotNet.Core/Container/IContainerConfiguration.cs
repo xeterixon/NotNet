@@ -10,5 +10,9 @@ namespace NotNet.Core
 			where IT : class
 			where T : IT;
 		IContainerConfiguration RegisterSingleton<T>(T instance) where T : class;
+		IContainerConfiguration RegisterSingleton<IT, T>()
+			where IT : class
+			where T : IT;
+
 	}
 }

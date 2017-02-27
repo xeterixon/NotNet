@@ -27,14 +27,14 @@ namespace NNFTests.UITest
 		public void BeforeEachTest()
 		{
 			app = AppInitializer.StartApp(platform);
-//			app.Repl();
+			//app.Repl();
 		}
-		private void PushView(string buttonId, string waitForAfterTap) 
+		private void PushView(string buttonId, string waitForAfterTap)
 		{
 			app.WaitForElement((arg) => arg.Marked(buttonId)); ;
 			app.Tap(c => c.Marked(buttonId));
 			app.WaitForElement(c => c.Marked(waitForAfterTap));
-			
+
 		}
 		[Test]
 		public void NavigateToWrappedViewAndBack()
@@ -44,15 +44,8 @@ namespace NNFTests.UITest
 			PushView(ButtonId1,LabelId);
 			var label = app.Query(c => c.Marked(LabelId)).First();
 			Assert.IsTrue(label.Text == ExpectedLabelText, $"Text should be {ExpectedLabelText}. Was {label.Text}");
-			if (platform == Platform.iOS)
-			{
-				app.Tap(c => c.Marked("Back"));
-			}
-			else
-			{
-				app.Back();
-			}
-			
+			app.Back();
+
 			PushView(ButtonId2, LabelId);
 			var labelText = app.Query(c => c.Marked(LabelId)).First().Text;
 			Assert.IsTrue(labelText == ExpectedLabelText, $"Text should be {ExpectedLabelText}. Was {labelText}");
@@ -90,6 +83,23 @@ namespace NNFTests.UITest
 			app.Tap(c => c.Marked("PopToRoot"));
 			app.WaitForElement((arg) => arg.Marked("PopMe"));
 			app.Tap(c => c.Marked("PopMe"));
+
+			app.Tap(c => c.Marked("Button7"));
+			app.WaitForElement(c => c.Marked("PushArgsToPage"));
+			app.Tap((arg) => arg.Marked("PushArgsToPage"));
+			app.WaitForElement((arg) => arg.Marked("ArgsLabel"));
+			var text = app.Query((arg) => arg.Marked("ArgsLabel")).First().Text;
+			Assert.IsTrue(text == "Hello Page", "Text should be 'Hello Page'");
+			app.Back();
+
+			app.WaitForElement(c => c.Marked("PushArgsToPage"));
+			app.Tap((arg) => arg.Marked("PushArgsToViewModel"));
+			app.WaitForElement((arg) => arg.Marked("ArgsLabel"));
+			text = app.Query((arg) => arg.Marked("ArgsLabel")).First().Text;
+			Assert.IsTrue(text == "Hello ViewModel", "Text should be 'Hello ViewModel'");
+			app.Back();
+
+
 		}
 	}		
 }

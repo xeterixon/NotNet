@@ -40,5 +40,13 @@ namespace NotNet.Core
 			Container.RegisterSingleton<T>(instance);
 			return this;
 		}
+		public IContainerConfiguration RegisterSingleton<IT, T>()
+			where IT : class
+			where T : IT
+		{
+			Container.RegisterSingleton<IT, T>();
+			return this;
+		}
+
 	}
 }

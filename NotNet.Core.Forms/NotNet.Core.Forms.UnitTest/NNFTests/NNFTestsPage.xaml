@@ -12,6 +12,7 @@
 		<Button AutomationId="Button4" Text="Push modal page" Clicked="PushPage4"/>
 		<Button AutomationId="Button5" Text="Push master detail page" Clicked="PushPage5"/>
 		<Button AutomationId="Button6" Text="Push modal with new stack" Clicked="PushPage6"/>
+		<Button AutomationId="Button7" Text="Test args to vm and page" Clicked="PushPage7"/>
 		
 	</StackLayout>
 </ContentPage>

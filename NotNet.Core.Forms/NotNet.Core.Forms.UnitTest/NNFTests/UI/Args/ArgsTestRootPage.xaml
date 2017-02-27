@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="NNFTests.ArgsTestRootPage">
+	<ContentPage.Content>
+		<StackLayout>
+			<Button AutomationId= "PushArgsToPage" Text="Push with args to page" Clicked="ArgsToPage"/>
+			<Button AutomationId= "PushArgsToViewModel" Text="Push with args to view model" Clicked="ArgsToVm"/>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

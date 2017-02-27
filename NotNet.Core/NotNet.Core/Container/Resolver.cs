@@ -58,9 +58,7 @@ namespace NotNet.Core
 		}
 		public object CreateWithArguments(Type t, params object[] args) 
 		{
-			var entry = GetEntryFor(t,null);
-			var ctor = GetPreferredConstructor(entry.Implementation);
-			return CreateInstanceWithArguments(ctor, args);
+			return CreateWithArguments(t.Name, args);
 		}
 		internal object CreateWithArguments(string name, params object[] args) 
 		{
