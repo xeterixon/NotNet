@@ -4,6 +4,7 @@
 		<StackLayout>
 			<Button AutomationId="PopModal" Text="PopMe" Clicked="Handle_Clicked"/>
 			<ContentView x:Name="SubView"/>
+			<Button Text="Try open detail" Clicked="TryOpenDrawer"/>
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

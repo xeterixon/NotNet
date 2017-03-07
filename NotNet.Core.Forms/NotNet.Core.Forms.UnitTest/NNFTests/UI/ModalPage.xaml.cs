@@ -9,6 +9,16 @@ namespace NNFTests
 	[AutoRegister(ObjectDescription.Base)]
 	public partial class ModalPage : ContentPage
 	{
+		void TryOpenDrawer(object sender, System.EventArgs e)
+		{
+			_navigation.MasterVisible = true;
+			Device.StartTimer(TimeSpan.FromSeconds(2), () => 
+			{
+				_navigation.MasterVisible = false;
+				return false;
+			});
+		}
+
 		async void Handle_Clicked(object sender, System.EventArgs e)
 		{
 			await _navigation.PopModalAsync();

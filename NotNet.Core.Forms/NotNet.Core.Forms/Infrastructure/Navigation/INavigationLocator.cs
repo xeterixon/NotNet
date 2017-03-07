@@ -29,6 +29,11 @@ namespace NotNet.Core.Forms
 		Task NavigateModalTo(string name);
 		Task NavigateModalTo(string name, params object[] args);
 
+		/// <summary>
+		/// If the current page is a MasterDetailPage, this will open or close the master
+		/// </summary>
+		/// <value><c>true</c> if master visible; otherwise, <c>false</c>.</value>
+		bool MasterVisible { set; get; }
 
 		//NOTE VisualElement Should really be Page or View. Everyting else fails... 
 		Task NavigateTo<T>() where T : VisualElement;

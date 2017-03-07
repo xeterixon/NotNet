@@ -23,6 +23,22 @@ namespace NotNet.Core.Forms
 				return _container.ResolveOrDefault<IApplicationDelegate>()?.Navigation;
 			} 
 		}
+		public bool MasterVisible 
+		{
+			set
+			{
+				var page = _container.ResolveOrDefault<IApplicationDelegate>()?.CurrentPage as MasterDetailPage;
+				if (page == null) return;
+				page.IsPresented = value;
+			}
+			get 
+			{
+				var page = _container.ResolveOrDefault<IApplicationDelegate>()?.CurrentPage as MasterDetailPage;
+				if (page == null) return false;
+				return page.IsPresented;
+				
+			}
+		}
 
 		private Page BuildPage(string name) 
 		{
