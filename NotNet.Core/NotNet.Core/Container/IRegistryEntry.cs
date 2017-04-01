@@ -6,6 +6,7 @@ namespace NotNet.Core
 		Type Interface { get;  }
 		Type Implementation { get; }
 		ObjectLifecycle LifeCycle { get; }
+		Action<object> Callback { get; }
 	}
 	// internal holder of stuff
 	internal class RegistryEntry : IRegistryEntry
@@ -14,5 +15,7 @@ namespace NotNet.Core
 		public Type Implementation { get; set; }
 		public object Instance { get; set; } // Holds the instance for singleton objects
 		public ObjectLifecycle LifeCycle { get; set; }
+		public Action<object> Callback { get; set; }
+
 	}
 }

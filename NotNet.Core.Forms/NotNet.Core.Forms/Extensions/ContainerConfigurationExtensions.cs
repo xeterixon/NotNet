@@ -26,7 +26,7 @@ namespace NotNet.Core.Forms
 		{
 			if (!self.Container.IsRegistered<IPopupService>()) 
 			{
-				self.Container.Register<IPopupService, PopupService>();
+				self.Container.RegisterTransient<IPopupService, PopupService>();
 			}
 			return self;
 		}

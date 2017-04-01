@@ -31,6 +31,39 @@ namespace NotNet.Core
 			Default.RegisterSingleton(Default);
 
 		}
+
+		public void RegisterTransient<T>()
+			where T : class
+
+		{
+			var t = typeof(T);
+			_registry.Add(t, t, ObjectLifecycle.Transient);
+		}
+		public void RegisterTransient<T>(Action<T> callback)
+			where T : class
+		{
+			_registry.Add(typeof(T), typeof(T), ObjectLifecycle.Transient, callback);
+		}
+
+		public void RegisterTransient<TIface, TImpl>(Action<TIface> callback)
+			where TIface : class
+			where TImpl : TIface
+		{
+			var ift = typeof(TIface);
+			var imt = typeof(TImpl);
+			_registry.Add(ift, imt, ObjectLifecycle.Transient,callback);
+			
+		}
+
+		public void RegisterTransient<TIFace, TImpl>() 
+			where TIFace : class
+			where TImpl : TIFace
+
+		{
+			var ift = typeof(TIFace);
+			var imt = typeof(TImpl);
+			_registry.Add(ift, imt, ObjectLifecycle.Transient);
+		}
 		/// <summary>
 		/// Register an interface and a implementing class
 		/// </summary>
@@ -71,6 +104,12 @@ namespace NotNet.Core
 		{
 			_registry.Add(typeof(TImpl), instance);
 		}
+		public void RegisterSingleton<TImpl>()
+			where TImpl : class
+		{
+			_registry.Add(typeof(TImpl), typeof(TImpl), ObjectLifecycle.Singleton);
+		}
+
 		public T Resolve<T>(params object[] args)
 			where T : class
 		{

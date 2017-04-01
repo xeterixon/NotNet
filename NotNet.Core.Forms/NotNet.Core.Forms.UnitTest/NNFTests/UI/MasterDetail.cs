@@ -7,7 +7,9 @@ namespace NNFTests
 	[AutoRegister(ObjectDescription.Base)]
 	public class MasterDetail : MasterDetailPage
 	{
-		INavigationLocator _navigation;
+#pragma warning disable
+		readonly INavigationLocator _navigation;
+#pragma warning restore
 		public MasterDetail(INavigationLocator nav, IContainer container)
 		{
 			_navigation = nav;

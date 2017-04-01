@@ -63,14 +63,14 @@ namespace NotNet.Core.UnitTest
 		[Test]
 		public void RemoveRegisterdItem() 
 		{
-			Container.Default.Register<TemporaryModel>();
+			Container.Default.RegisterTransient<TemporaryModel>();
 			var obj = Container.Default.Resolve<TemporaryModel>();
 			Assert.NotNull(obj, "Should not be null");
 			Container.Default.Unregister<TemporaryModel>();
 
 			obj = Container.Default.ResolveOrDefault<TemporaryModel>();
 			Assert.Null(obj, "Generic - Should be null");
-			Container.Default.Register<TemporaryModel>();
+			Container.Default.RegisterTransient<TemporaryModel>();
 
 			obj = Container.Default.Resolve<TemporaryModel>();
 			Assert.NotNull(obj, "Should not be null");

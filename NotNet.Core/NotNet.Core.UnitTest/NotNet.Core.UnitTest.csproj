@@ -28,10 +28,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="nunit.framework">
-      <HintPath>..\..\packages\NUnit.3.6.0\lib\net45\nunit.framework.dll</HintPath>
+      <HintPath>..\..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="nunitlite">
-      <HintPath>..\..\packages\NUnitLite.3.6.0\lib\net45\nunitlite.dll</HintPath>
+      <HintPath>..\..\packages\NUnitLite.3.6.1\lib\net45\nunitlite.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -52,9 +52,6 @@
     <Compile Include="Models\AutoRegisteredModel2.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +59,9 @@
       <Project>{856E53CA-A304-4DC4-8D7F-51F70FC87084}</Project>
       <Name>NotNet.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

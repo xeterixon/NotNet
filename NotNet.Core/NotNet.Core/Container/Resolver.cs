@@ -12,22 +12,13 @@ namespace NotNet.Core
 		{
 			_registry = registry;
 		}
-		private RegistryEntry GetEntryFor(Type t, Type implementationHint) 
+		public T TryCreateWithArguments<T>(params object[] args)
 		{
-			var tmp =  _registry.Register.FirstOrDefault(r => r.Key.Equals(t));
-			return tmp.Value?.FirstOrDefault((arg) => arg.Implementation.Equals(implementationHint) || implementationHint == null);
-		}
-		private RegistryEntry GetEntryFor(string name) 
-		{
-			return _registry.Register.FirstOrDefault((arg) => arg.Key.Name == name).Value.FirstOrDefault();
-		}
-		public T TryCreateWithArguments<T>(params object[] args) 
-		{
-			try 
+			try
 			{
 				return CreateWithArguments<T>(args);
-			} 
-			catch 
+			}
+			catch
 			{
 				return default(T);
 			}
@@ -39,11 +30,27 @@ namespace NotNet.Core
 			{
 				return Build(typeof(TIface)) as TIface;
 			}
-            catch 
+			catch
 			{
 				return null;
 			}
 		}
+		public object CreateWithArguments(Type t, params object[] args)
+		{
+			return CreateWithArguments(t.Name, args);
+		}
+
+		#region Private
+		private RegistryEntry GetEntryFor(Type t, Type implementationHint) 
+		{
+			var tmp =  _registry.Register.FirstOrDefault(r => r.Key.Equals(t));
+			return tmp.Value?.FirstOrDefault((arg) => arg.Implementation.Equals(implementationHint) || implementationHint == null);
+		}
+		private RegistryEntry GetEntryFor(string name) 
+		{
+			return _registry.Register.FirstOrDefault((arg) => arg.Key.Name == name).Value.FirstOrDefault();
+		}
+
 		internal object Build(Type ifaceType, Type implementationHint = null) 
 		{
 			var entry = GetEntryFor(ifaceType,implementationHint);
@@ -52,18 +59,25 @@ namespace NotNet.Core
 				if (entry.Instance == null)
 					entry.Instance = FindBestConstructorAndCreateInstance(entry.Implementation);
 				return entry.Instance;
-			} 
-			return FindBestConstructorAndCreateInstance(entry.Implementation);
+			}
+			var instance = FindBestConstructorAndCreateInstance(entry.Implementation);
+			if (entry.Callback != null) 
+			{
+				entry.Callback.Invoke(instance);
+			}
+			return instance;
+		}
 
-		}
-		public object CreateWithArguments(Type t, params object[] args) 
-		{
-			return CreateWithArguments(t.Name, args);
-		}
 		internal object CreateWithArguments(string name, params object[] args) 
 		{
-			var ctor = GetPreferredConstructor(GetEntryFor(name).Implementation);
-			return CreateInstanceWithArguments(ctor, args);
+			var entry = GetEntryFor(name);
+			var ctor = GetPreferredConstructor(entry.Implementation);
+			var instance =  CreateInstanceWithArguments(ctor, args);
+			if (entry.Callback != null) 
+			{
+				entry.Callback.Invoke(instance);
+			}
+			return instance;
 		}
 		internal object Create(string name) 
 		{
@@ -141,5 +155,7 @@ namespace NotNet.Core
 			var ctor = GetPreferredConstructor(type);
 			return CreateInstance(ctor);
 		}
+#endregion
+
 	}
 }

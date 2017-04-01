@@ -6,12 +6,40 @@ namespace NotNet.Core
 {
 	public interface IContainer: IServiceProvider
 	{
+
+
 		/// <summary>
 		/// Register an interface and an implementing class.
 		/// </summary>
 		/// <param name="olc">Object life cycle.</param>
 		/// <typeparam name="TIface">The interface type.</typeparam>
 		/// <typeparam name="TImpl">The implementaion type.</typeparam>
+		void RegisterTransient<TIface, TImpl>()
+			where TIface : class
+			where TImpl : TIface;
+
+		void RegisterTransient<TIface, TImpl>(Action<TIface> callback)
+			where TIface : class
+			where TImpl : TIface;
+
+		/// <summary>
+		/// Register an class,
+		/// </summary>
+		/// <typeparam name="T">The implementation type.</typeparam>
+		void RegisterTransient<T>()
+			where T : class;
+
+		void RegisterTransient<T>(Action<T> callback)
+			where T : class;
+
+
+		/// <summary>
+		/// Register an interface and an implementing class.
+		/// </summary>
+		/// <param name="olc">Object life cycle.</param>
+		/// <typeparam name="TIface">The interface type.</typeparam>
+		/// <typeparam name="TImpl">The implementaion type.</typeparam>
+		[Obsolete("Use RegisterTransient")]
 		void Register<TIface, TImpl>(ObjectLifecycle olc = ObjectLifecycle.Transient)
 			where TIface : class
 			where TImpl : TIface;
@@ -20,6 +48,7 @@ namespace NotNet.Core
 		/// </summary>
 		/// <param name="olc">Object life cycle.</param>
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
+		[Obsolete("Use RegisterTransient")]
 		void Register<T>(ObjectLifecycle olc = ObjectLifecycle.Transient)
 			where T : class;
 
@@ -31,7 +60,10 @@ namespace NotNet.Core
 		void RegisterSingleton<TIface, TImpl>()
 			where TIface : class
 			where TImpl : TIface;
-		
+
+		void RegisterSingleton<T>()
+			where T : class;
+
 		/// <summary>
 		/// Registers a singleton instance.
 		/// </summary>

@@ -16,8 +16,13 @@ namespace NNFTests
 		public ICommand ShowPopupCommand { get; private set; }
 		INavigationLocator _navigation;
 		IPopupService _popup;
-		public TestModel2(INavigationLocator nav, IPopupService popup) 
+#pragma warning disable
+		ITestModel3 _model3;
+#pragma warning restore
+
+		public TestModel2(INavigationLocator nav, IPopupService popup, ITestModel3 model3) 
 		{
+			_model3 = model3;
 			_navigation = nav;
 			_popup = popup;
 			Name = "Some Random Text";

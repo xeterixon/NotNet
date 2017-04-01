@@ -15,7 +15,7 @@ namespace NotNet.Core
 	{
 		public ObjectLifecycle Lifecycle{get; private set;}
 		public ObjectDescription Description { get; private set;}
-
+		public AutoRegisterAttribute(bool isBase) : this(isBase ? ObjectDescription.Base : ObjectDescription.ImplementsInterface) { }
 		public AutoRegisterAttribute() : this(ObjectLifecycle.Transient,ObjectDescription.ImplementsInterface){}
 		public AutoRegisterAttribute(ObjectLifecycle life) : this(life, ObjectDescription.ImplementsInterface){}
 		public AutoRegisterAttribute(ObjectDescription desc) : this(ObjectLifecycle.Transient,desc){}

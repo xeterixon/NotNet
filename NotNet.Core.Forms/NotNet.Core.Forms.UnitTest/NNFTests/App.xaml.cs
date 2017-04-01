@@ -24,11 +24,14 @@ namespace NNFTests
 				// Add standard forms related stuff
 				.AddApplicationDelegate(this)
 				.AddPopupService()
+				.RegisterTransient<ITestModel3,TestModel3>((o)=> 
+				{
+					o.Init();
+				})
 				.AddNavigationLocator() // Intentionally added twice, just to make sure it doesn't break
 				.AddNavigationLocator();
 			// One could use AddDefaultServices
 
-			
 		}
 		protected override void OnStart()
 		{

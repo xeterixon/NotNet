@@ -12,7 +12,9 @@ namespace NNFTests
 
 	public partial class ArgsToVm : ContentPage
 	{
-		INavigationLocator _navigation;
+#pragma warning disable 
+		readonly INavigationLocator _navigation;
+#pragma warning restore
 		public ArgsToVm(INavigationLocator nav)
 		{
 			_navigation = nav;

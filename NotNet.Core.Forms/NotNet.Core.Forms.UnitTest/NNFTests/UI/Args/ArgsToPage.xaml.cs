@@ -10,7 +10,9 @@ namespace NNFTests
 	[AutoRegister(ObjectDescription.Base)]
 	public partial class ArgsToPage : ContentPage
 	{
-		INavigationLocator _navigation;
+#pragma warning disable
+		readonly INavigationLocator _navigation;
+#pragma warning restore
 		string Arg;
 		public ArgsToPage(INavigationLocator nav, string arg)
 		{

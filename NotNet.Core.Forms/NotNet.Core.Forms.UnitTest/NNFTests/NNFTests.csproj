@@ -91,6 +91,7 @@
       <DependentUpon>ArgsToVm.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Args\Models.cs" />
+    <Compile Include="Model\TestModel3.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

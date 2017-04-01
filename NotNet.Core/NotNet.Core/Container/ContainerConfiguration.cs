@@ -19,10 +19,35 @@ namespace NotNet.Core
 			Container.AutoRegister(typeof(T).GetTypeInfo().Assembly);
 			return this;
 		}
+		public IContainerConfiguration RegisterTransient<T>() where T : class 
+		{
+			Container.RegisterTransient<T>();
+			return this;
+		}
+		public IContainerConfiguration RegisterTransient<IT, T>()
+			where IT : class
+			where T : IT
+		{
+			Container.RegisterTransient<IT, T>();
+			return this;
+		}
+		public IContainerConfiguration RegisterTransient<T>(Action<T> callback) where T : class
+		{
+			Container.RegisterTransient<T>(callback);
+			return this;
+		}
+		public IContainerConfiguration RegisterTransient<IT, T>(Action<IT> callback)
+			where IT : class
+			where T : IT
+		{
+			Container.RegisterTransient<IT, T>(callback);
+			return this;
+		}
+
 		public IContainerConfiguration Register<T>() 
 			where T: class
 		{
-			Container.Register<T>();
+			Container.RegisterTransient<T>();
 			return this;
 		}
 
@@ -30,7 +55,7 @@ namespace NotNet.Core
 			where IT:class
 			where T : IT
 		{
-			Container.Register<IT, T>();
+			Container.RegisterTransient<IT, T>();
 			return this;
 		}
 
@@ -45,6 +70,11 @@ namespace NotNet.Core
 			where T : IT
 		{
 			Container.RegisterSingleton<IT, T>();
+			return this;
+		}
+		public IContainerConfiguration RegisterSingleton<T>() where T : class 
+		{
+			Container.RegisterSingleton<T>();
 			return this;
 		}
 
