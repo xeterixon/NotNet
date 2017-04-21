@@ -4,6 +4,7 @@ namespace NotNet.Core.Forms
 	{
 		string Title { get; set; }
 		void OnPageAppearing();
+		void OnInitialPageAppearing();
 		void OnPageDisappearing();
 		bool OnBackButtonPressed();
 	}

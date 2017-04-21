@@ -21,8 +21,8 @@ namespace NotNet.Core.Forms
 		{
 	        var expr = (MemberExpression)outExpr.Body;
 			var prop = (PropertyInfo)expr.Member;
-			var apa = (TVal)prop.GetValue(target);
-			if (Equals(apa, input)) return;
+			var value = (TVal)prop.GetValue(target);
+			if (Equals(value, input)) return;
 			prop.SetValue(target, input, null);			OnPropertyChanged(prop.Name);
 		}
 		protected void SetProperty<T>(ref T self, T value, [CallerMemberName] string propertyName = null) 

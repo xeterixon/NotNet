@@ -28,6 +28,7 @@ namespace NNFTests
 				{
 					o.Init();
 				})
+				.AddTimerService()
 				.AddNavigationLocator() // Intentionally added twice, just to make sure it doesn't break
 				.AddNavigationLocator();
 			// One could use AddDefaultServices

@@ -25,6 +25,7 @@ namespace NotNet.Core.Forms
 		public virtual void Cleanup() { }
 		public virtual void OnPageAppearing(){}
 		public virtual void OnPageDisappearing(){}
+		public virtual void OnInitialPageAppearing() { }
 		public virtual bool OnBackButtonPressed()
 		{
 			return false;

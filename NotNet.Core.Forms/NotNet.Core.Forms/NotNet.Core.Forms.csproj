@@ -46,6 +46,8 @@
     <Compile Include="MVVM\ICleanup.cs" />
     <Compile Include="MVVM\ContentPageBase.cs" />
     <Compile Include="Extensions\ContainerConfigurationExtensions.cs" />
+    <Compile Include="Infrastructure\Timer\ITimer.cs" />
+    <Compile Include="Infrastructure\Timer\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -76,6 +78,7 @@
     <Folder Include="Infrastructure\Navigation\" />
     <Folder Include="Infrastructure\Popup\" />
     <Folder Include="Infrastructure\Application\" />
+    <Folder Include="Infrastructure\Timer\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

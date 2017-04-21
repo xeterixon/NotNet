@@ -4,8 +4,9 @@ namespace NotNet.Core.Forms
 {
 	public class ContentPageBase : ContentPage
 	{
-		
-		public IViewModelBase ViewModel{
+		private bool _initialAppear = true;
+		public IViewModelBase ViewModel
+		{
 			get
 			{
 				return BindingContext as IViewModelBase;
@@ -14,6 +15,11 @@ namespace NotNet.Core.Forms
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
+			if (_initialAppear) 
+			{
+				_initialAppear = false;
+				ViewModel?.OnInitialPageAppearing();
+			}
 			ViewModel?.OnPageAppearing();
 		}
 		protected override void OnDisappearing()
@@ -23,7 +29,7 @@ namespace NotNet.Core.Forms
 		}
 		protected override bool OnBackButtonPressed()
 		{
-			if (ViewModel != null) 
+			if (ViewModel != null)
 			{
 				return ViewModel.OnBackButtonPressed();
 			}
