@@ -187,10 +187,6 @@ namespace NotNet.Core
 			return _resolver.CreateWithArguments(name, args);
 		}
 
-		public object GetService(Type serviceType)
-		{
-			return _resolver.Create(serviceType);
-		}
 		public bool IsRegistered<T>()
 		{
 			return _registry.IsRegistered<T>();

@@ -16,11 +16,15 @@
 		</releaseNotes>
 		<tags>di, servicelocator, ioc, mvvm, xamarin.forms</tags>
 		<dependencies>
-			<dependency id="NotNet.Core" version="1.2.6" />
+            <group targetFramework="netstandard1.0">
+		       <dependency id="NETStandard.Library" version="1.6.1" />
+               <dependency id="Microsoft.NETCore.Portable.Compatibility" version="1.0.1" />
+            </group>
+            <dependency id="NotNet.Core" version="1.9.30" />
 			<dependency id="Xamarin.Forms" version="2.3.3.180" />
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="bin/Release/NotNet.Core.Forms.dll" target="lib" />
+        <file src="bin/Release/NotNet.Core.Forms.dll" target="lib/netstandard1.0/NotNet.Core.Forms.dll" />
 	</files>
 </package>

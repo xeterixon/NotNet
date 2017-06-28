@@ -4,14 +4,13 @@ using System.Reflection;
 
 namespace NotNet.Core
 {
-	public interface IContainer: IServiceProvider
+	public interface IContainer
 	{
 
 
 		/// <summary>
 		/// Register an interface and an implementing class.
 		/// </summary>
-		/// <param name="olc">Object life cycle.</param>
 		/// <typeparam name="TIface">The interface type.</typeparam>
 		/// <typeparam name="TImpl">The implementaion type.</typeparam>
 		void RegisterTransient<TIface, TImpl>()

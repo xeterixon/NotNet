@@ -15,3 +15,5 @@ Nuget/nugetpush.sh
 NotNet.Core.Forms/NotNet.Core.Forms.UnitTest/packages/*
 
 .droidres/
+
+project.lock.json
