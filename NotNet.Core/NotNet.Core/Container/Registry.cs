@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace NotNet.Core
 {
-	internal class Registry
+	class Registry
 	{
 		public Dictionary<Type, List<RegistryEntry>> Register = new Dictionary<Type, List<RegistryEntry>>();
 		readonly object gate = new object();

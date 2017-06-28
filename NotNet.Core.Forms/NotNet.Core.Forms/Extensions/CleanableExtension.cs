@@ -22,7 +22,7 @@ namespace NotNet.Core.Forms
 				CleanPage(((MasterDetailPage)self).Detail);
 			}
 		}
-		private static void CleanPage(Page p) 
+		static void CleanPage(Page p) 
 		{
 			CleanBindableObject(p);
 			CleanBindableObject((p as ContentPage)?.Content);
@@ -32,7 +32,7 @@ namespace NotNet.Core.Forms
 		{
 			CleanBindableObject(self);
 		}
-		private static void CleanTabPage(TabbedPage page) 
+		static void CleanTabPage(TabbedPage page) 
 		{
 			
 			foreach (var p in page?.Children ?? new List<Page>()) 
@@ -40,7 +40,7 @@ namespace NotNet.Core.Forms
 				CleanPage(p);
 			}
 		}
-		private static void CleanBindableObject(BindableObject bindable) 
+		static void CleanBindableObject(BindableObject bindable) 
 		{
 			
 			(bindable?.BindingContext as ICleanup)?.Cleanup();

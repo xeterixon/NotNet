@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace NNFTests
 {
-	[AutoRegister(ObjectDescription.Base)]
+	[AutoRegister]
 	public partial class ModalPage : ContentPage
 	{
 		void TryOpenDrawer(object sender, System.EventArgs e)

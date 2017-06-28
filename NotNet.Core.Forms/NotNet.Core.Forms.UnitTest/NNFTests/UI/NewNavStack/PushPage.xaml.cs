@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using NotNet.Core;
+﻿using NotNet.Core;
 using NotNet.Core.Forms;
 using Xamarin.Forms;
 
 namespace NNFTests
 {
-	[AutoRegister(ObjectDescription.Base)]
+    [AutoRegister]
 	public partial class PushPage : ContentPage
 	{
 		INavigationLocator _navigation;

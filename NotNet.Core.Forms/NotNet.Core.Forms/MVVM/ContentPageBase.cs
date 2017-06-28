@@ -4,7 +4,7 @@ namespace NotNet.Core.Forms
 {
 	public class ContentPageBase : ContentPage
 	{
-		private bool _initialAppear = true;
+		bool _initialAppear = true;
 		public IViewModelBase ViewModel
 		{
 			get

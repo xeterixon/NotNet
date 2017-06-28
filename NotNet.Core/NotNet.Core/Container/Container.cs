@@ -16,9 +16,9 @@ namespace NotNet.Core
 	public class Container : IContainer
 	{
 		public static IContainer Default { get; private set; }
-		private readonly Registry _registry;
-		private readonly Resolver _resolver;
-		private Container()
+		readonly Registry _registry;
+		readonly Resolver _resolver;
+		Container()
 		{
 			_registry = new Registry();
 			_resolver = new Resolver(_registry);
@@ -65,25 +65,6 @@ namespace NotNet.Core
 			_registry.Add(ift, imt, ObjectLifecycle.Transient);
 		}
 		/// <summary>
-		/// Register an interface and a implementing class
-		/// </summary>
-		/// <param name="olc">The lifecycle for the object.</param>
-		/// <typeparam name="TIface">The interface.</typeparam>
-		/// <typeparam name="TImpl">The implementation.</typeparam>
-		public void Register<TIface, TImpl>(ObjectLifecycle olc = ObjectLifecycle.Transient)
-			where TIface : class
-			where TImpl : TIface
-		{
-			var ift = typeof(TIface);
-			var imt = typeof(TImpl);
-			_registry.Add(ift, imt, olc);
-		}
-		public void Register<TImpl>(ObjectLifecycle olc = ObjectLifecycle.Transient)
-			where TImpl : class
-		{
-			_registry.Add(typeof(TImpl), typeof(TImpl), olc);
-		}
-		/// <summary>
 		/// Register an interface and a implementing class as a singleton
 		/// </summary>
 		/// <typeparam name="TIface">The interface.</typeparam>
@@ -91,8 +72,9 @@ namespace NotNet.Core
 		public void RegisterSingleton<TIface, TImpl>()
 			where TIface : class
 			where TImpl : TIface
+
 		{
-			Register<TIface, TImpl>(ObjectLifecycle.Singleton);
+			_registry.Add(typeof(TIface), typeof(TImpl), ObjectLifecycle.Singleton);
 		}
 		/// <summary>
 		/// Registers an interface with an instansiated object.
@@ -107,7 +89,7 @@ namespace NotNet.Core
 		public void RegisterSingleton<TImpl>()
 			where TImpl : class
 		{
-			_registry.Add(typeof(TImpl), typeof(TImpl), ObjectLifecycle.Singleton);
+            RegisterSingleton<TImpl, TImpl>();
 		}
 
 		public T Resolve<T>(params object[] args)
@@ -156,19 +138,23 @@ namespace NotNet.Core
 			// Register "SomeClass" that implements "ISomeClass"
 			var attr = typeof(AutoRegisterAttribute);
 			var typeInfos = assembly.DefinedTypes.Where(t => t.IsClass && !t.IsAbstract && t.GetCustomAttribute(attr) != null).ToList();
-			foreach (var typeInfo in typeInfos) {
-				try {
+			foreach (var typeInfo in typeInfos)
+			{
+				try
+				{
+                    var ifaceType = typeInfo.ImplementedInterfaces.FirstOrDefault(i => i.GetTypeInfo().Assembly.Equals(assembly));
 					var autoattr = typeInfo.GetCustomAttribute(attr) as AutoRegisterAttribute;
-					var iface = autoattr.Description == ObjectDescription.ImplementsInterface ?
-										typeInfo.AsType().GetTypeInfo().ImplementedInterfaces.FirstOrDefault() :
-										typeInfo.AsType();
+                    var iface = ifaceType ?? typeInfo.AsType();
 					Register(iface, typeInfo.AsType(), autoattr.Lifecycle);
-				} catch (Exception ex) {
+				}
+				catch (Exception ex)
+				{
 					System.Diagnostics.Debug.WriteLine(ex.Message);
 				}
 			}
 		}
-		private void Register(Type iface, Type impl, ObjectLifecycle olc)
+
+		void Register(Type iface, Type impl, ObjectLifecycle olc)
 		{
 			_registry.Add(iface, impl, olc);
 		}

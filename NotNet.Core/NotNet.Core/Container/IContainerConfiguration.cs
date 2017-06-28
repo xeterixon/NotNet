@@ -14,12 +14,6 @@ namespace NotNet.Core
 		IContainerConfiguration RegisterTransient<IT, T>(Action<IT> callback)
 			where IT : class
 			where T : IT;
-		[Obsolete("Use RegisterTransient")]
-		IContainerConfiguration Register<T>() where T : class;
-		[Obsolete("Use RegisterTransient")]
-		IContainerConfiguration Register<IT, T>()
-			where IT : class
-			where T : IT;
 		IContainerConfiguration RegisterSingleton<T>(T instance) where T : class;
 		IContainerConfiguration RegisterSingleton<IT, T>()
 			where IT : class

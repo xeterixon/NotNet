@@ -31,26 +31,6 @@ namespace NotNet.Core
 		void RegisterTransient<T>(Action<T> callback)
 			where T : class;
 
-
-		/// <summary>
-		/// Register an interface and an implementing class.
-		/// </summary>
-		/// <param name="olc">Object life cycle.</param>
-		/// <typeparam name="TIface">The interface type.</typeparam>
-		/// <typeparam name="TImpl">The implementaion type.</typeparam>
-		[Obsolete("Use RegisterTransient")]
-		void Register<TIface, TImpl>(ObjectLifecycle olc = ObjectLifecycle.Transient)
-			where TIface : class
-			where TImpl : TIface;
-		/// <summary>
-		/// Register an class,
-		/// </summary>
-		/// <param name="olc">Object life cycle.</param>
-		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		[Obsolete("Use RegisterTransient")]
-		void Register<T>(ObjectLifecycle olc = ObjectLifecycle.Transient)
-			where T : class;
-
 		/// <summary>
 		/// Register an interface and an implementing class as a singleton.
 		/// </summary>
@@ -135,6 +115,11 @@ namespace NotNet.Core
 		/// <summary>
 		/// Auto register classes with the AutoRegister attribute
 		/// </summary>
+        /// <remarks>
+        /// Note that if the class should be resolved using and interface,
+        /// the interface got to be the "first" in the inheritance chain
+        /// and live in the same assembly as the class.
+        /// </remarks>
 		/// <param name="assembly">The assembly holding the classes</param>
 		void AutoRegister(Assembly assembly);
 

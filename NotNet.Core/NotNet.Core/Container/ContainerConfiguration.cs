@@ -10,7 +10,7 @@ namespace NotNet.Core
 		{
 			return new ContainerConfiguration(c);
 		}
-		private ContainerConfiguration(IContainer c)
+		ContainerConfiguration(IContainer c)
 		{
 			Container = c;
 		}

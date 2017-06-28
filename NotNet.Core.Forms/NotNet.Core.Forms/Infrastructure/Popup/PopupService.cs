@@ -1,11 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace NotNet.Core.Forms
 {
-	public class PopupService : IPopupService
+    public class PopupService : IPopupService
 	{
-		IApplicationDelegate _app;
+		readonly IApplicationDelegate _app;
 		public PopupService(IApplicationDelegate appDelegate)
 		{
 			_app = appDelegate;

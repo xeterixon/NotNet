@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace NNFTests
 {
-	[AutoRegister(ObjectDescription.Base)]
+	[AutoRegister]
 	public partial class ArgsTestRootPage : ContentPage
 	{
 		async void ArgsToPage(object sender, System.EventArgs e)

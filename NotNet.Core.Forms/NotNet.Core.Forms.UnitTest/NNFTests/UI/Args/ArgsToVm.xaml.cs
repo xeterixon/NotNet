@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using NotNet.Core;
+﻿using NotNet.Core;
 using NotNet.Core.Forms;
-            
+
 using Xamarin.Forms;
 
 namespace NNFTests
 {
-	[ViewModel(typeof(ViewModelStringArg))]
-	[AutoRegister(ObjectDescription.Base)]
-
+    [ViewModel(typeof(ViewModelStringArg))]
+	[AutoRegister]
 	public partial class ArgsToVm : ContentPage
 	{
 #pragma warning disable 

@@ -5,9 +5,9 @@ using System.Reflection;
 
 namespace NotNet.Core
 {
-	internal class Resolver
+	class Resolver
 	{
-		private Registry _registry;
+		Registry _registry;
 		public Resolver(Registry registry) 
 		{
 			_registry = registry;
@@ -41,12 +41,12 @@ namespace NotNet.Core
 		}
 
 		#region Private
-		private RegistryEntry GetEntryFor(Type t, Type implementationHint) 
+		RegistryEntry GetEntryFor(Type t, Type implementationHint) 
 		{
 			var tmp =  _registry.Register.FirstOrDefault(r => r.Key.Equals(t));
 			return tmp.Value?.FirstOrDefault((arg) => arg.Implementation.Equals(implementationHint) || implementationHint == null);
 		}
-		private RegistryEntry GetEntryFor(string name) 
+		RegistryEntry GetEntryFor(string name) 
 		{
 			return _registry.Register.FirstOrDefault((arg) => arg.Key.Name == name).Value.FirstOrDefault();
 		}
@@ -111,19 +111,19 @@ namespace NotNet.Core
 		{
 			return (T)CreateWithArguments(typeof(T), args);
 		}
-		private ConstructorInfo GetPreferredConstructor(Type type) 
+		ConstructorInfo GetPreferredConstructor(Type type) 
 		{
 			var ctors = type.GetTypeInfo().DeclaredConstructors.OrderBy((arg) => arg.GetParameters().Count());
 			var ctor = ctors.FirstOrDefault((arg) => arg.GetCustomAttribute(typeof(PreferredConstructorAttribute)) != null) ?? ctors.FirstOrDefault();
 			return ctor;
 		}
-		private object CreateInstanceWithArguments(ConstructorInfo cinof, params object[] args) 
+		object CreateInstanceWithArguments(ConstructorInfo cinof, params object[] args) 
 		{
 			var cargs = GetResolvableArguments(cinof);
 			cargs.AddRange(args);
 			return Activator.CreateInstance(cinof.DeclaringType, cargs.ToArray());
 		}
-		private List<object> GetResolvableArguments(ConstructorInfo cinfo) 
+		List<object> GetResolvableArguments(ConstructorInfo cinfo) 
 		{
 			var types = new List<object>();
 			foreach (var param in cinfo.GetParameters()) {
@@ -136,7 +136,7 @@ namespace NotNet.Core
 			}
 			return types;
 		}
-		private object CreateInstance(ConstructorInfo cinfo) 
+		object CreateInstance(ConstructorInfo cinfo) 
 		{
 			var args = GetResolvableArguments(cinfo);
 			return Activator.CreateInstance(cinfo.DeclaringType, args.ToArray());
@@ -149,7 +149,7 @@ namespace NotNet.Core
 		/// </summary>
 		/// <returns>An object of some description.</returns>
 		/// <param name="type">Type.</param>
-		private object FindBestConstructorAndCreateInstance(Type type) 
+		object FindBestConstructorAndCreateInstance(Type type) 
 		{
 
 			var ctor = GetPreferredConstructor(type);

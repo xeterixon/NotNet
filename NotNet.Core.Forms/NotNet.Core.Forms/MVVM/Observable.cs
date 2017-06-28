@@ -35,7 +35,7 @@ namespace NotNet.Core.Forms
 
 	public class Observable<T> : Observable
 	{
-		private T _Value;
+		T _Value;
 		public T Value
 		{
 			get { return _Value; }

@@ -41,7 +41,7 @@ namespace NotNet.Core.Forms
 		{
 			return (T)container.ResolvePage(typeof(T));
 		}
-		private static void BindTitle(Page p) 
+		static void BindTitle(Page p) 
 		{
 			if (p?.BindingContext == null) return;
 			p.SetBinding(Page.TitleProperty, "Title");
@@ -139,11 +139,11 @@ namespace NotNet.Core.Forms
 			return page;
 		}
 
-		private static ViewModelAttribute GetViewModelAttribute(Type t) 
+		static ViewModelAttribute GetViewModelAttribute(Type t) 
 		{
 			return t.GetTypeInfo().GetCustomAttribute<ViewModelAttribute>();
 		}
-		private static object CreateViewModelFromAttribute(IContainer container, Type t, params object[] args) 
+		static object CreateViewModelFromAttribute(IContainer container, Type t, params object[] args) 
 		{
 			var attr = GetViewModelAttribute(t);
 			if (attr == null) return null;
@@ -151,7 +151,7 @@ namespace NotNet.Core.Forms
 			return args == null ? container.Resolve(attr.ViewModelType): container.Resolve(attr.ViewModelType, args);
 		}
 
-		private static void SetBindingContextFromAttributeIfExist(BindableObject bindable, IContainer container, Type viewType, params object[] args)		{
+		static void SetBindingContextFromAttributeIfExist(BindableObject bindable, IContainer container, Type viewType, params object[] args)		{
 			object vm = null;
 			//HACK If bindable is a Page, args might go to the Page constructor or the ViewModel constructor. Try both...
 			try

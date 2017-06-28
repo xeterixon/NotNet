@@ -40,11 +40,11 @@ namespace NotNet.Core.Forms
 			}
 		}
 
-		private Page BuildPage(string name) 
+		Page BuildPage(string name) 
 		{
 			return BuildPage(name, null);
 		}
-		private Page BuildPage(string name, params object[] args )
+		Page BuildPage(string name, params object[] args )
 		{
 			var entry = _container.GetEntry(name);
 			if (entry == null) 
