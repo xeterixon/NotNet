@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="UI\Args\Models.cs" />
     <Compile Include="Model\TestModel3.cs" />
+    <Compile Include="Model\SingletonModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />

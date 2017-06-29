@@ -5,37 +5,34 @@ using Xamarin.Forms;
 
 namespace NotNet.Core.Forms
 {
-	public class ApplicationDelegate : IApplicationDelegate
-	{
-		public Application App { get;private set; }
-		public INavigation Navigation => Navigations.Peek();
-		Stack<INavigation> Navigations { get; set; } = new Stack<INavigation>();
-		public Page CurrentPage { 
-			get 
-			{
-				return GetCurrentPage();
-			} 
-		}
-		Page GetCurrentPage() 
-		{
-			Page p = null;
-			// Get the topmost (i.e Last) in the model stack, if there is one
-			if (Navigation.ModalStack.Any())
-			{
-				p = Navigation.ModalStack.Last();
-			}
-			else 
-			{
-				p = Navigation.NavigationStack.LastOrDefault();
-			}
-			return p ?? App.MainPage;
-		}
-		[Obsolete("Will be removed soon, use the ContainerConfigurator to set up the ApplicationDelegate")]
-		public ApplicationDelegate(Application app, IContainer container) : this(container,app)
-		{
-			container.RegisterSingleton<INavigationLocator>(new NavigationLocator(container));
-		}
-		public ApplicationDelegate(IContainer container, Application app)
+    public class ApplicationDelegate : IApplicationDelegate
+    {
+        public Application App { get; private set; }
+        public INavigation Navigation => Navigations.Peek();
+        Stack<INavigation> Navigations { get; set; } = new Stack<INavigation>();
+        public Page CurrentPage
+        {
+            get
+            {
+                return GetCurrentPage();
+            }
+        }
+        Page GetCurrentPage()
+        {
+            Page p = null;
+            // Get the topmost (i.e Last) in the model stack, if there is one
+            if (Navigation.ModalStack.Any())
+            {
+                p = Navigation.ModalStack.Last();
+            }
+            else
+            {
+                p = Navigation.NavigationStack.LastOrDefault();
+            }
+            return p ?? App.MainPage;
+        }
+        ApplicationDelegate(){}
+        internal ApplicationDelegate(IContainer container, Application app)
 		{
 			App = app;
 			app.PropertyChanged += Application_PropertyChanged;
