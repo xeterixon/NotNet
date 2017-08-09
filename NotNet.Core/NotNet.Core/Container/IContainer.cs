@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -82,7 +82,7 @@ namespace NotNet.Core
 		/// Resolve by type
 		/// </summary>
 		/// <param name="t">The type</param>
-		/// <param name="args">Arguments pass to the consturcotr.</param>
+		/// <param name="args">Arguments pass to the constructor.</param>
 		object Resolve(Type t, params object[] args);
 		/// <summary>
 		/// Resolve by type

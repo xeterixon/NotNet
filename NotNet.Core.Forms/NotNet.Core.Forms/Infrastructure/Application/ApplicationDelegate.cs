@@ -10,13 +10,7 @@ namespace NotNet.Core.Forms
         public Application App { get; private set; }
         public INavigation Navigation => Navigations.Peek();
         Stack<INavigation> Navigations { get; set; } = new Stack<INavigation>();
-        public Page CurrentPage
-        {
-            get
-            {
-                return GetCurrentPage();
-            }
-        }
+        public Page CurrentPage => GetCurrentPage();
         Page GetCurrentPage()
         {
             Page p = null;
