@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -113,5 +114,15 @@ namespace NotNet.Core.Forms
 			var page = BuildPage(typeof(T).Name,args);
 			return Navigation.PushModalAsync(page);
 		}
+        public Task ActivateTab(string tabTitle)
+        {
+            var page = _container.ResolveOrDefault<IApplicationDelegate>()?.CurrentPage as TabbedPage;
+            if (page == null) return Task.FromResult(0);
+            var tab = page.Children.FirstOrDefault(p => p.Title == tabTitle);
+            if (tab == null) return Task.FromResult(0);
+            page.CurrentPage = tab;
+            return Task.FromResult(0);
+		}
+
 	}
 }

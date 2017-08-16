@@ -16,7 +16,7 @@ namespace NotNet.Core
 
 		public void Add(Type iface, object instance)
 		{
-            DoRegister(iface, instance.GetType(),ObjectLifecycle.Singleton,null);
+            DoRegister(iface, instance.GetType(),instance, ObjectLifecycle.Singleton,null);
 		}
 		public void Remove(Type t) 
 		{
@@ -30,12 +30,12 @@ namespace NotNet.Core
 		{
 			CheckTypes(iface, impl);
 			var wrappedCallback = callback != null ? new Action<object>((obj) => callback((T)obj)) : null;
-			DoRegister(iface, impl,olc,wrappedCallback);
+			DoRegister(iface, impl,null, olc,wrappedCallback);
 		}
 		public void Add(Type iface, Type impl, ObjectLifecycle olc)
 		{
             CheckTypes(iface, impl);
-            DoRegister(iface,impl,olc,null);
+            DoRegister(iface,impl,null,olc,null);
 		}
 		private void CheckTypes(Type iface, Type impl)
 		{
@@ -51,7 +51,7 @@ namespace NotNet.Core
 
 		}
 
-		private void DoRegister(Type iface, Type impl, ObjectLifecycle olc, Action<object> callback)
+        private void DoRegister(Type iface, Type impl, object instance, ObjectLifecycle olc, Action<object> callback)
         {
 			lock (gate)
 			{
@@ -59,7 +59,7 @@ namespace NotNet.Core
 				{
 					Register.Add(iface, new List<RegistryEntry>());
 				}
-                Register[iface].Add(new RegistryEntry { Interface = iface, Implementation = impl, LifeCycle = olc, Callback = callback });
+                Register[iface].Add(new RegistryEntry { Interface = iface, Implementation = impl, Instance = instance, LifeCycle = olc, Callback = callback });
 			}
 
 		}

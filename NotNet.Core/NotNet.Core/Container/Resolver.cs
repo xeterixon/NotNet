@@ -30,8 +30,9 @@ namespace NotNet.Core
 			{
 				return Build(typeof(TIface)) as TIface;
 			}
-			catch
+            catch(Exception ex)
 			{
+                System.Diagnostics.Debug.WriteLine(ex.Message);
 				return null;
 			}
 		}

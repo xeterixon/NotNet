@@ -93,12 +93,14 @@
     <Compile Include="UI\Args\Models.cs" />
     <Compile Include="Model\TestModel3.cs" />
     <Compile Include="Model\SingletonModel.cs" />
+    <Compile Include="UI\TabPage\TabPageTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />
     <Folder Include="Model\" />
     <Folder Include="UI\NewNavStack\" />
     <Folder Include="UI\Args\" />
+    <Folder Include="UI\TabPage\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\NotNet.Core\NotNet.Core\NotNet.Core.csproj">
