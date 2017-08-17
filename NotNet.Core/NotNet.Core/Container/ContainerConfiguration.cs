@@ -44,21 +44,6 @@ namespace NotNet.Core
 			return this;
 		}
 
-		public IContainerConfiguration Register<T>() 
-			where T: class
-		{
-			Container.RegisterTransient<T>();
-			return this;
-		}
-
-		public IContainerConfiguration Register<IT, T>() 
-			where IT:class
-			where T : IT
-		{
-			Container.RegisterTransient<IT, T>();
-			return this;
-		}
-
 		public IContainerConfiguration RegisterSingleton<T>(T instance)
 			where T : class
 		{

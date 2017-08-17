@@ -1,7 +1,7 @@
 ﻿using System;
 namespace NotNet.Core.UnitTest
 {
-	[AutoRegister(ObjectDescription.Base)]
+	[AutoRegister]
 	public class TestModel4
 	{
 		public string ModelName { get { return Model.Name; } }
