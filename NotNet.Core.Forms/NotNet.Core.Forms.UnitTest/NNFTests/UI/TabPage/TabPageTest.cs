@@ -6,8 +6,14 @@ using Xamarin.Forms;
 namespace NNFTests.UI.TabPage
 {
     [AutoRegister]
-    public class TabPageTest : TabbedPage
+    public class TabPageTest : TabbedPage, IPublish
     {
+        bool SendMessage()
+        {
+			this.Publish("change", "TEXT_CHANGE");
+            return false;
+		}
+
         INavigationLocator _nav;
         ITimer _timer;
         public TabPageTest(ITimer timer ,INavigationLocator nav, TestPage1 page1, ModalPage page2)
@@ -18,10 +24,11 @@ namespace NNFTests.UI.TabPage
             page2.Title = "Tab2";
             Children.Add(page1);
             Children.Add(page2);
-            _timer.StartTimer(TimeSpan.FromSeconds(2),HandleFunc);
+            _timer.StartTimer(TimeSpan.FromSeconds(1),ChangeTab);
+            _timer.StartTimer(TimeSpan.FromSeconds(2),SendMessage);
         }
 
-        bool HandleFunc()
+        bool ChangeTab()
         {
             _nav.ActivateTab("Tab2");
             return false;

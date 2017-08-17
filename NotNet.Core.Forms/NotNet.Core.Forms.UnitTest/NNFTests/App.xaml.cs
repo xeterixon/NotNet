@@ -11,10 +11,14 @@ namespace NNFTests
 		{
 			InitializeComponent();
 			RegisterDependencies();
-
+            RunMessagesTest();
 			MainPage = new NavigationPage(new NNFTestsPage());
 		}
-
+        private void RunMessagesTest()
+        {
+            var tester = new PubSubTest();
+            tester.SendToTest();
+        }
 		private void RegisterDependencies() 
 		{
 

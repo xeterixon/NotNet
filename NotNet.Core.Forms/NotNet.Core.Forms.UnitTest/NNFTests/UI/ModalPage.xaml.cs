@@ -7,12 +7,18 @@ using Xamarin.Forms;
 namespace NNFTests
 {
 	[AutoRegister]
-	public partial class ModalPage : ContentPage
+    public partial class ModalPage : ContentPage, ISubscribe
 	{
+        void ChangeLabel(string str)
+        {
+            TestLabel.Text = str;
+        }
+
+        public Label TestLabel { get; set; }
 		void TryOpenDrawer(object sender, System.EventArgs e)
 		{
 			_navigation.MasterVisible = true;
-			Device.StartTimer(TimeSpan.FromSeconds(2), () => 
+			Device.StartTimer(TimeSpan.FromSeconds(1), () => 
 			{
 				_navigation.MasterVisible = false;
 				return false;
@@ -26,9 +32,11 @@ namespace NNFTests
 		INavigationLocator _navigation;
 		public ModalPage( INavigationLocator nav, IContainer container)
 		{
-			_navigation = nav;
 			InitializeComponent();
+			_navigation = nav;
+            TestLabel = CBLabel;
 			SubView.Content = container.ResolveView<TestView2>();
+            this.Subscribe<string>("change",ChangeLabel);
 		}
 	}
 }

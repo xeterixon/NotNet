@@ -94,6 +94,9 @@
     <Compile Include="Model\TestModel3.cs" />
     <Compile Include="Model\SingletonModel.cs" />
     <Compile Include="UI\TabPage\TabPageTest.cs" />
+    <Compile Include="UI\Messages\TestSub.cs" />
+    <Compile Include="UI\Messages\TestPub.cs" />
+    <Compile Include="UI\Messages\PubSubTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />
@@ -101,6 +104,7 @@
     <Folder Include="UI\NewNavStack\" />
     <Folder Include="UI\Args\" />
     <Folder Include="UI\TabPage\" />
+    <Folder Include="UI\Messages\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\NotNet.Core\NotNet.Core\NotNet.Core.csproj">
