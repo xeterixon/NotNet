@@ -1,2 +1,2 @@
-#NotNet.Core
+# NotNet.Core
 [Documentation](https://github.com/xeterixon/NotNet/wiki)
