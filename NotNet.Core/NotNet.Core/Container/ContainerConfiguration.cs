@@ -6,7 +6,7 @@ namespace NotNet.Core
 	public class ContainerConfiguration : IContainerConfiguration
 	{
 		public IContainer Container { get; private set; }
-		public static IContainerConfiguration Use(IContainer c) 
+		public static IContainerConfiguration Use(IContainer c)
 		{
 			return new ContainerConfiguration(c);
 		}
@@ -19,7 +19,7 @@ namespace NotNet.Core
 			Container.AutoRegister(typeof(T).GetTypeInfo().Assembly);
 			return this;
 		}
-		public IContainerConfiguration RegisterTransient<T>() where T : class 
+		public IContainerConfiguration RegisterTransient<T>() where T : class
 		{
 			Container.RegisterTransient<T>();
 			return this;
@@ -57,7 +57,7 @@ namespace NotNet.Core
 			Container.RegisterSingleton<IT, T>();
 			return this;
 		}
-		public IContainerConfiguration RegisterSingleton<T>() where T : class 
+		public IContainerConfiguration RegisterSingleton<T>() where T : class
 		{
 			Container.RegisterSingleton<T>();
 			return this;

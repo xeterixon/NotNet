@@ -3,7 +3,7 @@ namespace NotNet.Core
 {
 	public interface IRegistryEntry
 	{
-		Type Interface { get;  }
+		Type Interface { get; }
 		Type Implementation { get; }
 		ObjectLifecycle LifeCycle { get; }
 		Action<object> Callback { get; }

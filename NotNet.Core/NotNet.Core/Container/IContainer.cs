@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -115,11 +115,11 @@ namespace NotNet.Core
 		/// <summary>
 		/// Auto register classes with the AutoRegister attribute
 		/// </summary>
-        /// <remarks>
-        /// Note that if the class should be resolved using and interface,
-        /// the interface got to be the "first" in the inheritance chain
-        /// and live in the same assembly as the class.
-        /// </remarks>
+		/// <remarks>
+		/// Note that if the class should be resolved using and interface,
+		/// the interface got to be the "first" in the inheritance chain
+		/// and live in the same assembly as the class.
+		/// </remarks>
 		/// <param name="assembly">The assembly holding the classes</param>
 		void AutoRegister(Assembly assembly);
 

@@ -7,8 +7,8 @@ namespace NotNet.Core
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 	public class AutoRegisterAttribute : Attribute
 	{
-		public ObjectLifecycle Lifecycle{get; private set;}
-		public AutoRegisterAttribute() : this(ObjectLifecycle.Transient){}
+		public ObjectLifecycle Lifecycle { get; private set; }
+		public AutoRegisterAttribute() : this(ObjectLifecycle.Transient) { }
 		public AutoRegisterAttribute(ObjectLifecycle life)
 		{
 			Lifecycle = life;

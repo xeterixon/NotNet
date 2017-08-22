@@ -9,7 +9,7 @@ namespace NotNet.Core
 		IContainerConfiguration RegisterTransient<IT, T>()
 			where IT : class
 			where T : IT;
-		
+
 		IContainerConfiguration RegisterTransient<T>(Action<T> callback) where T : class;
 		IContainerConfiguration RegisterTransient<IT, T>(Action<IT> callback)
 			where IT : class

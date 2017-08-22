@@ -51,11 +51,11 @@ namespace NotNet.Core
 		{
 			var ift = typeof(TIface);
 			var imt = typeof(TImpl);
-			_registry.Add(ift, imt, ObjectLifecycle.Transient,callback);
-			
+			_registry.Add(ift, imt, ObjectLifecycle.Transient, callback);
+
 		}
 
-		public void RegisterTransient<TIFace, TImpl>() 
+		public void RegisterTransient<TIFace, TImpl>()
 			where TIFace : class
 			where TImpl : TIFace
 
@@ -89,7 +89,7 @@ namespace NotNet.Core
 		public void RegisterSingleton<TImpl>()
 			where TImpl : class
 		{
-            RegisterSingleton<TImpl, TImpl>();
+			RegisterSingleton<TImpl, TImpl>();
 		}
 
 		public T Resolve<T>(params object[] args)
@@ -102,12 +102,12 @@ namespace NotNet.Core
 		{
 			return _resolver.CreateAll<T>();
 		}
-		public void Unregister<T>() 
+		public void Unregister<T>()
 		{
 			Unregister(typeof(T));
 		}
 
-		public void Unregister(Type t) 
+		public void Unregister(Type t)
 		{
 			_registry.Remove(t);
 		}
@@ -138,16 +138,16 @@ namespace NotNet.Core
 			// Register "SomeClass" that implements "ISomeClass"
 			var attr = typeof(AutoRegisterAttribute);
 			var typeInfos = assembly.DefinedTypes.Where(t => t.IsClass && !t.IsAbstract && t.GetCustomAttribute(attr) != null).ToList();
-			foreach (var typeInfo in typeInfos)
+			foreach(var typeInfo in typeInfos)
 			{
 				try
 				{
-                    var ifaceType = typeInfo.ImplementedInterfaces.FirstOrDefault(i => i.GetTypeInfo().Assembly.Equals(assembly));
+					var ifaceType = typeInfo.ImplementedInterfaces.FirstOrDefault(i => i.GetTypeInfo().Assembly.Equals(assembly));
 					var autoattr = typeInfo.GetCustomAttribute(attr) as AutoRegisterAttribute;
-                    var iface = ifaceType ?? typeInfo.AsType();
+					var iface = ifaceType ?? typeInfo.AsType();
 					Register(iface, typeInfo.AsType(), autoattr.Lifecycle);
 				}
-				catch (Exception ex)
+				catch(Exception ex)
 				{
 					System.Diagnostics.Debug.WriteLine(ex.Message);
 				}
@@ -164,9 +164,9 @@ namespace NotNet.Core
 		public object Resolve(Type t)		{
 			return _resolver.Create(t);
 		}
-		public object Resolve(string name) 
+		public object Resolve(string name)
 		{
-			return _resolver.Create(name);	
+			return _resolver.Create(name);
 		}
 		public object Resolve(string name, params object[] args)
 		{
@@ -180,25 +180,28 @@ namespace NotNet.Core
 
 		public IEnumerable<Type> RegistedTypes
 		{
-			get { 
+			get
+			{
 				return _registry.Register.Select((arg) => arg.Key);
 			}
 		}
-		public IRegistryEntry GetEntry(string name) 
+		public IRegistryEntry GetEntry(string name)
 		{
-			var tmp =  _registry.Register.FirstOrDefault((arg) => arg.Key.Name == name);
+			var tmp = _registry.Register.FirstOrDefault((arg) => arg.Key.Name == name);
 			return tmp.Value?.FirstOrDefault();
 		}
 
 		public IEnumerable<string> RegisteredNames
 		{
-			get {
+			get
+			{
 				return _registry.Register.Select((arg) => arg.Key.Name);
 			}
 		}
-		public IEnumerable<IRegistryEntry> RegisteredEntries 
+		public IEnumerable<IRegistryEntry> RegisteredEntries
 		{
-			get {
+			get
+			{
 				return _registry.Register.SelectMany((arg) => arg.Value);
 			}
 		}
