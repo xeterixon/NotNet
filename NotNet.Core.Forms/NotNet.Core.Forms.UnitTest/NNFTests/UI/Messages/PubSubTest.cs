@@ -1,4 +1,6 @@
 ﻿using System;
+using NotNet.Core;
+
 namespace NNFTests
 {
     public class Payload
@@ -14,6 +16,7 @@ namespace NNFTests
         {
             _pub.Send("empty");
             _pub.Send("payload", new Payload{Name = "Payload"});
+			Message.Publish("empty");
         }
     }
 }

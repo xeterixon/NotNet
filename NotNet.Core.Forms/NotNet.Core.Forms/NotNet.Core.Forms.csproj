@@ -18,12 +18,14 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\NotNet.Core.Forms.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -44,7 +46,7 @@
     <Compile Include="Infrastructure\Application\IApplicationDelegate.cs" />
     <Compile Include="MVVM\ICleanup.cs" />
     <Compile Include="MVVM\ContentPageBase.cs" />
-    <Compile Include="Extensions\ContainerConfigurationExtensions.cs" />
+    <Compile Include="Extensions\ContainerConfiguratorExtensions.cs" />
     <Compile Include="Infrastructure\Timer\ITimer.cs" />
     <Compile Include="Infrastructure\Timer\Timer.cs" />
   </ItemGroup>

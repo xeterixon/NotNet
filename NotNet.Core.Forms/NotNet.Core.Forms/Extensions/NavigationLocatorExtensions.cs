@@ -3,6 +3,10 @@ using Xamarin.Forms;
 
 namespace NotNet.Core.Forms
 {
+	/// <summary>
+	/// Navigation extensions that wrapps the Xamarin.Forms.INavigation
+	/// Might be removed.
+	/// </summary>
 	public static class NavigationLocatorExtensions
 	{
 		public static void InsertPageBefore(this INavigationLocator self, Page page, Page before)

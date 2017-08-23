@@ -3,6 +3,10 @@
 
 namespace NotNet.Core
 {
+	/// <summary>
+	/// Subscriber interface.
+	/// Simply a tag interface to make the SubscribeExtensions hook up
+	/// </summary>
 	public interface ISubscribe { }
 	public static class SubscribeExtensions
 	{
@@ -18,7 +22,6 @@ namespace NotNet.Core
 		{
 			Subscriptions.Instance.RemoveSubscriber(channel, self);
 		}
-
 	}
 }
 

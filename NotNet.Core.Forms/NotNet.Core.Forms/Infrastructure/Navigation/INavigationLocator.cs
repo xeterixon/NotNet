@@ -20,7 +20,7 @@ namespace NotNet.Core.Forms
 
 		bool ShowBackButton { get; set; }
 		/// <summary>
-		/// The current navigation instance.
+		/// The current Xamarin.Forms navigation instance.
 		/// </summary>
 		/// <value>The navigation.</value>
 		INavigation Navigation { get; }

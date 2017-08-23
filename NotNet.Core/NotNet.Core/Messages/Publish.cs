@@ -3,6 +3,11 @@ using System.Threading.Tasks;
 
 namespace NotNet.Core
 {
+	/// <summary>
+	/// Publish interface
+	/// Simply a tag interface to make the PublishExtensions hook up.
+	/// <seealso cref="Message"/>
+	/// </summary>
 	public interface IPublish { }
 	public static class PublishExtensions
 	{

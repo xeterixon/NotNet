@@ -42,6 +42,10 @@ namespace NNFTests
 		{
             await _navigation.NavigateModalTo("TabPageTest");
 		}
+		async void PushPage9(object sender, System.EventArgs e)
+		{
+			await _navigation.NavigateTo("TestPage3");
+		}
 
 		INavigationLocator _navigation;
 		public NNFTestsPage()

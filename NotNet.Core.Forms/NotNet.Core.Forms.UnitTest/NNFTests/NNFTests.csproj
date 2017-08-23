@@ -97,6 +97,8 @@
     <Compile Include="UI\Messages\TestSub.cs" />
     <Compile Include="UI\Messages\TestPub.cs" />
     <Compile Include="UI\Messages\PubSubTest.cs" />
+    <Compile Include="UI\ViewModelInterface\TestPage3.cs" />
+    <Compile Include="UI\ViewModelInterface\TestPage3ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />
@@ -105,6 +107,7 @@
     <Folder Include="UI\Args\" />
     <Folder Include="UI\TabPage\" />
     <Folder Include="UI\Messages\" />
+    <Folder Include="UI\ViewModelInterface\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\NotNet.Core\NotNet.Core\NotNet.Core.csproj">

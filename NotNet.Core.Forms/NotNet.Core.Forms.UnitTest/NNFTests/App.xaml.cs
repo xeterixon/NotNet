@@ -22,8 +22,8 @@ namespace NNFTests
 		private void RegisterDependencies() 
 		{
 
-			ContainerConfiguration
-				.Use(Container.Default)
+			ContainerConfigurator
+				.Configure(Container.Default)
 				.AutoRegister<App>()
 				// Add standard forms related stuff
 				.AddApplicationDelegate(this)

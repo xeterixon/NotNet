@@ -21,14 +21,16 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile></DocumentationFile>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
+    <DebugType></DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\NotNet.Core.xml</DocumentationFile>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
@@ -40,11 +42,12 @@
     <Compile Include="Container\IContainer.cs" />
     <Compile Include="Attributes\PreferredConstructorAttribute.cs" />
     <Compile Include="Container\IRegistryEntry.cs" />
-    <Compile Include="Container\ContainerConfiguration.cs" />
-    <Compile Include="Container\IContainerConfiguration.cs" />
+    <Compile Include="Container\ContainerConfigurator.cs" />
+    <Compile Include="Container\IContainerConfigurator.cs" />
     <Compile Include="Messages\Publish.cs" />
     <Compile Include="Messages\Subscribe.cs" />
     <Compile Include="Messages\Subscriptions.cs" />
+    <Compile Include="Messages\Message.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.0.0.6484\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.0.0.6484\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

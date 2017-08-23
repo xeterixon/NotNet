@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace NotNet.Core
 {
-	class Resolver
+	internal sealed class Resolver
 	{
 		Registry _registry;
 		public Resolver(Registry registry)
@@ -106,7 +106,7 @@ namespace NotNet.Core
 			var it = TryCreate<TIface>();
 			if(it == null)
 			{
-				throw new ArgumentException(string.Format("Unable to resolve {0}", typeof(TIface).GetTypeInfo().Name));
+				throw new ArgumentException($"Unable to resolve {typeof(TIface).GetTypeInfo().Name}");
 			}
 			return it;
 		}

@@ -10,7 +10,7 @@ namespace NotNet.Core
 		public string Channel;
 	};
 
-	public sealed class Subscriptions
+	internal sealed class Subscriptions
 	{
 		private Dictionary<string, List<SubscriptionEntry>> _database;
 		private static Subscriptions _instance = new Subscriptions();
@@ -67,7 +67,6 @@ namespace NotNet.Core
 						Subscriber = subscriber,
 						Callback = new Action<object>((obj) => action((T)obj)),
 						Channel = channel
-
 					});
 				}
 			}

@@ -6,8 +6,6 @@ namespace NotNet.Core
 {
 	public interface IContainer
 	{
-
-
 		/// <summary>
 		/// Register an interface and an implementing class.
 		/// </summary>

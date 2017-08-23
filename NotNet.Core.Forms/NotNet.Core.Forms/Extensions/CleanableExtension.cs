@@ -8,18 +8,18 @@ namespace NotNet.Core.Forms
 		{
 			CleanPage(self);
 			//Do we need to handle other special pages?
-			if (self is TabbedPage)
+			if (self is TabbedPage tp)
 			{
-				CleanTabPage(self as TabbedPage);
+				CleanTabPage(tp);
 			}
-			if (self is NavigationPage)
+			if (self is NavigationPage np)
 			{
-				CleanPage(((NavigationPage)self).CurrentPage);
+				CleanPage(np.CurrentPage);
 			}
-			if (self is MasterDetailPage)
+			if (self is MasterDetailPage mp)
 			{
-				CleanPage(((MasterDetailPage)self).Master);
-				CleanPage(((MasterDetailPage)self).Detail);
+				CleanPage(mp.Master);
+				CleanPage(mp.Detail);
 			}
 		}
 		static void CleanPage(Page p)

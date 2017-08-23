@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace NotNet.Core.Forms
 {
-	public class ApplicationDelegate : IApplicationDelegate
+	internal class ApplicationDelegate : IApplicationDelegate
 	{
 		public Application App { get; private set; }
 		public INavigation Navigation => Navigations.Peek();

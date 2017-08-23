@@ -67,7 +67,7 @@ namespace NotNet.Core.Forms
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine("ResolvePage - Args to Page - " + ex.Message);
+				System.Diagnostics.Debug.WriteLine($"ResolvePage - Args to Page - {ex.Message}");
 			}
 			try
 			{
@@ -78,7 +78,7 @@ namespace NotNet.Core.Forms
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine("ResolvePage - Args to BindingContext - " + ex.Message);
+				System.Diagnostics.Debug.WriteLine($"ResolvePage - Args to BindingContext - {ex.Message}");
 			}
 
 			return null;
@@ -152,11 +152,9 @@ namespace NotNet.Core.Forms
 		}
 
 		static void SetBindingContextFromAttributeIfExist(BindableObject bindable, IContainer container, Type viewType, params object[] args)		{
-			object vm = null;
-			//HACK If bindable is a Page, args might go to the Page constructor or the ViewModel constructor. Try both...
 			try
 			{
-				vm = CreateViewModelFromAttribute(container, viewType, args);
+				var vm = CreateViewModelFromAttribute(container, viewType, args);
 				if (vm != null)
 				{
 					bindable.BindingContext = vm;
@@ -165,23 +163,8 @@ namespace NotNet.Core.Forms
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine("SetBindingContextFromAttributeIfExist - Args to BindingContext - " + ex.Message);
+				System.Diagnostics.Debug.WriteLine($"SetBindingContextFromAttributeIfExist - {ex.Message}");
 			}
-			try
-			{
-				vm = CreateViewModelFromAttribute(container, viewType);
-				if (vm != null)
-				{
-					bindable.BindingContext = vm;
-				}
-				return;
-			}
-			catch (Exception ex)
-			{
-				System.Diagnostics.Debug.WriteLine("SetBindingContextFromAttributeIfExist - No args to BindingContext- " + ex.Message);
-			}
-
 		}
-
 	}
 }

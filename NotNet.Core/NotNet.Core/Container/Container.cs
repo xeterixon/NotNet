@@ -10,9 +10,18 @@ namespace NotNet.Core
 	/// </summary>
 	public enum ObjectLifecycle
 	{
+		/// <summary>
+		/// The resolved object is "newed" every time
+		/// </summary>
 		Transient,
+		/// <summary>
+		/// The resolved object is the same instance every time
+		/// </summary>
 		Singleton,
 	}
+	/// <summary>
+	/// The container is responsible for registering and resolving object
+	/// </summary>
 	public class Container : IContainer
 	{
 		public static IContainer Default { get; private set; }
@@ -31,7 +40,10 @@ namespace NotNet.Core
 			Default.RegisterSingleton(Default);
 
 		}
-
+		/// <summary>
+		/// Register an type
+		/// </summary>
+		/// <typeparam name="T">The type to register</typeparam>
 		public void RegisterTransient<T>()
 			where T : class
 
@@ -39,6 +51,11 @@ namespace NotNet.Core
 			var t = typeof(T);
 			_registry.Add(t, t, ObjectLifecycle.Transient);
 		}
+		/// <summary>
+		/// Register an type
+		/// </summary>
+		/// <param name="callback">Action called after the object has been created.</param>
+		/// <typeparam name="T">The type to register</typeparam>
 		public void RegisterTransient<T>(Action<T> callback)
 			where T : class
 		{
