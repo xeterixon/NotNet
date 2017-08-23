@@ -8,7 +8,7 @@ namespace NotNet.Core.Forms
 	{
 		// Creates a ContentPage with TView as content trying to get the BindingContext from an attribute on the TView
 		public static ContentPage ResolveWrappedView<TView>(this IContainer container)
-			where TView:View
+			where TView : View
 		{
 			var view = container.ResolveView<TView>();
 			var page = new ContentPageBase
@@ -33,7 +33,7 @@ namespace NotNet.Core.Forms
 		public static T ResolvePage<T>(this IContainer container, params object[] args)
 			where T : Page
 		{
-			return (T)container.ResolvePage(typeof(T),args);
+			return (T)container.ResolvePage(typeof(T), args);
 		}
 
 		public static T ResolvePage<T>(this IContainer container)
@@ -41,13 +41,13 @@ namespace NotNet.Core.Forms
 		{
 			return (T)container.ResolvePage(typeof(T));
 		}
-		static void BindTitle(Page p) 
+		static void BindTitle(Page p)
 		{
 			if (p?.BindingContext == null) return;
 			p.SetBinding(Page.TitleProperty, "Title");
 
-		} 
-		public static Page ResolvePage(this IContainer container, Type type) 
+		}
+		public static Page ResolvePage(this IContainer container, Type type)
 		{
 			var page = (Page)container.Resolve(type);
 			SetBindingContextFromAttributeIfExist(page, container, type, null);
@@ -67,7 +67,7 @@ namespace NotNet.Core.Forms
 			}
 			catch (Exception ex)
 			{
-				System.Diagnostics.Debug.WriteLine("ResolvePage - Args to Page - " + ex.Message);				
+				System.Diagnostics.Debug.WriteLine("ResolvePage - Args to Page - " + ex.Message);
 			}
 			try
 			{
@@ -97,11 +97,11 @@ namespace NotNet.Core.Forms
 			return page;
 		}
 
-		public static ContentPage ResolveWrappedView<TView>(this IContainer container, params object[] args) 
-			where TView:View
+		public static ContentPage ResolveWrappedView<TView>(this IContainer container, params object[] args)
+			where TView : View
 		{
 			var view = container.ResolveView<TView>(args);
-			var page = new ContentPageBase 
+			var page = new ContentPageBase
 			{
 				BindingContext = view.BindingContext,
 				Content = view
@@ -139,16 +139,16 @@ namespace NotNet.Core.Forms
 			return page;
 		}
 
-		static ViewModelAttribute GetViewModelAttribute(Type t) 
+		static ViewModelAttribute GetViewModelAttribute(Type t)
 		{
 			return t.GetTypeInfo().GetCustomAttribute<ViewModelAttribute>();
 		}
-		static object CreateViewModelFromAttribute(IContainer container, Type t, params object[] args) 
+		static object CreateViewModelFromAttribute(IContainer container, Type t, params object[] args)
 		{
 			var attr = GetViewModelAttribute(t);
 			if (attr == null) return null;
 
-			return args == null ? container.Resolve(attr.ViewModelType): container.Resolve(attr.ViewModelType, args);
+			return args == null ? container.Resolve(attr.ViewModelType) : container.Resolve(attr.ViewModelType, args);
 		}
 
 		static void SetBindingContextFromAttributeIfExist(BindableObject bindable, IContainer container, Type viewType, params object[] args)		{

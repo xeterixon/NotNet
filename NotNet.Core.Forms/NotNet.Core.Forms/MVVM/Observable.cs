@@ -17,15 +17,15 @@ namespace NotNet.Core.Forms
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 		}
 		#endregion
-		protected void SetProperty<TVal, TTarget>(TVal input, TTarget target, Expression<Func<TTarget, TVal>> outExpr) 
+		protected void SetProperty<TVal, TTarget>(TVal input, TTarget target, Expression<Func<TTarget, TVal>> outExpr)
 		{
-	        var expr = (MemberExpression)outExpr.Body;
+			var expr = (MemberExpression)outExpr.Body;
 			var prop = (PropertyInfo)expr.Member;
 			var value = (TVal)prop.GetValue(target);
 			if (Equals(value, input)) return;
 			prop.SetValue(target, input, null);			OnPropertyChanged(prop.Name);
 		}
-		protected void SetProperty<T>(ref T self, T value, [CallerMemberName] string propertyName = null) 
+		protected void SetProperty<T>(ref T self, T value, [CallerMemberName] string propertyName = null)
 		{
 			if (Equals(self, value)) return;
 			self = value;

@@ -28,12 +28,12 @@ namespace NotNet.Core.Forms
 		Task NavigateTo(string name, params object[] args);
 		Task NavigateModalTo(string name);
 		Task NavigateModalTo(string name, params object[] args);
-        /// <summary>
-        /// Activates the tab if the current page is a TabbedPage and the
-        /// tab exists as a child
-        /// </summary>
-        /// <param name="tabTitle">The title of the tab </param>
-        Task ActivateTab(string tabTitle);
+		/// <summary>
+		/// Activates the tab if the current page is a TabbedPage and the
+		/// tab exists as a child
+		/// </summary>
+		/// <param name="tabTitle">The title of the tab </param>
+		Task ActivateTab(string tabTitle);
 		/// <summary>
 		/// If the current page is a MasterDetailPage, this will open or close the master
 		/// </summary>

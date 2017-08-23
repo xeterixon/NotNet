@@ -1,6 +1,6 @@
 namespace NotNet.Core.Forms
 {
-	public interface IViewModelBase 
+	public interface IViewModelBase
 	{
 		string Title { get; set; }
 		void OnPageAppearing();

@@ -15,7 +15,7 @@ namespace NotNet.Core.Forms
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-			if (_initialAppear) 
+			if (_initialAppear)
 			{
 				_initialAppear = false;
 				ViewModel?.OnInitialPageAppearing();

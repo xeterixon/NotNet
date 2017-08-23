@@ -2,7 +2,7 @@
 
 namespace NotNet.Core.Forms
 {
-    public class PopupService : IPopupService
+	public class PopupService : IPopupService
 	{
 		readonly IApplicationDelegate _app;
 		public PopupService(IApplicationDelegate appDelegate)
@@ -20,7 +20,7 @@ namespace NotNet.Core.Forms
 		}
 		public Task<string> ShowActionSheet(string title, string cancel, string delete, params string[] others)
 		{
-			return _app.CurrentPage.DisplayActionSheet(title, cancel,delete, others);
+			return _app.CurrentPage.DisplayActionSheet(title, cancel, delete, others);
 		}
 
 
