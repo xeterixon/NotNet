@@ -13,19 +13,18 @@
 		<iconUrl>https://raw.githubusercontent.com/xeterixon/NotNet/master/Nuget/nn-nuget.png</iconUrl>
 		<releaseNotes>
 Some breaking changes:
-* IContainerConfiguration has been renamed to IContainerConfigurator
+* IContainerConfiguration has been renamed to IContainerConfigurator and gotten some changes
 * IContainer.Register has been removed, use RegisterTransient or RegisterSingleton.
+* AutoRegister has changed a bit. It does not need arguments that often.
 		</releaseNotes>
 		<tags>notnet, di, servicelocator, ioc</tags>
         <dependencies>
-            <group targetFramework="netstandard1.0">
-               <dependency id="NETStandard.Library" version="1.6.1" />
-               <dependency id="Microsoft.NETCore.Portable.Compatibility" version="1.0.1" />
-            </group>
         </dependencies>
 	</metadata>
 	<files>
         <file src="bin/Release/NotNet.Core.dll" target="lib/netstandard1.0/NotNet.Core.dll" />
         <file src="bin/Release/NotNet.Core.xml" target="lib/netstandard1.0/NotNet.Core.xml" />
+        <file src="bin/Release/NotNet.Core.dll" target="lib/portable-net45+wpa81+wp8+win8/NotNet.Core.dll" />
+        <file src="bin/Release/NotNet.Core.xml" target="lib/portable-net45+wpa81+wp8+win8/NotNet.Core.xml" />
 	</files>
 </package>

@@ -61,7 +61,7 @@ namespace NotNet.Core.Forms
 			try
 			{
 				var page = (Page)container.Resolve(type, args);
-				SetBindingContextFromAttributeIfExist(page, container, type, args);
+                SetBindingContextFromAttributeIfExist(page, container, type, null);
 				BindTitle(page);
 				return page;
 			}

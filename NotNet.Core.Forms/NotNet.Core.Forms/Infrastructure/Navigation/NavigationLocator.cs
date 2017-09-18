@@ -76,7 +76,7 @@ namespace NotNet.Core.Forms
 			throw new ArgumentException($"Wrong type. {name} must be either a View or a Page");
 		}
 
-
+		#region Navigate to
 		public Task NavigateTo(string visualElementName)
 		{
 			return NavigateTo(visualElementName, null);
@@ -85,7 +85,17 @@ namespace NotNet.Core.Forms
 		{
 			return Navigation.PushAsync(BuildPage(visualElementName, args));
 		}
+		public Task NavigateTo<T>() where T : VisualElement
+		{
+			return NavigateTo<T>(null);
+		}
+		public Task NavigateTo<T>(params object[] args) where T : VisualElement
+		{
+			return NavigateTo(typeof(T).Name, args);
+		}
+		#endregion
 
+		#region Navigate modal to
 		public Task NavigateModalTo(string visualElementName)
 		{
 			return NavigateModalTo(visualElementName, null);
@@ -95,28 +105,15 @@ namespace NotNet.Core.Forms
 		{
 			return Navigation.PushModalAsync(BuildPage(name, args));
 		}
-
-		public Task NavigateTo<T>() where T : VisualElement
-		{
-			return NavigateTo<T>(null);
-		}
-
-
-		public Task NavigateTo<T>(params object[] args) where T : VisualElement
-		{
-			var page = BuildPage(typeof(T).Name, args);
-			return Navigation.PushAsync(page);
-		}
-
 		public Task NavigateModalTo<T>() where T : VisualElement
 		{
 			return NavigateModalTo<T>(null);
 		}
 		public Task NavigateModalTo<T>(params object[] args) where T : VisualElement
 		{
-			var page = BuildPage(typeof(T).Name, args);
-			return Navigation.PushModalAsync(page);
+			return NavigateModalTo(typeof(T).Name, args);
 		}
+		#endregion
 		public Task ActivateTab(string tabTitle)
 		{
 			var page = _container.ResolveOrDefault<IApplicationDelegate>()?.CurrentPage as TabbedPage;
