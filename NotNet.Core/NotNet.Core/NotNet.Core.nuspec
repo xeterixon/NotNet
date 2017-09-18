@@ -12,6 +12,9 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<iconUrl>https://raw.githubusercontent.com/xeterixon/NotNet/master/Nuget/nn-nuget.png</iconUrl>
 		<releaseNotes>
+Some breaking changes:
+* IContainerConfiguration has been renamed to IContainerConfigurator
+* IContainer.Register has been removed, use RegisterTransient or RegisterSingleton.
 		</releaseNotes>
 		<tags>notnet, di, servicelocator, ioc</tags>
         <dependencies>
