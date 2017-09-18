@@ -16,7 +16,7 @@ namespace NNFTests
 
 		async void ArgsToVm(object sender, System.EventArgs e)
 		{
-			await _navigation.NavigateTo("ArgsToVm", "Hello ViewModel");
+            await _navigation.NavigateTo<ArgsToVm>("Hello ViewModel");
 		}
 		INavigationLocator _navigation;
 		public ArgsTestRootPage(INavigationLocator nav)

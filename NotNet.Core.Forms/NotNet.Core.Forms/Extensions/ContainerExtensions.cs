@@ -61,7 +61,7 @@ namespace NotNet.Core.Forms
 			try
 			{
 				var page = (Page)container.Resolve(type, args);
-				SetBindingContextFromAttributeIfExist(page, container, type, args);
+				SetBindingContextFromAttributeIfExist(page, container, type, null);
 				BindTitle(page);
 				return page;
 			}
@@ -147,8 +147,7 @@ namespace NotNet.Core.Forms
 		{
 			var attr = GetViewModelAttribute(t);
 			if (attr == null) return null;
-
-			return args == null ? container.Resolve(attr.ViewModelType) : container.Resolve(attr.ViewModelType, args);
+            return args == null ? container.Resolve(attr.ViewModelType) : container.Resolve(attr.ViewModelType, args);
 		}
 
 		static void SetBindingContextFromAttributeIfExist(BindableObject bindable, IContainer container, Type viewType, params object[] args)		{
