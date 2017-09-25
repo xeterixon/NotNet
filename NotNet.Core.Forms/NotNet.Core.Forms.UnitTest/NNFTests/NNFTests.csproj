@@ -99,6 +99,7 @@
     <Compile Include="UI\Messages\PubSubTest.cs" />
     <Compile Include="UI\ViewModelInterface\TestPage3.cs" />
     <Compile Include="UI\ViewModelInterface\TestPage3ViewModel.cs" />
+    <Compile Include="UI\TestPage4.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />

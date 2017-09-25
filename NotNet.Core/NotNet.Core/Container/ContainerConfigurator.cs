@@ -10,7 +10,7 @@ namespace NotNet.Core
 		/// <summary>
 		/// Configure
 		/// </summary>
-		/// <returns>The container configuration.</returns>
+		/// <returns>The container configurator.</returns>
 		/// <param name="c">C.</param>
 		public static IContainerConfigurator Configure(IContainer c)
 		{

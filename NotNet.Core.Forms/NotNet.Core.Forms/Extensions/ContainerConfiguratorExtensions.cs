@@ -16,6 +16,13 @@ namespace NotNet.Core.Forms
 			}
 			return self;
 		}
+		public static IContainerConfigurator RegisterView<TView,TViewModel>(this IContainerConfigurator self)
+			where TView: BindableObject
+			where TViewModel : class
+		{
+			self.Container.RegisterView<TView,TViewModel>();
+			return self;
+		}
 		public static IContainerConfigurator AddNavigationLocator(this IContainerConfigurator self)
 		{
 

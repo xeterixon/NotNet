@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using NotNet.Core;
 using NotNet.Core.Forms;
+using NNFTests.UI;
 
 namespace NNFTests
 {
@@ -28,6 +29,8 @@ namespace NNFTests
 				// Add standard forms related stuff
 				.AddApplicationDelegate(this)
 				.AddPopupService()
+				.RegisterTransient<ITestPage4ViewModel,TestPage4ViewModel>()
+				.RegisterView<TestPage4,ITestPage4ViewModel>()
 				.RegisterTransient<ITestModel3,TestModel3>((o)=> 
 				{
 					o.Init();

@@ -6,18 +6,28 @@ namespace NotNet.Core.Forms
 {
 	public static class ContainerExtensions
 	{
+		public static void RegisterView<TView,TViewModel>(this IContainer self)
+			where TView: BindableObject
+			where TViewModel : class
+		{
+			self.RegisterTransient<TView>();
+			var view = self.GetEntry(typeof(TView).Name);
+			// It the viewmodel registered? If not register it
+			var vm = self.GetEntry(typeof(TViewModel).Name);
+			if(vm == null)
+			{
+				//TODO This does not work that well if TViewModel is an interface
+				self.RegisterTransient<TViewModel>();
+				vm = self.GetEntry(typeof(TViewModel).Name);
+			}
+			view.Dependant = vm;
+		}
+
 		// Creates a ContentPage with TView as content trying to get the BindingContext from an attribute on the TView
 		public static ContentPage ResolveWrappedView<TView>(this IContainer container)
 			where TView : View
 		{
-			var view = container.ResolveView<TView>();
-			var page = new ContentPageBase
-			{
-				BindingContext = view.BindingContext,
-				Content = view
-			};
-			BindTitle(page);
-			return page;
+			return ResolveWrappedView(container, typeof(TView));
 		}
 
 		public static ContentPage ResolveWrappedView(this IContainer container, string viewName)
@@ -28,6 +38,30 @@ namespace NotNet.Core.Forms
 		public static ContentPage ResolveWrappedView(this IContainer container, string viewName, params object[] args)
 		{
 			return ResolveWrappedView(container, container.GetEntry(viewName).Interface, args);
+		}
+		public static ContentPage ResolveWrappedView(this IContainer container, Type viewType)
+		{
+			var viewEntry = container.GetEntry(viewType.Name);
+			var view = (View)container.Resolve(viewType);
+			TrySetBindingContext(view, container, viewType);
+			return WrappAndBindView(view);
+		}
+		private static ContentPage WrappAndBindView(View view)
+		{
+			var page = new ContentPageBase
+			{
+				BindingContext = view.BindingContext,
+				Content = view
+			};
+			BindTitle(page);
+			return page;
+
+		}
+		public static ContentPage ResolveWrappedView<TView>(this IContainer container, params object[] args)
+			where TView : View
+		{
+			var view = container.ResolveView<TView>(args);
+			return WrappAndBindView(view);
 		}
 
 		public static T ResolvePage<T>(this IContainer container, params object[] args)
@@ -49,8 +83,10 @@ namespace NotNet.Core.Forms
 		}
 		public static Page ResolvePage(this IContainer container, Type type)
 		{
+			var pageEntry = container.GetEntry(type.Name);
+
 			var page = (Page)container.Resolve(type);
-			SetBindingContextFromAttributeIfExist(page, container, type, null);
+			TrySetBindingContext(page, container, type, null);
 			BindTitle(page);
 			return page;
 		}
@@ -58,57 +94,32 @@ namespace NotNet.Core.Forms
 		public static Page ResolvePage(this IContainer container, Type type, params object[] args)
 		{
 			//HACK The args might go to the Page constructor or the ViewModel constructor. Try both...	
+			var pageEntry = container.GetEntry(type.Name);
+			Page page = null;
+			object[] argsToVm = null;
 			try
 			{
-				var page = (Page)container.Resolve(type, args);
-                SetBindingContextFromAttributeIfExist(page, container, type, null);
-				BindTitle(page);
-				return page;
+				page = (Page)container.Resolve(type, args);
+				argsToVm = null;
 			}
-			catch (Exception ex)
+			catch(Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine($"ResolvePage - Args to Page - {ex.Message}");
 			}
 			try
 			{
-				var page = (Page)container.Resolve(type);
-				SetBindingContextFromAttributeIfExist(page, container, type, args);
-				BindTitle(page);
-				return page;
+				page = (Page)container.Resolve(type);
+				argsToVm = args;
 			}
-			catch (Exception ex)
+			catch(Exception ex)
 			{
 				System.Diagnostics.Debug.WriteLine($"ResolvePage - Args to BindingContext - {ex.Message}");
 			}
-
-			return null;
-		}
-
-		public static ContentPage ResolveWrappedView(this IContainer container, Type viewType)
-		{
-			var view = (View)container.Resolve(viewType);
-			SetBindingContextFromAttributeIfExist(view, container, viewType);
-			var page = new ContentPageBase
-			{
-				BindingContext = view.BindingContext,
-				Content = view
-			};
+			TrySetBindingContext(page, container, type, argsToVm);
 			BindTitle(page);
 			return page;
 		}
 
-		public static ContentPage ResolveWrappedView<TView>(this IContainer container, params object[] args)
-			where TView : View
-		{
-			var view = container.ResolveView<TView>(args);
-			var page = new ContentPageBase
-			{
-				BindingContext = view.BindingContext,
-				Content = view
-			};
-			BindTitle(page);
-			return page;
-		}
 
 		public static TView ResolveView<TView>(this IContainer container, params object[] vmArgs)
 			where TView : View
@@ -123,38 +134,41 @@ namespace NotNet.Core.Forms
 			where TElement : View
 		{
 			var bindable = container.Resolve<TElement>();
-			SetBindingContextFromAttributeIfExist(bindable, container, typeof(TElement));
+			TrySetBindingContext(bindable, container, typeof(TElement));
 			return bindable;
 		}
 		public static ContentPage ResolveWrappedView(this IContainer container, Type viewType, params object[] args)
 		{
 			var view = (View)container.Resolve(viewType);
-			SetBindingContextFromAttributeIfExist(view, container, viewType, args);
-			var page = new ContentPageBase
-			{
-				BindingContext = view.BindingContext,
-				Content = view
-			};
-			BindTitle(page);
-			return page;
+			TrySetBindingContext(view, container, viewType, args);
+			return WrappAndBindView(view);
 		}
 
 		static ViewModelAttribute GetViewModelAttribute(Type t)
 		{
 			return t.GetTypeInfo().GetCustomAttribute<ViewModelAttribute>();
 		}
-		static object CreateViewModelFromAttribute(IContainer container, Type t, params object[] args)
+		static object CreateViewModel(IContainer container, Type t, params object[] args)
 		{
 			var attr = GetViewModelAttribute(t);
-			if (attr == null) return null;
-
-			return args == null ? container.Resolve(attr.ViewModelType) : container.Resolve(attr.ViewModelType, args);
+			Type vmType = null;
+			if (attr != null){
+				vmType = attr.ViewModelType;	
+			}
+			else
+			{
+				var entry = container.GetEntry(t.Name);
+				vmType = entry?.Dependant.Interface;
+			}
+			//Ok, so this can be written in 1 line, but this is easier to read
+			if(vmType == null) return null;
+			return args == null ? container.Resolve(vmType) : container.Resolve(vmType, args);
 		}
 
-		static void SetBindingContextFromAttributeIfExist(BindableObject bindable, IContainer container, Type viewType, params object[] args)		{
+		static void TrySetBindingContext(BindableObject bindable, IContainer container, Type viewType, params object[] args)		{
 			try
 			{
-				var vm = CreateViewModelFromAttribute(container, viewType, args);
+				var vm = CreateViewModel(container, viewType, args);
 				if (vm != null)
 				{
 					bindable.BindingContext = vm;
