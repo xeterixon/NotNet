@@ -4,14 +4,11 @@ using System.Reflection;
 
 namespace NotNet.Core
 {
-	public interface IContainer: IServiceProvider
+	public interface IContainer
 	{
-
-
 		/// <summary>
 		/// Register an interface and an implementing class.
 		/// </summary>
-		/// <param name="olc">Object life cycle.</param>
 		/// <typeparam name="TIface">The interface type.</typeparam>
 		/// <typeparam name="TImpl">The implementaion type.</typeparam>
 		void RegisterTransient<TIface, TImpl>()
@@ -30,26 +27,6 @@ namespace NotNet.Core
 			where T : class;
 
 		void RegisterTransient<T>(Action<T> callback)
-			where T : class;
-
-
-		/// <summary>
-		/// Register an interface and an implementing class.
-		/// </summary>
-		/// <param name="olc">Object life cycle.</param>
-		/// <typeparam name="TIface">The interface type.</typeparam>
-		/// <typeparam name="TImpl">The implementaion type.</typeparam>
-		[Obsolete("Use RegisterTransient")]
-		void Register<TIface, TImpl>(ObjectLifecycle olc = ObjectLifecycle.Transient)
-			where TIface : class
-			where TImpl : TIface;
-		/// <summary>
-		/// Register an class,
-		/// </summary>
-		/// <param name="olc">Object life cycle.</param>
-		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		[Obsolete("Use RegisterTransient")]
-		void Register<T>(ObjectLifecycle olc = ObjectLifecycle.Transient)
 			where T : class;
 
 		/// <summary>
@@ -103,7 +80,7 @@ namespace NotNet.Core
 		/// Resolve by type
 		/// </summary>
 		/// <param name="t">The type</param>
-		/// <param name="args">Arguments pass to the consturcotr.</param>
+		/// <param name="args">Arguments pass to the constructor.</param>
 		object Resolve(Type t, params object[] args);
 		/// <summary>
 		/// Resolve by type
@@ -136,6 +113,11 @@ namespace NotNet.Core
 		/// <summary>
 		/// Auto register classes with the AutoRegister attribute
 		/// </summary>
+		/// <remarks>
+		/// Note that if the class should be resolved using and interface,
+		/// the interface got to be the "first" in the inheritance chain
+		/// and live in the same assembly as the class.
+		/// </remarks>
 		/// <param name="assembly">The assembly holding the classes</param>
 		void AutoRegister(Assembly assembly);
 

@@ -4,7 +4,7 @@ namespace NotNet.Core.Forms
 {
 	public class ContentPageBase : ContentPage
 	{
-		private bool _initialAppear = true;
+		bool _initialAppear = true;
 		public IViewModelBase ViewModel
 		{
 			get
@@ -15,7 +15,7 @@ namespace NotNet.Core.Forms
 		protected override void OnAppearing()
 		{
 			base.OnAppearing();
-			if (_initialAppear) 
+			if (_initialAppear)
 			{
 				_initialAppear = false;
 				ViewModel?.OnInitialPageAppearing();

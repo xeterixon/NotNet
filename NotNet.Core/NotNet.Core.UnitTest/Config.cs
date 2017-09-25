@@ -9,11 +9,12 @@ namespace NotNet.Core.UnitTest
 		[OneTimeSetUp]
 		public void Setup()
 		{
-			Container.Default.AutoRegister(typeof(Config).GetTypeInfo().Assembly);
-			Container.Default.RegisterTransient<ITestModel1, TestModel1>();
-			Container.Default.RegisterSingleton<SingletonModel1>();
-			Container.Default.RegisterTransient<IMulti, Multi1>();
-			Container.Default.RegisterTransient<IMulti, Multi2>();
+            ContainerConfiguration.Use(Container.Default)
+                                  .AutoRegister<Config>()
+                                  .RegisterTransient<ITestModel1, TestModel1>()
+                                  .RegisterSingleton<SingletonModel1>()
+                                  .RegisterTransient<IMulti, Multi1>()
+                                  .RegisterTransient<IMulti, Multi2>();
 
 		}
 		[OneTimeTearDown]

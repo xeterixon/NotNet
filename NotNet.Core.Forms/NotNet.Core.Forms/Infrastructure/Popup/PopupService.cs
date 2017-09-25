@@ -1,11 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace NotNet.Core.Forms
 {
 	public class PopupService : IPopupService
 	{
-		IApplicationDelegate _app;
+		readonly IApplicationDelegate _app;
 		public PopupService(IApplicationDelegate appDelegate)
 		{
 			_app = appDelegate;
@@ -21,7 +20,7 @@ namespace NotNet.Core.Forms
 		}
 		public Task<string> ShowActionSheet(string title, string cancel, string delete, params string[] others)
 		{
-			return _app.CurrentPage.DisplayActionSheet(title, cancel,delete, others);
+			return _app.CurrentPage.DisplayActionSheet(title, cancel, delete, others);
 		}
 
 

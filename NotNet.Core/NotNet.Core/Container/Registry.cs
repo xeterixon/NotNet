@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace NotNet.Core
 {
-	internal class Registry
+	internal sealed class Registry
 	{
 		public Dictionary<Type, List<RegistryEntry>> Register = new Dictionary<Type, List<RegistryEntry>>();
 		readonly object gate = new object();
@@ -14,79 +14,54 @@ namespace NotNet.Core
 			return Register.Any((arg) => arg.Key.Equals(typeof(T)));
 		}
 
-
-		//TODO There should be a lock in the Add methods
 		public void Add(Type iface, object instance)
 		{
-			if (!Register.Keys.Contains(iface)) 
-			{
-				Register.Add(iface, new List<RegistryEntry>());
-			}
-			Register[iface].Add(
-				new RegistryEntry 
-				{ 
-					Instance = instance, 
-					Implementation = instance.GetType(), 
-					Interface = iface, 
-					LifeCycle = ObjectLifecycle.Singleton 
-				}
-			);
+			DoRegister(iface, instance.GetType(), instance, ObjectLifecycle.Singleton, null);
 		}
-		public void Remove(Type t) 
+		public void Remove(Type t)
 		{
 			var items = Register.Where((arg) => arg.Key.Equals(t)).ToList();
-			foreach (var item in items) 
+			foreach(var item in items)
 			{
 				Register.Remove(item.Key);
 			}
 		}
-		public void Add<T>(Type iface, Type impl, ObjectLifecycle olc, Action<T> callback) 
+		public void Add<T>(Type iface, Type impl, ObjectLifecycle olc, Action<T> callback)
 		{
-			if (!iface.Equals(impl) && !iface.GetTypeInfo().IsInterface)
+			CheckTypes(iface, impl);
+			var wrappedCallback = callback != null ? new Action<object>((obj) => callback((T)obj)) : null;
+			DoRegister(iface, impl, null, olc, wrappedCallback);
+		}
+		public void Add(Type iface, Type impl, ObjectLifecycle olc)
+		{
+			CheckTypes(iface, impl);
+			DoRegister(iface, impl, null, olc, null);
+		}
+		private void CheckTypes(Type iface, Type impl)
+		{
+			if(!iface.Equals(impl) && !iface.GetTypeInfo().IsInterface)
 			{
 				throw new ArgumentException(string.Format("{0} is not an interface", iface.Name));
 			}
 
-			if (!iface.GetTypeInfo().IsAssignableFrom(impl.GetTypeInfo()))
+			if(!iface.GetTypeInfo().IsAssignableFrom(impl.GetTypeInfo()))
 			{
 				throw new ArgumentException(string.Format("{0} does not implement {1}", impl.Name, iface.Name));
 			}
-			lock (gate)
-			{
-				if (!Register.Keys.Contains(iface))
-				{
-					Register.Add(iface, new List<RegistryEntry>());
-				}
-				var wrappedCallback = callback != null ? new Action<object>((obj) => callback((T)obj)) : null;
-				Register[iface].Add(new RegistryEntry { 
-					Interface = iface, 
-					Implementation = impl, 
-					LifeCycle = olc, 
-					Callback = wrappedCallback 
-				});
-			}
-			
+
 		}
 
-		public void Add(Type iface, Type impl, ObjectLifecycle olc)
+		private void DoRegister(Type iface, Type impl, object instance, ObjectLifecycle olc, Action<object> callback)
 		{
-			if (!iface.Equals(impl) && !iface.GetTypeInfo ().IsInterface) 
+			lock(gate)
 			{
-				throw new ArgumentException (string.Format("{0} is not an interface", iface.Name));
-			}
-
-			if(!iface.GetTypeInfo ().IsAssignableFrom (impl.GetTypeInfo ()))
-			{
-				throw new ArgumentException (string.Format("{0} does not implement {1}",impl.Name,iface.Name));
-			}
-			lock (gate) 
-			{
-				if (!Register.Keys.Contains(iface)) 
+				if(!Register.Keys.Contains(iface))
 				{
 					Register.Add(iface, new List<RegistryEntry>());
 				}
-				Register[iface].Add(new RegistryEntry { Interface = iface, Implementation = impl, LifeCycle = olc });
+				Register[iface].Add(new RegistryEntry { Interface = iface, Implementation = impl, Instance = instance, LifeCycle = olc, Callback = callback });
 			}
+
 		}
 
 	}

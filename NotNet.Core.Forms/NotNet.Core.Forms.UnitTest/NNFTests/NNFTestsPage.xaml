@@ -13,6 +13,9 @@
 		<Button AutomationId="Button5" Text="Push master detail page" Clicked="PushPage5"/>
 		<Button AutomationId="Button6" Text="Push modal with new stack" Clicked="PushPage6"/>
 		<Button AutomationId="Button7" Text="Test args to vm and page" Clicked="PushPage7"/>
+        <Button AutomationId="Button8" Text="Modal Tabpage" Clicked="PushPage8"/>
+        <Button AutomationId="Button9" Text="Push page with IViewModel" Clicked="PushPage9"/>
+        <Button AutomationId="Button10" Text="Page registered with vm" Clicked="PushPage10"/>
 		
 	</StackLayout>
 </ContentPage>

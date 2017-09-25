@@ -19,12 +19,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <DeviceSpecificBuild>true</DeviceSpecificBuild>
+    <DeviceSpecificBuild>false</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchFastDev>true</MtouchFastDev>
     <MtouchProfiling>true</MtouchProfiling>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <IOSDebuggerPort>45695</IOSDebuggerPort>
     <MtouchLink>None</MtouchLink>
     <MtouchArch>x86_64</MtouchArch>
@@ -38,8 +36,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
@@ -55,8 +51,6 @@
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchLink>None</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
@@ -71,18 +65,17 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <DeviceSpecificBuild>true</DeviceSpecificBuild>
+    <DeviceSpecificBuild>false</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchFastDev>true</MtouchFastDev>
-    <MtouchProfiling>true</MtouchProfiling>
-    <MtouchUseSGen>true</MtouchUseSGen>
-    <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <MtouchProfiling>false</MtouchProfiling>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <PlatformTarget>x86</PlatformTarget>
+    <BuildIpa>false</BuildIpa>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -90,19 +83,19 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.180\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.267\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.180\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.267\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform.iOS">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.180\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.267\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.180\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.267\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="Calabash">
-      <HintPath>..\..\packages\Xamarin.TestCloud.Agent.0.20.3\lib\Xamarin.iOS10\Calabash.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.TestCloud.Agent.0.21.1\lib\Xamarin.iOS\Calabash.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -140,4 +133,5 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+  <Import Project="..\..\packages\Xamarin.Forms.2.3.4.267\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.267\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
 </Project>

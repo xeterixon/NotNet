@@ -4,45 +4,45 @@ namespace NotNet.Core.Forms
 {
 	public static class CleanableExtension
 	{
-		public static void Cleanup(this Page self) 
+		public static void Cleanup(this Page self)
 		{
 			CleanPage(self);
 			//Do we need to handle other special pages?
-			if (self is TabbedPage)
+			if (self is TabbedPage tp)
 			{
-				CleanTabPage(self as TabbedPage);
+				CleanTabPage(tp);
 			}
-			if (self is NavigationPage) 
+			if (self is NavigationPage np)
 			{
-				CleanPage(((NavigationPage)self).CurrentPage);
+				CleanPage(np.CurrentPage);
 			}
-			if (self is MasterDetailPage) 
+			if (self is MasterDetailPage mp)
 			{
-				CleanPage(((MasterDetailPage)self).Master);
-				CleanPage(((MasterDetailPage)self).Detail);
+				CleanPage(mp.Master);
+				CleanPage(mp.Detail);
 			}
 		}
-		private static void CleanPage(Page p) 
+		static void CleanPage(Page p)
 		{
 			CleanBindableObject(p);
 			CleanBindableObject((p as ContentPage)?.Content);
-			
+
 		}
-		public static void Cleanup(this View self) 
+		public static void Cleanup(this View self)
 		{
 			CleanBindableObject(self);
 		}
-		private static void CleanTabPage(TabbedPage page) 
+		static void CleanTabPage(TabbedPage page)
 		{
-			
-			foreach (var p in page?.Children ?? new List<Page>()) 
+
+			foreach (var p in page?.Children ?? new List<Page>())
 			{
 				CleanPage(p);
 			}
 		}
-		private static void CleanBindableObject(BindableObject bindable) 
+		static void CleanBindableObject(BindableObject bindable)
 		{
-			
+
 			(bindable?.BindingContext as ICleanup)?.Cleanup();
 			(bindable as ICleanup)?.Cleanup();
 		}

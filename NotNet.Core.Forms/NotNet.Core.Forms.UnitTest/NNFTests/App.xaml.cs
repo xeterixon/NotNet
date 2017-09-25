@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using NotNet.Core;
 using NotNet.Core.Forms;
+using NNFTests.UI;
 
 namespace NNFTests
 {
@@ -11,19 +12,25 @@ namespace NNFTests
 		{
 			InitializeComponent();
 			RegisterDependencies();
-
+            RunMessagesTest();
 			MainPage = new NavigationPage(new NNFTestsPage());
 		}
-
+        private void RunMessagesTest()
+        {
+            var tester = new PubSubTest();
+            tester.SendToTest();
+        }
 		private void RegisterDependencies() 
 		{
 
-			ContainerConfiguration
-				.Use(Container.Default)
+			ContainerConfigurator
+				.Configure(Container.Default)
 				.AutoRegister<App>()
 				// Add standard forms related stuff
 				.AddApplicationDelegate(this)
 				.AddPopupService()
+				.RegisterTransient<ITestPage4ViewModel,TestPage4ViewModel>()
+				.RegisterView<TestPage4,ITestPage4ViewModel>()
 				.RegisterTransient<ITestModel3,TestModel3>((o)=> 
 				{
 					o.Init();

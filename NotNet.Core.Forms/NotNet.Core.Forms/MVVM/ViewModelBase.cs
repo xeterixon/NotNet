@@ -7,11 +7,14 @@ namespace NotNet.Core.Forms
 	public abstract class ViewModelBase : Observable, IViewModelBase, ICleanup
 	{
 		string _title = string.Empty;
-		public string Title {
-			get {
+		public string Title
+		{
+			get
+			{
 				return _title;
 			}
-			set {
+			set
+			{
 				SetProperty(ref _title, value);
 			}
 		}
@@ -23,8 +26,8 @@ namespace NotNet.Core.Forms
 		/// It will be called only once,  when a page holding the view model is popped, hopefully...
 		/// </summary>
 		public virtual void Cleanup() { }
-		public virtual void OnPageAppearing(){}
-		public virtual void OnPageDisappearing(){}
+		public virtual void OnPageAppearing() { }
+		public virtual void OnPageDisappearing() { }
 		public virtual void OnInitialPageAppearing() { }
 		public virtual bool OnBackButtonPressed()
 		{

@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace NNFTests
 {
-	[AutoRegister(ObjectDescription.Base)]
+	[AutoRegister]
 	public class TestModel2 : ViewModelBase
  	{
 		public string Name { get; private set; }

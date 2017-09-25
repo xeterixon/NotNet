@@ -3,10 +3,11 @@ namespace NotNet.Core
 {
 	public interface IRegistryEntry
 	{
-		Type Interface { get;  }
+		Type Interface { get; }
 		Type Implementation { get; }
 		ObjectLifecycle LifeCycle { get; }
 		Action<object> Callback { get; }
+		IRegistryEntry Dependant { get; set; }
 	}
 	// internal holder of stuff
 	internal class RegistryEntry : IRegistryEntry
@@ -16,6 +17,6 @@ namespace NotNet.Core
 		public object Instance { get; set; } // Holds the instance for singleton objects
 		public ObjectLifecycle LifeCycle { get; set; }
 		public Action<object> Callback { get; set; }
-
+		public IRegistryEntry Dependant { get; set; }
 	}
 }

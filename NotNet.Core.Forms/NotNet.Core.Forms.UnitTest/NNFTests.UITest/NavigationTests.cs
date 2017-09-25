@@ -92,13 +92,21 @@ namespace NNFTests.UITest
 			Assert.IsTrue(text == "Hello Page", "Text should be 'Hello Page'");
 			app.Back();
 
+
 			app.WaitForElement(c => c.Marked("PushArgsToPage"));
 			app.Tap((arg) => arg.Marked("PushArgsToViewModel"));
 			app.WaitForElement((arg) => arg.Marked("ArgsLabel"));
 			text = app.Query((arg) => arg.Marked("ArgsLabel")).First().Text;
 			Assert.IsTrue(text == "Hello ViewModel", "Text should be 'Hello ViewModel'");
 			app.Back();
-
+            app.Back();
+            app.Tap(c => c.Marked("Button8"));
+            app.WaitForElement((c) => c.Marked("TEXT_CHANGE"));
+			app.WaitForElement(c => c.Marked("PopMe"));
+			app.Tap(c => c.Marked("PopMe"));
+			app.Tap(c => c.Marked("Button10"));
+			app.WaitForElement(c => c.Marked("Hello"));
+			app.Back();
 
 		}
 	}		

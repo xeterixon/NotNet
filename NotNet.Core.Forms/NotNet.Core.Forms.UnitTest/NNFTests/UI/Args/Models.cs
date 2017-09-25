@@ -4,7 +4,7 @@ using NotNet.Core.Forms;
 
 namespace NNFTests
 {
-	[AutoRegister(ObjectDescription.Base)]
+	[AutoRegister]
 	public class ViewModelNoArgs : ViewModelBase
 	{
 		public Observable<string> Text { get; set; } = new Observable<string>(string.Empty);
@@ -12,7 +12,7 @@ namespace NNFTests
 		{
 		}
 	}
-	[AutoRegister(ObjectDescription.Base)]
+	[AutoRegister]
 	public class ViewModelStringArg : ViewModelBase
 	{
 		public string Text { get; set; }

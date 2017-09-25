@@ -4,7 +4,7 @@ using Xamarin.Forms;
 using NotNet.Core.Forms;
 namespace NNFTests
 {
-	[AutoRegister(ObjectDescription.Base)]
+	[AutoRegister]
 	public class MasterDetail : MasterDetailPage
 	{
 #pragma warning disable
