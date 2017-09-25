@@ -104,6 +104,9 @@ namespace NNFTests.UITest
             app.WaitForElement((c) => c.Marked("TEXT_CHANGE"));
 			app.WaitForElement(c => c.Marked("PopMe"));
 			app.Tap(c => c.Marked("PopMe"));
+			app.Tap(c => c.Marked("Button10"));
+			app.WaitForElement(c => c.Marked("Hello"));
+			app.Back();
 
 		}
 	}		
