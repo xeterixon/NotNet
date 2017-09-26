@@ -16,7 +16,7 @@
 		</releaseNotes>
 		<tags>di, servicelocator, ioc, mvvm, xamarin.forms</tags>
 		<dependencies>
-            <dependency id="NotNet.Core" version="2.0.0" />
+            <dependency id="NotNet.Core" version="2.1.0-beta" />
 			<dependency id="Xamarin.Forms" version="2.3.3.180" />
 		</dependencies>
 	</metadata>
