@@ -42,7 +42,7 @@ namespace NotNet.Core.Forms
 		}
 		public static IContainerConfigurator AddContentPageBase(this IContainerConfigurator self)
 		{
-			self.Container.RegisterPageForWrappedView<ContentPageBaseInternal>();
+			self.Container.RegisterPageForWrappedView<ContentPageBase>();
 			return self;
 		}
 		public static IContainerConfigurator AddTimerService(this IContainerConfigurator self)

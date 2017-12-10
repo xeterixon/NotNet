@@ -40,7 +40,7 @@ namespace NotNet.Core.Forms
 				entry.Implementation = typeof(TPage);
 			}
 			else{
-				self.RegisterTransient<IContentPage,ContentPageBaseInternal>();
+				self.RegisterTransient<IContentPage,ContentPageBase>();
 			}
 		}
 		public static ContentPage ResolveWrappedView(this IContainer container, string viewName)
@@ -64,6 +64,7 @@ namespace NotNet.Core.Forms
 			var page = (ContentPage)container.Resolve<IContentPage>();
 			page.BindingContext = view.BindingContext;
 			page.Content = view;
+			BindTitle(page);
 			return page;
 
 		}

@@ -16,7 +16,7 @@
         <Button AutomationId="Button8" Text="Modal Tabpage" Clicked="PushPage8"/>
         <Button AutomationId="Button9" Text="Push page with IViewModel" Clicked="PushPage9"/>
         <Button AutomationId="Button10" Text="Page registered with vm" Clicked="PushPage10"/>
-        <Button AutomationId="Button11" Text="Custome base paget" Clicked="PushPage11"/>
+        <Button AutomationId="Button11" Text="Custome base page" Clicked="PushPage11"/>
 		
 	</StackLayout>
 </ContentPage>
