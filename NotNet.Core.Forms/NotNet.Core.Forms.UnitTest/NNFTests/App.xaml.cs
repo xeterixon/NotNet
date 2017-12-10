@@ -29,15 +29,16 @@ namespace NNFTests
 				// Add standard forms related stuff
 				.AddApplicationDelegate(this)
 				.AddPopupService()
-				.RegisterTransient<ITestPage4ViewModel,TestPage4ViewModel>()
-				.RegisterView<TestPage4,ITestPage4ViewModel>()
-				.RegisterTransient<ITestModel3,TestModel3>((o)=> 
-				{
-					o.Init();
-				})
+				.RegisterTransient<ITestPage4ViewModel, TestPage4ViewModel>()
+				.RegisterView<TestPage4, ITestPage4ViewModel>()
+				.RegisterTransient<ITestModel3, TestModel3>((o) =>
+				 {
+					 o.Init();
+				 })
 				.AddTimerService()
 				.AddNavigationLocator() // Intentionally added twice, just to make sure it doesn't break
-				.AddNavigationLocator();
+				.AddNavigationLocator()
+				.AddContentPageBase();
 			// One could use AddDefaultServices
 
 		}

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using Xamarin.Forms;
 
@@ -30,11 +31,16 @@ namespace NotNet.Core.Forms
 			return ResolveWrappedView(container, typeof(TView));
 		}
 		public static void RegisterPageForWrappedView<TPage>(this IContainer self)
-			where TPage: ContentPage
+			where TPage : ContentPage, IContentPage
+		
 		{
-			var entry = self.GetEntry("ContentPageBaseInternal") as RegistryEntry;
-			if(entry != null){
-				entry.Interface = typeof(TPage);
+			var entry = self.RegisteredEntries.FirstOrDefault((arg) => arg.Interface == typeof(IContentPage)) as RegistryEntry;
+			if (entry != null)
+			{
+				entry.Implementation = typeof(TPage);
+			}
+			else{
+				self.RegisterTransient<IContentPage,ContentPageBaseInternal>();
 			}
 		}
 		public static ContentPage ResolveWrappedView(this IContainer container, string viewName)
@@ -51,16 +57,13 @@ namespace NotNet.Core.Forms
 			var viewEntry = container.GetEntry(viewType.Name);
 			var view = (View)container.Resolve(viewType);
 			TrySetBindingContext(view, container, viewType);
-			return WrappAndBindView(view);
+			return WrappAndBindView(container,view);
 		}
-		private static ContentPage WrappAndBindView(View view)
+		private static ContentPage WrappAndBindView(IContainer container, View view)
 		{
-			var page = new ContentPageBaseInternal
-			{
-				BindingContext = view.BindingContext,
-				Content = view
-			};
-			BindTitle(page);
+			var page = (ContentPage)container.Resolve<IContentPage>();
+			page.BindingContext = view.BindingContext;
+			page.Content = view;
 			return page;
 
 		}
@@ -68,7 +71,7 @@ namespace NotNet.Core.Forms
 			where TView : View
 		{
 			var view = container.ResolveView<TView>(args);
-			return WrappAndBindView(view);
+			return WrappAndBindView(container,view);
 		}
 
 		public static T ResolvePage<T>(this IContainer container, params object[] args)
@@ -148,7 +151,7 @@ namespace NotNet.Core.Forms
 		{
 			var view = (View)container.Resolve(viewType);
 			TrySetBindingContext(view, container, viewType, args);
-			return WrappAndBindView(view);
+			return WrappAndBindView(container,view);
 		}
 
 		static ViewModelAttribute GetViewModelAttribute(Type t)
@@ -165,7 +168,7 @@ namespace NotNet.Core.Forms
 			else
 			{
 				var entry = container.GetEntry(t.Name);
-				vmType = entry?.Dependant.Interface;
+				vmType = entry?.Dependant?.Interface;
 			}
 			//Ok, so this can be written in 1 line, but this is easier to read
 			if(vmType == null) return null;

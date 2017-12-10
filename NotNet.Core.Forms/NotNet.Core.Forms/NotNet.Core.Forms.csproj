@@ -49,6 +49,7 @@
     <Compile Include="Extensions\ContainerConfiguratorExtensions.cs" />
     <Compile Include="Infrastructure\Timer\ITimer.cs" />
     <Compile Include="Infrastructure\Timer\Timer.cs" />
+    <Compile Include="MVVM\IContentPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NotNet.Core.Forms.nuspec" />

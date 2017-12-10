@@ -2,6 +2,8 @@
 using Xamarin.Forms;
 using NotNet.Core;
 using NotNet.Core.Forms;
+using NNFTests.UI.CustomBasePage;
+
 namespace NNFTests
 {
 	public partial class NNFTestsPage : ContentPage
@@ -49,6 +51,11 @@ namespace NNFTests
 		async void PushPage10(object sender, System.EventArgs e)
 		{
 			await _navigation.NavigateTo("TestPage4");
+		}
+		async void PushPage11(object sender, System.EventArgs e)
+		{
+			Container.Default.RegisterPageForWrappedView<MyBasePage>();
+			await _navigation.NavigateTo("TestView2");
 		}
 
 		INavigationLocator _navigation;

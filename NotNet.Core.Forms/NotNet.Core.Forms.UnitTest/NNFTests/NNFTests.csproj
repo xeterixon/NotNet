@@ -100,6 +100,7 @@
     <Compile Include="UI\ViewModelInterface\TestPage3.cs" />
     <Compile Include="UI\ViewModelInterface\TestPage3ViewModel.cs" />
     <Compile Include="UI\TestPage4.cs" />
+    <Compile Include="UI\CustomBasePage\MyBasePage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />
@@ -109,6 +110,7 @@
     <Folder Include="UI\TabPage\" />
     <Folder Include="UI\Messages\" />
     <Folder Include="UI\ViewModelInterface\" />
+    <Folder Include="UI\CustomBasePage\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\NotNet.Core\NotNet.Core\NotNet.Core.csproj">
