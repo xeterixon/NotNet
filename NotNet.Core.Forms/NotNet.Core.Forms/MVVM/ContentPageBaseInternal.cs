@@ -2,7 +2,7 @@ using Xamarin.Forms;
 
 namespace NotNet.Core.Forms
 {
-	public class ContentPageBase : ContentPage
+	public class ContentPageBaseInternal : ContentPage
 	{
 		bool _initialAppear = true;
 		public IViewModelBase ViewModel

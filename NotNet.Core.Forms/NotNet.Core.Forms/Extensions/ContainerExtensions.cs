@@ -29,7 +29,14 @@ namespace NotNet.Core.Forms
 		{
 			return ResolveWrappedView(container, typeof(TView));
 		}
-
+		public static void RegisterPageForWrappedView<TPage>(this IContainer self)
+			where TPage: ContentPage
+		{
+			var entry = self.GetEntry("ContentPageBaseInternal") as RegistryEntry;
+			if(entry != null){
+				entry.Interface = typeof(TPage);
+			}
+		}
 		public static ContentPage ResolveWrappedView(this IContainer container, string viewName)
 		{
 			return ResolveWrappedView(container, container.GetEntry(viewName).Interface);
@@ -48,7 +55,7 @@ namespace NotNet.Core.Forms
 		}
 		private static ContentPage WrappAndBindView(View view)
 		{
-			var page = new ContentPageBase
+			var page = new ContentPageBaseInternal
 			{
 				BindingContext = view.BindingContext,
 				Content = view

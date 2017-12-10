@@ -40,6 +40,11 @@ namespace NotNet.Core.Forms
 			}
 			return self;
 		}
+		public static IContainerConfigurator AddContentPageBase(this IContainerConfigurator self)
+		{
+			self.Container.RegisterPageForWrappedView<ContentPageBaseInternal>();
+			return self;
+		}
 		public static IContainerConfigurator AddTimerService(this IContainerConfigurator self)
 		{
 			if (!self.Container.IsRegistered<ITimer>())
@@ -50,7 +55,7 @@ namespace NotNet.Core.Forms
 		}
 		public static IContainerConfigurator AddDefaultServices(this IContainerConfigurator self, Application app)
 		{
-			return self.AddApplicationDelegate(app).AddNavigationLocator().AddPopupService().AddTimerService();
+			return self.AddApplicationDelegate(app).AddNavigationLocator().AddPopupService().AddTimerService().AddContentPageBase();
 		}
 
 	}

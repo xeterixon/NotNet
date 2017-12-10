@@ -9,8 +9,8 @@ namespace NotNet.Core
 		Action<object> Callback { get; }
 		IRegistryEntry Dependant { get; set; }
 	}
-	// internal holder of stuff
-	internal class RegistryEntry : IRegistryEntry
+
+	public class RegistryEntry : IRegistryEntry
 	{
 		public Type Interface { get; set; }
 		public Type Implementation { get; set; }

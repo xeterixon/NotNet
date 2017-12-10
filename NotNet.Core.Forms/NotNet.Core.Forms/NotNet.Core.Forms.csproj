@@ -45,7 +45,7 @@
     <Compile Include="Infrastructure\Application\ApplicationDelegate.cs" />
     <Compile Include="Infrastructure\Application\IApplicationDelegate.cs" />
     <Compile Include="MVVM\ICleanup.cs" />
-    <Compile Include="MVVM\ContentPageBase.cs" />
+    <Compile Include="MVVM\ContentPageBaseInternal.cs" />
     <Compile Include="Extensions\ContainerConfiguratorExtensions.cs" />
     <Compile Include="Infrastructure\Timer\ITimer.cs" />
     <Compile Include="Infrastructure\Timer\Timer.cs" />
