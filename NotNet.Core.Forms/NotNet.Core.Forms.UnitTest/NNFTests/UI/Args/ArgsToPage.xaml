@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="NNFTests.ArgsToPage">
-	<ContentPage.Content>
-		<StackLayout>
-			<Label AutomationId="ArgsLabel" Text="{Binding Text.Value}"/>
-		</StackLayout>
-	</ContentPage.Content>
-</ContentPage>

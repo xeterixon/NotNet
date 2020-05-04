@@ -19,3 +19,4 @@ NotNet.Core.Forms/NotNet.Core.Forms.UnitTest/packages/*
 project.lock.json
 .DS_Store
 *.targets
+.vs/
