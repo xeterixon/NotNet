@@ -16,6 +16,7 @@ namespace NotNet.Core.UnitTest
                                   .RegisterTransient<IMulti, Multi1>()
                                   .RegisterTransient<IMulti, Multi2>();
 
+
 		}
 		[OneTimeTearDown]
 		public void TearDown()

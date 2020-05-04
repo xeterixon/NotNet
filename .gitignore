@@ -20,3 +20,4 @@ project.lock.json
 .DS_Store
 *.targets
 .vs/
+.DS_Store

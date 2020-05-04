@@ -10,7 +10,7 @@
     <PackageProjectUrl>https://github.com/xeterixon/NotNet</PackageProjectUrl>
     <Title>NotNet Core Forms</Title>
     <ReleaseVersion>2.0.6-beta</ReleaseVersion>
-    <Summary>MVVM framework for Xamarin Forms</Summary>
+    <Summary>Simple MVVM framework for Xamarin Forms</Summary>
     <Authors>NotNet Solutions</Authors>
     <PackageLicenseUrl>https://raw.githubusercontent.com/xeterixon/NotNet/master/LICENSE</PackageLicenseUrl>
     <LicenseUrl>https://raw.githubusercontent.com/xeterixon/NotNet/master/LICENSE</LicenseUrl>
