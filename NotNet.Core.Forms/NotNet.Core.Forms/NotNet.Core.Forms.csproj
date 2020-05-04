@@ -4,19 +4,19 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Copyright>NotNet Solutions</Copyright>
     <PackageIconUrl>https://raw.githubusercontent.com/xeterixon/NotNet/master/Nuget/nn-nuget.png</PackageIconUrl>
+    <IconUrl>https://raw.githubusercontent.com/xeterixon/NotNet/master/Nuget/nn-nuget.png</IconUrl>
+    <Icon>..\..\Nuget\nn-nuget.png</Icon>
     <Owners>NotNet Solutions</Owners>
     <PackageProjectUrl>https://github.com/xeterixon/NotNet</PackageProjectUrl>
     <Title>NotNet Core Forms</Title>
-    <ReleaseVersion>2.1.0</ReleaseVersion>
+    <ReleaseVersion>2.0.6-beta</ReleaseVersion>
     <Summary>MVVM framework for Xamarin Forms</Summary>
-    <SynchReleaseVersion>false</SynchReleaseVersion>
-    <PackageVersion>2.1.0</PackageVersion>
     <Authors>NotNet Solutions</Authors>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/xeterixon/NotNet/master/LICENSE</PackageLicenseUrl>
+    <LicenseUrl>https://raw.githubusercontent.com/xeterixon/NotNet/master/LICENSE</LicenseUrl>
+    <License>https://raw.githubusercontent.com/xeterixon/NotNet/master/LICENSE</License>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
   </ItemGroup>
