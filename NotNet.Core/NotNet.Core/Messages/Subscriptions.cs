@@ -24,6 +24,7 @@ namespace NotNet.Core
 
 		internal void Publish<T>(string channel, T payload)
 		{
+			if (!_database.ContainsKey(channel)) return;
 			var sublist = _database.FirstOrDefault(x => x.Key == channel).Value;
 			//NOTE ToArray makes it possible for the subscriber 
 			// to unsubscribes during callback
@@ -54,13 +55,14 @@ namespace NotNet.Core
 		{
 			lock(gate)
 			{
-				var sublist = _database.FirstOrDefault(x => x.Key == channel).Value;
-				if(sublist == null)
+				List<SubscriptionEntry> sublist;
+				if(!_database.ContainsKey(channel))
 				{
 					sublist = new List<SubscriptionEntry>();
 					_database.Add(channel, sublist);
 				}
-				if(!sublist.Any(s => object.ReferenceEquals(s.Subscriber, subscriber)))
+				sublist = _database.FirstOrDefault(x => x.Key == channel).Value;
+				if (!sublist.Any(s => object.ReferenceEquals(s.Subscriber, subscriber)))
 				{
 					sublist.Add(new SubscriptionEntry
 					{
